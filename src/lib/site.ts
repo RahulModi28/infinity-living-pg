@@ -280,7 +280,7 @@ export const faqs = [
   },
   {
     q: "What is included in the rent?",
-    a: "The furnished room, electricity, all four meals, Wi-Fi, housekeeping and laundry. Deposit is separate: [SECURITY DEPOSIT — CONFIRM].",
+    a: "The furnished room, electricity, all four meals, Wi-Fi, housekeeping and laundry. The security deposit — two months' rent — is separate and paid once, on move-in.",
   },
   {
     q: "Is food included?",
@@ -296,7 +296,7 @@ export const faqs = [
   },
   {
     q: "Is there a security deposit?",
-    a: "[SECURITY DEPOSIT AMOUNT & REFUND TERMS — CONFIRM].",
+    a: "Yes — two months' rent, paid on move-in. That's ₹40,000 for single sharing and ₹30,000 for double. It is separate from the rent and is not an ongoing charge. [REFUND TERMS & DEDUCTIONS — CONFIRM].",
   },
   {
     q: "What is the minimum stay?",
@@ -325,6 +325,15 @@ export const faqs = [
 ] as const;
 
 /* ──────────────────────── Derived helpers ──────────────────────── */
+
+/** Security deposit is two months' rent, so derive it rather than restating. */
+export const DEPOSIT_MONTHS = 2;
+
+export function depositFor(room: { price: string }) {
+  const n = Number(room.price.replace(/[^\d]/g, ""));
+  if (!n) return null;
+  return (n * DEPOSIT_MONTHS).toLocaleString("en-IN");
+}
 
 export function whatsappHref(message: string = site.contact.whatsappMessage) {
   const num = site.contact.whatsappNumber.replace(/[^\d]/g, "");

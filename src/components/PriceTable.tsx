@@ -1,5 +1,5 @@
 import { Check } from "lucide-react";
-import { rooms } from "@/lib/site";
+import { rooms, depositFor } from "@/lib/site";
 import Reveal from "./ui/Reveal";
 
 /**
@@ -117,6 +117,19 @@ export default function PriceTable() {
           <p className="text-[0.8125rem] leading-relaxed text-mute">
             Everything above is included in the rent — electricity and meals are not billed on
             top. We&apos;ll put the full inclusion list in writing before you pay anything.
+          </p>
+          {/* Not the table row back — that belonged in a list of inclusions and
+              a deposit is not one. But two months' rent is a large enough sum
+              that finding it out only in the FAQ would feel like a catch. */}
+          <p className="mt-3 text-[0.8125rem] leading-relaxed text-mute">
+            <span className="font-medium text-ink-2">Security deposit</span> is two months&apos;
+            rent, paid once on move-in —{" "}
+            {rooms.map((r, i) => (
+              <span key={r.id}>
+                {i > 0 ? ", " : ""}₹{depositFor(r)} for {r.name.toLowerCase()}
+              </span>
+            ))}
+            .
           </p>
         </div>
       </div>
