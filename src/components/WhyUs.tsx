@@ -31,7 +31,7 @@ export default function WhyUs() {
           duration: 0.7,
           stagger: 0.08,
           ease: "power3.out",
-          scrollTrigger: { trigger: el, start: "top 82%", once: true },
+          scrollTrigger: { trigger: el, start: "top 90%", once: true },
         }
       );
     }, el);
@@ -39,7 +39,7 @@ export default function WhyUs() {
   }, []);
 
   return (
-    <section className="bg-ivory py-20 sm:py-28 lg:py-32">
+    <section className="bg-ivory py-14 sm:py-24 lg:py-32">
       <div className="shell">
         <SectionHead
           eyebrow="Why students choose us"

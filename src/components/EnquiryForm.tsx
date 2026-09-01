@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { Check, Loader2, MessageCircle } from "lucide-react";
 import { rooms, whatsappHref } from "@/lib/site";
+import { trackLead } from "./Analytics";
 import Button from "./ui/Button";
 
 type State = "idle" | "sending" | "done";
@@ -34,6 +35,7 @@ export default function EnquiryForm() {
         body: JSON.stringify(data),
       });
       if (!res.ok) throw new Error("Request failed");
+      trackLead("enquiry_submitted", { roomType: data.roomType });
       setState("done");
     } catch {
       setState("idle");
@@ -65,6 +67,7 @@ export default function EnquiryForm() {
           rel="noopener noreferrer"
           variant="whatsapp"
           className="mt-7"
+          data-cta="whatsapp"
         >
           <MessageCircle className="size-[1.05em]" aria-hidden="true" /> Continue on WhatsApp
         </Button>

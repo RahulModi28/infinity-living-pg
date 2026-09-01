@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useRef, useState } from "react";
+import { useDialog } from "@/lib/useDialog";
 import { X, ArrowLeft, ArrowRight, Expand } from "lucide-react";
 import SectionHead from "./ui/SectionHead";
 import Figure from "./ui/Figure";
@@ -19,6 +20,7 @@ const SHOTS = [
 
 export default function Gallery() {
   const [open, setOpen] = useState<number | null>(null);
+  const boxRef = useRef<HTMLDivElement>(null);
 
   const close = useCallback(() => setOpen(null), []);
   const step = useCallback(
@@ -26,24 +28,13 @@ export default function Gallery() {
     []
   );
 
-  useEffect(() => {
-    if (open === null) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") close();
-      if (e.key === "ArrowRight") step(1);
-      if (e.key === "ArrowLeft") step(-1);
-    };
-    document.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = prev;
-      document.removeEventListener("keydown", onKey);
-    };
-  }, [open, close, step]);
+  useDialog(open !== null, boxRef, close, (e) => {
+    if (e.key === "ArrowRight") step(1);
+    if (e.key === "ArrowLeft") step(-1);
+  });
 
   return (
-    <section id="gallery" className="scroll-mt-20 bg-ivory py-20 sm:py-28 lg:py-32">
+    <section id="gallery" className="scroll-mt-20 bg-ivory py-14 sm:py-24 lg:py-32">
       <div className="shell">
         <SectionHead
           eyebrow="Gallery"
@@ -82,9 +73,11 @@ export default function Gallery() {
       {/* Lightbox */}
       {open !== null && (
         <div
+          ref={boxRef}
           role="dialog"
           aria-modal="true"
           aria-label="Image viewer"
+          tabIndex={-1}
           className="fixed inset-0 z-[80] flex items-center justify-center bg-ink/94 p-4 sm:p-10"
         >
           <button

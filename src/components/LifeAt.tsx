@@ -4,7 +4,7 @@ import SplitText from "./ui/SplitText";
 
 export default function LifeAt() {
   return (
-    <section className="relative overflow-hidden bg-ivory-2 py-20 sm:py-28 lg:py-36">
+    <section className="relative overflow-hidden bg-ivory-2 py-14 sm:py-24 lg:py-36">
       <div className="shell">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
           {/* Tall hero image, offset */}
@@ -48,7 +48,7 @@ export default function LifeAt() {
               <Figure
                 src="/images/life-3.svg"
                 alt="Corridor and rooms at Infinity Living PG near Christ University Yeshwanthpur"
-                className="aspect-[3/4] rounded-[1.25rem]"
+                className="hidden aspect-[3/4] rounded-[1.25rem] sm:block"
                 sizes="(max-width: 640px) 100vw, 30vw"
               />
             </div>
@@ -57,7 +57,7 @@ export default function LifeAt() {
               <Figure
                 src="/images/life-4.svg"
                 alt="Students in the lounge at Infinity Living student accommodation, Bengaluru"
-                className="aspect-[16/10] rounded-[1.25rem]"
+                className="hidden aspect-[16/10] rounded-[1.25rem] sm:block"
                 sizes="(max-width: 640px) 100vw, 35vw"
               />
               <Reveal>

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { useDialog } from "@/lib/useDialog";
 import { X, Check, ArrowLeft, ArrowRight, MessageCircle } from "lucide-react";
 import type { Room } from "@/lib/site";
 import { whatsappHref } from "@/lib/site";
@@ -19,22 +20,11 @@ export default function RoomModal({
 
   useEffect(() => setI(0), [room]);
 
-  useEffect(() => {
+  useDialog(!!room, ref, onClose, (e) => {
     if (!room) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-      if (e.key === "ArrowRight") setI((v) => (v + 1) % room.gallery.length);
-      if (e.key === "ArrowLeft") setI((v) => (v - 1 + room.gallery.length) % room.gallery.length);
-    };
-    document.addEventListener("keydown", onKey);
-    ref.current?.focus();
-    return () => {
-      document.body.style.overflow = prev;
-      document.removeEventListener("keydown", onKey);
-    };
-  }, [room, onClose]);
+    if (e.key === "ArrowRight") setI((v) => (v + 1) % room.gallery.length);
+    if (e.key === "ArrowLeft") setI((v) => (v - 1 + room.gallery.length) % room.gallery.length);
+  });
 
   if (!room) return null;
 

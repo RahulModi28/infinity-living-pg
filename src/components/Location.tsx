@@ -19,7 +19,7 @@ export default function Location() {
   const hasDirections = !directions.startsWith("[");
 
   return (
-    <section id="location" className="scroll-mt-20 bg-ivory py-20 sm:py-28 lg:py-32">
+    <section id="location" className="scroll-mt-20 bg-ivory py-14 sm:py-24 lg:py-32">
       <div className="shell">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
           {/* Map */}

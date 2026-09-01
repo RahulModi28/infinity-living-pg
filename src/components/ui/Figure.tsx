@@ -57,7 +57,7 @@ export default function Figure({
             clipPath: "inset(0% 0% 0% 0%)",
             duration: 1.15,
             ease: "power4.out",
-            scrollTrigger: { trigger: el, start: "top 90%", once: true },
+            scrollTrigger: { trigger: el, start: "top 94%", once: true },
           }
         );
         if (img) {
@@ -68,7 +68,7 @@ export default function Figure({
               scale: 1,
               duration: 1.5,
               ease: "power3.out",
-              scrollTrigger: { trigger: el, start: "top 90%", once: true },
+              scrollTrigger: { trigger: el, start: "top 94%", once: true },
             }
           );
         }

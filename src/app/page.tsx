@@ -7,6 +7,7 @@ import LifeAt from "@/components/LifeAt";
 import Amenities from "@/components/Amenities";
 import SignatureReveal from "@/components/SignatureReveal";
 import Audience from "@/components/Audience";
+import BookingSteps from "@/components/BookingSteps";
 import Location from "@/components/Location";
 import ParentTrust from "@/components/ParentTrust";
 import Food from "@/components/Food";
@@ -41,6 +42,9 @@ export default function Home() {
         {site.foodAvailable && <Food />}
         <Reviews />
         <Gallery />
+        {/* Removes the "what happens if I message them?" hesitation right
+            before the final ask */}
+        <BookingSteps />
         <FAQ />
         {/* ACTION */}
         <FinalCTA />

@@ -7,6 +7,7 @@ import { rooms, type Room } from "@/lib/site";
 import SectionHead from "./ui/SectionHead";
 import Reveal from "./ui/Reveal";
 import RoomModal from "./RoomModal";
+import PriceTable from "./PriceTable";
 
 function RoomCard({ room, onOpen }: { room: Room; onOpen: () => void }) {
   return (
@@ -71,7 +72,7 @@ export default function Rooms() {
   const [active, setActive] = useState<Room | null>(null);
 
   return (
-    <section id="rooms" className="scroll-mt-20 bg-ivory py-20 sm:py-28 lg:py-32">
+    <section id="rooms" className="scroll-mt-20 bg-ivory py-14 sm:py-24 lg:py-32">
       <div className="shell">
         <SectionHead
           eyebrow="Rooms"
@@ -80,7 +81,7 @@ export default function Rooms() {
         />
 
         {/* Swipeable on mobile, grid from tablet up. */}
-        <div className="no-bar edge-fade -mx-5 mt-14 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:[mask-image:none] lg:grid-cols-3 lg:gap-7">
+        <div className="no-bar edge-fade -mx-5 mt-14 flex snap-x snap-mandatory scroll-pl-5 gap-5 overflow-x-auto px-5 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:[mask-image:none] lg:grid-cols-3 lg:gap-7">
           {rooms.map((r) => (
             <div key={r.id} className="w-[80vw] shrink-0 sm:w-auto">
               <Reveal>
@@ -96,6 +97,8 @@ export default function Rooms() {
             rate card.
           </p>
         </Reveal>
+
+        <PriceTable />
       </div>
 
       <RoomModal room={active} onClose={() => setActive(null)} />

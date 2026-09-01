@@ -27,6 +27,14 @@ export const MOTION = {
   stagger: 0.07,
   /** Distance elements travel on reveal — small, so it never feels floaty. */
   rise: 28,
+  /**
+   * Where a reveal begins, relative to the viewport. Deliberately close to
+   * the fold: tall mobile sections were scrolling into view completely blank
+   * because the trigger sat too far up the screen.
+   */
+  start: "top 94%",
+  /** For grouped/staggered blocks, which need a little more runway. */
+  startGroup: "top 90%",
 } as const;
 
 export { gsap, ScrollTrigger };

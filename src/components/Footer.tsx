@@ -38,7 +38,7 @@ export default function Footer() {
                       {...(placeholder ? {} : { target: "_blank", rel: "noopener noreferrer" })}
                       aria-label={label}
                       title={placeholder ? `Add the ${label} URL in src/lib/site.ts` : label}
-                      className={`grid size-10 place-items-center rounded-full border border-white/15 transition-colors duration-300 hover:border-white/45 hover:bg-white/10 ${
+                      className={`grid size-11 place-items-center rounded-full border border-white/15 transition-colors duration-300 hover:border-white/45 hover:bg-white/10 ${
                         placeholder ? "opacity-45" : ""
                       }`}
                     >
@@ -52,10 +52,10 @@ export default function Footer() {
 
           <nav aria-label="Footer">
             <h2 className="t-label text-white/40">Explore</h2>
-            <ul className="mt-5 space-y-2.5">
+            <ul className="mt-3 -mx-2">
               {NAV.map((l) => (
                 <li key={l.href}>
-                  <a href={l.href} className="link-u text-[0.9375rem] text-white/72 hover:text-white">
+                  <a href={l.href} className="link-u inline-flex min-h-11 items-center px-2 text-[0.9375rem] text-white/72 hover:text-white">
                     {l.label}
                   </a>
                 </li>
@@ -79,13 +79,13 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="size-[1.05rem] shrink-0 text-clay" aria-hidden="true" />
-                <a href={`tel:${site.contact.phoneHref}`} className="link-u hover:text-white">
+                <a href={`tel:${site.contact.phoneHref}`} data-cta="call" className="link-u inline-flex min-h-11 items-center hover:text-white">
                   {site.contact.phoneDisplay}
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="size-[1.05rem] shrink-0 text-clay" aria-hidden="true" />
-                <a href={`mailto:${site.contact.email}`} className="link-u hover:text-white">
+                <a href={`mailto:${site.contact.email}`} className="link-u inline-flex min-h-11 items-center hover:text-white">
                   {site.contact.email}
                 </a>
               </li>
@@ -95,7 +95,7 @@ export default function Footer() {
                   href={whatsappHref()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="link-u hover:text-white"
+                  className="link-u inline-flex min-h-11 items-center hover:text-white"
                 >
                   WhatsApp us
                 </a>
@@ -110,12 +110,12 @@ export default function Footer() {
           </p>
           <ul className="flex gap-6">
             <li>
-              <a href="/privacy" className="link-u hover:text-white/80">
+              <a href="/privacy" className="link-u inline-flex min-h-11 items-center hover:text-white/80">
                 Privacy Policy
               </a>
             </li>
             <li>
-              <a href="/terms" className="link-u hover:text-white/80">
+              <a href="/terms" className="link-u inline-flex min-h-11 items-center hover:text-white/80">
                 Terms
               </a>
             </li>

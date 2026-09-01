@@ -42,9 +42,16 @@ most of the site is done.
 | Domain | `site.url` (drives canonical, sitemap, OG tags, schema) |
 | Photography | `public/images/*.svg` → replace with real `.webp`/`.jpg`, update `src` paths |
 | Privacy / Terms copy | `src/app/privacy`, `src/app/terms` |
+| Audience page copy + FAQs | `src/lib/audiences.ts` |
 
 **`site.foodAvailable = false`** removes the entire food section if meals
 aren't provided.
+
+**Conversion tracking is off until you set env vars.** Copy `.env.example`
+to `.env.local` and fill in `NEXT_PUBLIC_GA_ID` / `NEXT_PUBLIC_META_PIXEL_ID`.
+Nothing loads while they're unset, so no consent banner is needed yet. Every
+contact route is tagged `data-cta="call|whatsapp|enquire"` and tracked
+automatically — see `src/components/Analytics.tsx`.
 
 **Lead capture is not wired up yet.** `src/app/api/enquiry/route.ts`
 validates and logs. Point it at a real destination (sheet, CRM, email, or a
@@ -69,7 +76,23 @@ src/
   components/
     ui/                 Button, Magnetic, Reveal, SplitText, Figure, SectionHead
     <Section>.tsx       one file per page section
+  lib/
+    audiences.ts        copy for the two landing pages
+    useDialog.ts        shared scroll-lock + focus-trap for every overlay
 ```
+
+### Pages
+
+| Route | Targets |
+|---|---|
+| `/` | `pg near christ university yeshwanthpur` |
+| `/ladies-pg-yeshwanthpur` | `ladies pg yeshwanthpur`, `girls pg near christ yeshwanthpur` |
+| `/gents-pg-yeshwanthpur` | `yeshwanthpur pg for gents`, `boys pg near christ university yeshwanthpur campus` |
+
+The two audience pages exist because one homepage can't rank for both
+clusters — they're distinct searches with distinct intent, and no competitor
+currently gives either a real page. Copy is deliberately different per page;
+near-duplicates get filtered as thin content.
 
 ### The motion system
 
@@ -147,5 +170,8 @@ on-page work.
 Semantic sections, one `<h1>`, ordered `h2`/`h3`, keyboard-navigable
 accordion and modals with focus trapping and Escape, visible focus rings,
 `aria-label` on every icon-only control, alt text on every image, and full
-reduced-motion support. Verified in-browser: 24 images / 0 missing alt,
-1 `h1`, 0 unnamed controls.
+reduced-motion support.
+
+Every overlay (mobile menu, room modal, gallery lightbox) shares
+`useDialog` — scroll lock, focus moved in, Tab trapped, Escape to close,
+focus returned to the trigger. Verified in-browser end to end.

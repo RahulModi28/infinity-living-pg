@@ -4,6 +4,7 @@ import "./globals.css";
 import { site, baseUrl } from "@/lib/site";
 import { localBusinessJsonLd, faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import SmoothScroll from "@/components/SmoothScroll";
+import Analytics from "@/components/Analytics";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -50,14 +51,14 @@ export const metadata: Metadata = {
     title: "PG near Christ University Yeshwanthpur Campus | Infinity Living",
     description:
       "Premium student living in Yeshwanthpur, Bengaluru — furnished rooms, meals, Wi-Fi and a short walk to Christ University Yeshwanthpur Campus.",
-    images: [{ url: "/images/og.svg", width: 1200, height: 630, alt: "Infinity Living — PG near Christ University Yeshwanthpur Campus" }],
+    images: [{ url: "/images/og.png", width: 1200, height: 630, type: "image/png", alt: "Infinity Living — PG near Christ University Yeshwanthpur Campus" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "PG near Christ University Yeshwanthpur Campus | Infinity Living",
     description:
       "Furnished PG in Yeshwanthpur, Bengaluru — rooms, meals, Wi-Fi and 24/7 security, minutes from campus.",
-    images: ["/images/og.svg"],
+    images: ["/images/og.png"],
   },
   robots: {
     index: true,
@@ -88,6 +89,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to rooms
         </a>
         <SmoothScroll />
+        <Analytics />
         {children}
         <script
           type="application/ld+json"

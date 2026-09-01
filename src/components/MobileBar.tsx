@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { CalendarCheck, MessageCircle } from "lucide-react";
-import { whatsappHref } from "@/lib/site";
+import { CalendarCheck, MessageCircle, Phone } from "lucide-react";
+import { site, whatsappHref } from "@/lib/site";
 
 /**
- * Sticky bottom bar — mobile only. Two thumb-sized targets, always one tap
- * from the two actions that actually convert. Hides while a dialog is open
- * (body scroll lock) so it never floats over a modal.
+ * Sticky bottom bar — mobile only. Three thumb-sized targets covering the
+ * three ways people actually make contact in this market: a phone call
+ * (which parents overwhelmingly prefer), WhatsApp, and the enquiry form.
+ *
+ * Dialogs render above it (z-70/z-80 vs z-40), so it never covers a modal.
  */
 export default function MobileBar() {
   const [shown, setShown] = useState(false);
@@ -19,6 +21,9 @@ export default function MobileBar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const icon =
+    "flex size-12 shrink-0 items-center justify-center rounded-full border transition-transform active:scale-[0.96]";
+
   return (
     <div
       className={[
@@ -27,19 +32,29 @@ export default function MobileBar() {
         shown ? "translate-y-0" : "translate-y-full",
       ].join(" ")}
     >
-      <div className="grid grid-cols-2 gap-2.5 px-4 py-3">
+      <div className="flex items-center gap-2.5 px-4 py-3">
+        <a
+          href={`tel:${site.contact.phoneHref}`}
+          aria-label={`Call ${site.contact.phoneDisplay}`}
+          data-cta="call"
+          className={`${icon} border-ink/20 text-ink hover:bg-ink/5`}
+        >
+          <Phone className="size-[1.15rem]" aria-hidden="true" />
+        </a>
         <a
           href={whatsappHref()}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex h-12 items-center justify-center gap-2 rounded-full border border-[#1f8b4d]/30 bg-[#1f8b4d]/10 text-[0.9375rem] font-medium text-[#166b3a] active:scale-[0.98]"
+          aria-label="Chat with us on WhatsApp"
+          data-cta="whatsapp"
+          className={`${icon} border-[#1f8b4d]/30 bg-[#1f8b4d]/10 text-[#166b3a]`}
         >
-          <MessageCircle className="size-[1.1em]" aria-hidden="true" />
-          WhatsApp
+          <MessageCircle className="size-[1.15rem]" aria-hidden="true" />
         </a>
         <a
           href="#enquire"
-          className="flex h-12 items-center justify-center gap-2 rounded-full bg-ink text-[0.9375rem] font-medium text-ivory active:scale-[0.98]"
+          data-cta="enquire"
+          className="flex h-12 flex-1 items-center justify-center gap-2 rounded-full bg-ink text-[0.9375rem] font-medium text-ivory transition-transform active:scale-[0.98]"
         >
           <CalendarCheck className="size-[1.1em]" aria-hidden="true" />
           Check Availability

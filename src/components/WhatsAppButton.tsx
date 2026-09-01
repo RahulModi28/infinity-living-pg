@@ -36,11 +36,12 @@ export default function WhatsAppButton() {
       target={disabled ? undefined : "_blank"}
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp"
+      data-cta="whatsapp"
       title={disabled ? "Add a WhatsApp number in src/lib/site.ts" : "Chat with us on WhatsApp"}
       className={[
-        "group fixed right-4 z-40 flex items-center gap-0 overflow-hidden rounded-full bg-[#1f8b4d] text-white",
+        "group fixed right-4 z-40 flex max-sm:hidden items-center gap-0 overflow-hidden rounded-full bg-[#1f8b4d] text-white",
         "shadow-[0_12px_30px_-10px_rgba(31,139,77,0.75)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
-        "bottom-[calc(env(safe-area-inset-bottom)+5.5rem)] sm:bottom-6 sm:right-6",
+        "bottom-6 right-6",
         "hover:gap-2 hover:bg-[#1a7742] hover:pr-5",
         shown ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0",
       ].join(" ")}

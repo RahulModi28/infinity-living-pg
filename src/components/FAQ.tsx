@@ -11,7 +11,7 @@ export default function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="scroll-mt-20 bg-ivory py-20 sm:py-28 lg:py-32">
+    <section id="faq" className="scroll-mt-20 bg-ivory py-14 sm:py-24 lg:py-32">
       <div className="shell grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
         <div className="lg:sticky lg:top-28 lg:self-start">
           <SectionHead

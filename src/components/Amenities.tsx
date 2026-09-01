@@ -20,7 +20,7 @@ export default function Amenities() {
     initGsap();
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
-        scrollTrigger: { trigger: el, start: "top 78%", once: true },
+        scrollTrigger: { trigger: el, start: "top 90%", once: true },
       });
       tl.fromTo(
         el.querySelectorAll("[data-card]"),
@@ -44,7 +44,7 @@ export default function Amenities() {
   return (
     <section
       id="amenities"
-      className="grain relative scroll-mt-20 overflow-hidden bg-moss py-20 text-ivory sm:py-28 lg:py-32"
+      className="grain relative scroll-mt-20 overflow-hidden bg-moss py-14 text-ivory sm:py-24 lg:py-32"
     >
       <div className="shell">
         <div className="text-ivory [&_.t-section]:text-ivory">
@@ -58,7 +58,7 @@ export default function Amenities() {
 
         <div
           ref={root}
-          className="no-bar edge-fade -mx-5 mt-14 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-2 md:mx-0 md:grid md:grid-cols-2 md:overflow-visible md:px-0 md:[mask-image:none] lg:grid-cols-4"
+          className="no-bar edge-fade -mx-5 mt-14 flex snap-x snap-mandatory scroll-pl-5 gap-5 overflow-x-auto px-5 pb-2 md:mx-0 md:grid md:grid-cols-2 md:overflow-visible md:px-0 md:[mask-image:none] lg:grid-cols-4"
         >
           {amenityGroups.map((g) => {
             const Icon = ICONS[g.icon] ?? Sofa;

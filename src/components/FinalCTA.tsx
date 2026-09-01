@@ -10,7 +10,7 @@ export default function FinalCTA() {
   return (
     <section
       id="enquire"
-      className="grain relative scroll-mt-20 overflow-hidden bg-moss-2 py-20 text-ivory sm:py-28 lg:py-32"
+      className="grain relative scroll-mt-20 overflow-hidden bg-moss-2 py-14 text-ivory sm:py-24 lg:py-32"
     >
       <div
         aria-hidden="true"
@@ -40,6 +40,7 @@ export default function FinalCTA() {
                   target="_blank"
                   rel="noopener noreferrer"
                   variant="whatsapp"
+                  data-cta="whatsapp"
                 >
                   <MessageCircle className="size-[1.05em]" aria-hidden="true" /> WhatsApp Us
                 </Button>

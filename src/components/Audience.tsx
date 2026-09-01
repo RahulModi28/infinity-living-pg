@@ -1,4 +1,5 @@
 import { Venus, Mars, Check } from "lucide-react";
+import { audiences } from "@/lib/audiences";
 import SectionHead from "./ui/SectionHead";
 import Reveal from "./ui/Reveal";
 import Button from "./ui/Button";
@@ -12,6 +13,7 @@ import Button from "./ui/Button";
 const GROUPS = [
   {
     icon: Venus,
+    href: `/${audiences.ladies.slug}`,
     h: "Ladies PG in Yeshwanthpur",
     sub: "For women students & working professionals",
     points: [
@@ -23,6 +25,7 @@ const GROUPS = [
   },
   {
     icon: Mars,
+    href: `/${audiences.gents.slug}`,
     h: "Gents PG in Yeshwanthpur",
     sub: "For men students & working professionals",
     points: [
@@ -36,7 +39,7 @@ const GROUPS = [
 
 export default function Audience() {
   return (
-    <section aria-label="Ladies PG and gents PG in Yeshwanthpur" className="bg-ivory pb-4 pt-20 sm:pt-28">
+    <section aria-label="Ladies PG and gents PG in Yeshwanthpur" className="bg-ivory pb-4 pt-14 sm:pt-24">
       <div className="shell">
         <SectionHead
           eyebrow="Who it's for"
@@ -44,7 +47,7 @@ export default function Audience() {
           intro="Whether you're a first-year moving in from another state or working nearby, the room is the same standard — the arrangement is what changes."
         />
         <div className="mt-12 grid gap-5 md:grid-cols-2 lg:gap-7">
-          {GROUPS.map(({ icon: Icon, h, sub, points }) => (
+          {GROUPS.map(({ icon: Icon, href, h, sub, points }) => (
             <Reveal key={h}>
               <div className="group h-full rounded-[1.5rem] border border-ink/12 bg-ivory-2 p-7 transition-[transform,border-color,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:border-ink/25 hover:shadow-[0_20px_46px_-30px_rgba(18,17,16,0.5)] sm:p-9">
                 <span className="grid size-12 place-items-center rounded-2xl bg-moss/10 text-moss transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1">
@@ -75,8 +78,8 @@ export default function Audience() {
                     );
                   })}
                 </ul>
-                <Button href="#enquire" variant="ghost" className="mt-7 !px-5 !py-3 !text-[0.875rem]" arrow>
-                  Check availability
+                <Button href={href} variant="ghost" className="mt-7 !px-5 !py-3 !text-[0.875rem]" arrow>
+                  See {h.split(" ")[0].toLowerCase()} PG details
                 </Button>
               </div>
             </Reveal>

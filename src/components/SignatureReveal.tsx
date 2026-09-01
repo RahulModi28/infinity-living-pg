@@ -44,7 +44,7 @@ export default function SignatureReveal() {
               trigger: el,
               start: "top top",
               // Shorter travel on mobile so it never feels like a hostage scroll.
-              end: isDesktop ? "+=220%" : "+=140%",
+              end: isDesktop ? "+=220%" : "+=90%",
               pin: true,
               scrub: 0.6,
               anticipatePin: 1,

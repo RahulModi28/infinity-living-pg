@@ -49,7 +49,7 @@ export default function Reveal({
           ease: MOTION.ease,
           delay,
           stagger: stagger ? MOTION.stagger : 0,
-          scrollTrigger: { trigger: el, start: "top 88%", once: true },
+          scrollTrigger: { trigger: el, start: MOTION.start, once: true },
         }
       );
     }, el);

@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Menu, X, MessageCircle } from "lucide-react";
+import { useDialog } from "@/lib/useDialog";
+import { Menu, X, MessageCircle, Phone } from "lucide-react";
 import Logo from "./Logo";
 import Button from "./ui/Button";
-import { whatsappHref } from "@/lib/site";
+import { site, whatsappHref } from "@/lib/site";
 
 const LINKS = [
   { href: "#rooms", label: "Rooms" },
@@ -27,35 +28,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock the page and trap focus while the mobile sheet is open.
-  useEffect(() => {
-    if (!open) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
-      if (e.key !== "Tab" || !panelRef.current) return;
-      const f = panelRef.current.querySelectorAll<HTMLElement>(
-        'a[href], button:not([disabled])'
-      );
-      if (!f.length) return;
-      const first = f[0];
-      const last = f[f.length - 1];
-      if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
-      }
-    };
-    document.addEventListener("keydown", onKey);
-    panelRef.current?.querySelector<HTMLElement>("a,button")?.focus();
-    return () => {
-      document.body.style.overflow = prev;
-      document.removeEventListener("keydown", onKey);
-    };
-  }, [open]);
+  useDialog(open, panelRef, () => setOpen(false));
 
   return (
     <>
@@ -190,15 +163,26 @@ export default function Navbar() {
             <Button href="#enquire" onClick={() => setOpen(false)} className="w-full" arrow>
               Check Availability
             </Button>
-            <Button
-              href={whatsappHref()}
-              variant="whatsapp"
-              className="w-full"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <MessageCircle className="size-[1.05em]" aria-hidden="true" /> WhatsApp Us
-            </Button>
+            <div className="grid grid-cols-2 gap-3">
+              <Button
+                href={whatsappHref()}
+                variant="whatsapp"
+                className="w-full"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cta="whatsapp"
+              >
+                <MessageCircle className="size-[1.05em]" aria-hidden="true" /> WhatsApp
+              </Button>
+              <Button
+                href={`tel:${site.contact.phoneHref}`}
+                variant="light"
+                className="w-full"
+                data-cta="call"
+              >
+                <Phone className="size-[1.05em]" aria-hidden="true" /> Call
+              </Button>
+            </div>
           </div>
         </div>
       </div>

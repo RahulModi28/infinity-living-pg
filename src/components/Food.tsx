@@ -20,7 +20,7 @@ const SHOTS = [
 
 export default function Food() {
   return (
-    <section className="bg-ivory py-20 sm:py-28 lg:py-32">
+    <section className="bg-ivory py-14 sm:py-24 lg:py-32">
       <div className="shell">
         <SectionHead
           eyebrow="Food"
@@ -30,7 +30,7 @@ export default function Food() {
       </div>
 
       {/* Horizontal food gallery — full-bleed, swipeable */}
-      <div className="no-bar edge-fade mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 sm:gap-5 md:px-[max(1.25rem,calc((100vw-84rem)/2+2rem))]">
+      <div className="no-bar edge-fade mt-12 flex snap-x snap-mandatory scroll-pl-5 gap-4 overflow-x-auto px-5 pb-2 sm:gap-5 md:px-[max(1.25rem,calc((100vw-84rem)/2+2rem))]">
         {SHOTS.map((s) => (
           <Figure
             key={s.src}

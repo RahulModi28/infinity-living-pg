@@ -1,4 +1,5 @@
 import { site, rooms, faqs, baseUrl } from "./site";
+import type { Audience } from "./audiences";
 
 /**
  * Structured data. Keyword and phrasing choices below are grounded in live
@@ -38,7 +39,7 @@ export function localBusinessJsonLd() {
           },
         }
       : {}),
-    image: `${baseUrl()}/images/hero.svg`,
+    image: `${baseUrl()}/images/og.png`,
     priceRange: "₹₹",
     areaServed: [
       { "@type": "Place", name: "Yeshwanthpur, Bengaluru" },
@@ -100,4 +101,27 @@ export function breadcrumbJsonLd() {
       },
     ],
   };
+}
+
+/** Breadcrumb + FAQ schema for a dedicated audience landing page. */
+export function audienceJsonLd(a: Audience, base: string) {
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: base },
+        { "@type": "ListItem", position: 2, name: a.title, item: `${base}/${a.slug}` },
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: a.faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    },
+  ];
 }

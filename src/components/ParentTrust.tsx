@@ -18,7 +18,7 @@ export default function ParentTrust() {
   return (
     <section
       aria-labelledby="parents-heading"
-      className="border-y border-ink/8 bg-ivory-2 py-20 sm:py-28 lg:py-32"
+      className="border-y border-ink/8 bg-ivory-2 py-14 sm:py-24 lg:py-32"
     >
       <div className="shell grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:items-center lg:gap-16">
         <Figure
@@ -74,7 +74,7 @@ export default function ParentTrust() {
               <p className="text-[0.9375rem] leading-relaxed text-ink-2">
                 <strong className="font-medium">Come and see it first.</strong> We&apos;d rather you
                 visit, meet the staff and look at the actual room than book from photos. Call{" "}
-                <a href={`tel:${site.contact.phoneHref}`} className="link-u font-medium">
+                <a href={`tel:${site.contact.phoneHref}`} data-cta="call" className="link-u font-medium">
                   {site.contact.phoneDisplay}
                 </a>{" "}
                 and we&apos;ll fix a time.

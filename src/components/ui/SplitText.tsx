@@ -52,7 +52,7 @@ export default function SplitText({
           stagger: 0.055,
           delay,
           ...(trigger === "scroll"
-            ? { scrollTrigger: { trigger: el, start: "top 88%", once: true } }
+            ? { scrollTrigger: { trigger: el, start: "top 94%", once: true } }
             : {}),
         }
       );
