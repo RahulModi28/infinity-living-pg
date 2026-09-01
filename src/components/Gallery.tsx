@@ -8,14 +8,13 @@ import SectionHead from "./ui/SectionHead";
 import Figure from "./ui/Figure";
 
 const SHOTS = [
-  { src: "/images/gal-1.svg", alt: "Furnished room at Infinity Living PG near Christ University Yeshwanthpur Campus", span: "row-span-2" },
-  { src: "/images/gal-2.svg", alt: "Common area at Infinity Living PG, Yeshwanthpur, Bengaluru", span: "" },
-  { src: "/images/gal-3.svg", alt: "Study space at Infinity Living student accommodation, Yeshwanthpur", span: "" },
-  { src: "/images/gal-4.svg", alt: "Exterior of Infinity Living PG in Yeshwanthpur, Bengaluru", span: "row-span-2" },
-  { src: "/images/gal-5.svg", alt: "Dining area at Infinity Living PG near Christ University", span: "" },
-  { src: "/images/gal-6.svg", alt: "Bathroom at Infinity Living PG, Yeshwanthpur", span: "row-span-2" },
-  { src: "/images/gal-7.svg", alt: "Corridor at Infinity Living PG, Yeshwanthpur, Bengaluru", span: "" },
-  { src: "/images/gal-8.svg", alt: "Neighbourhood around Infinity Living, Yeshwanthpur, near Christ University", span: "" },
+  { src: "/images/room-double.jpg", alt: "Double sharing room with two beds, study table and storage at Infinity Living PG, Yeshwanthpur", span: "" },
+  { src: "/images/entrance.jpg", alt: "The entrance at Infinity Living PG near Christ University Yeshwanthpur Campus, Bengaluru", span: "" },
+  { src: "/images/living-room.jpg", alt: "Shared living room with sofa seating at Infinity Living PG, Yeshwanthpur, Bengaluru", span: "" },
+  { src: "/images/gym.jpg", alt: "Gym at Infinity Living PG — treadmills, cross trainer, bench and weights", span: "" },
+  { src: "/images/bathroom.jpg", alt: "Attached bathroom at Infinity Living PG, Yeshwanthpur, Bengaluru", span: "" },
+  { src: "/images/hero.jpg", alt: "Common area with snooker table and lounge seating at Infinity Living PG, Yeshwanthpur", span: "" },
+  { src: "/images/entry-biometric.jpg", alt: "Biometric secure entry at Infinity Living PG, Yeshwanthpur", span: "" },
 ];
 
 export default function Gallery() {
@@ -39,7 +38,7 @@ export default function Gallery() {
         <SectionHead
           eyebrow="Gallery"
           title="Look around before you visit."
-          intro="Real photographs of the rooms, common spaces and the street outside — replacing the placeholders below before launch."
+          intro="Real photographs of the rooms, common spaces, gym and entrance — taken at the property, not stock."
         />
 
         <div className="mt-14 columns-2 gap-4 sm:gap-5 lg:columns-4">

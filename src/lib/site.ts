@@ -120,8 +120,8 @@ export const rooms: Room[] = [
       "Housekeeping",
     ],
     availability: "[ROOM AVAILABILITY]",
-    image: "/images/room-double.svg",
-    gallery: ["/images/room-double.svg", "/images/room-double-2.svg", "/images/room-double-3.svg"],
+    image: "/images/room-double.jpg",
+    gallery: ["/images/room-double.jpg", "/images/bathroom.jpg", "/images/living-room-2.jpg"],
   },
   {
     id: "triple",
@@ -158,7 +158,7 @@ export const amenityGroups = [
       "Mattress provided",
       "Wardrobe",
       "Study table & chair",
-      "[ATTACHED BATHROOM — CONFIRM]",
+      "Attached bathroom",
     ],
   },
   {
@@ -174,8 +174,9 @@ export const amenityGroups = [
     title: "Lifestyle",
     icon: "Sofa",
     items: [
-      "Common area",
-      "[RECREATION AREA — CONFIRM]",
+      "Common area & lounge",
+      "Gym / fitness area",
+      "Snooker & recreation area",
       "[LAUNDRY — CONFIRM]",
       "Housekeeping",
     ],
@@ -185,7 +186,7 @@ export const amenityGroups = [
     icon: "ShieldCheck",
     items: [
       "[CCTV COVERAGE — CONFIRM]",
-      "[SECURE ENTRY — CONFIRM]",
+      "Biometric secure entry",
       "[SECURITY PERSONNEL — CONFIRM]",
     ],
   },

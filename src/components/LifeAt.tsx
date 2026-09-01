@@ -10,9 +10,9 @@ export default function LifeAt() {
           {/* Tall hero image, offset */}
           <div className="lg:col-span-5 lg:pt-16">
             <Figure
-              src="/images/life-1.svg"
-              alt="Students studying together in the common area at Infinity Living PG, Yeshwanthpur"
-              className="aspect-[4/5] rounded-[1.5rem] lg:aspect-[3/4]"
+              src="/images/gym.jpg"
+              alt="The gym at Infinity Living PG near Christ University Yeshwanthpur Campus — treadmills, cross trainer and weights"
+              className="aspect-[4/3] rounded-[1.5rem]"
               sizes="(max-width: 1024px) 100vw, 40vw"
               parallax={6}
             />
@@ -40,14 +40,14 @@ export default function LifeAt() {
 
             <div className="mt-10 grid gap-5 sm:grid-cols-2">
               <Figure
-                src="/images/life-2.svg"
-                alt="Evening on the terrace at Infinity Living, Yeshwanthpur"
+                src="/images/living-room-2.jpg"
+                alt="The shared living room at Infinity Living PG, Yeshwanthpur, Bengaluru"
                 className="aspect-[4/3] rounded-[1.25rem] sm:mt-10"
                 sizes="(max-width: 640px) 100vw, 30vw"
               />
               <Figure
-                src="/images/life-3.svg"
-                alt="Corridor and rooms at Infinity Living PG near Christ University Yeshwanthpur"
+                src="/images/entry-biometric.jpg"
+                alt="Biometric entry at Infinity Living PG, Yeshwanthpur, Bengaluru"
                 className="hidden aspect-[3/4] rounded-[1.25rem] sm:block"
                 sizes="(max-width: 640px) 100vw, 30vw"
               />
@@ -55,8 +55,8 @@ export default function LifeAt() {
 
             <div className="mt-5 grid gap-5 sm:grid-cols-[1.4fr_1fr] sm:items-end">
               <Figure
-                src="/images/life-4.svg"
-                alt="Students in the lounge at Infinity Living student accommodation, Bengaluru"
+                src="/images/room-double.jpg"
+                alt="A double sharing room at Infinity Living PG near Christ University Yeshwanthpur Campus"
                 className="hidden aspect-[16/10] rounded-[1.25rem] sm:block"
                 sizes="(max-width: 640px) 100vw, 35vw"
               />

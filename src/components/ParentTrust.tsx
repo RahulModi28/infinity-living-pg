@@ -6,7 +6,7 @@ import Button from "./ui/Button";
 import { site } from "@/lib/site";
 
 const POINTS = [
-  { icon: KeyRound, t: "Secure premises", d: "[ENTRY & ACCESS CONTROL DETAILS — CONFIRM]" },
+  { icon: KeyRound, t: "Secure premises", d: "Biometric entry at the main door — no shared keys floating around." },
   { icon: Camera, t: "CCTV", d: "[CAMERA COVERAGE & AREAS — CONFIRM]" },
   { icon: UserCheck, t: "Professional management", d: "On-site staff, a name and number you can call." },
   { icon: Sparkles, t: "Clean environment", d: "Regular housekeeping in rooms and common areas." },
@@ -22,8 +22,8 @@ export default function ParentTrust() {
     >
       <div className="shell grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:items-center lg:gap-16">
         <Figure
-          src="/images/parent-1.svg"
-          alt="Entrance, reception and security desk at Infinity Living PG, Yeshwanthpur, Bengaluru"
+          src="/images/entrance.jpg"
+          alt="The entrance at Infinity Living PG near Christ University Yeshwanthpur Campus, Bengaluru"
           className="aspect-[4/5] rounded-[1.5rem]"
           sizes="(max-width: 1024px) 100vw, 42vw"
         />

@@ -97,7 +97,7 @@ export default function AudiencePage({ a }: { a: Audience }) {
                 </Reveal>
               </div>
               <Figure
-                src={["/images/life-1.svg", "/images/parent-1.svg", "/images/room-single.svg"][i % 3]}
+                src={["/images/room-double.jpg", "/images/entrance.jpg", "/images/living-room.jpg"][i % 3]}
                 alt={`${s.h2} — Infinity Living, Yeshwanthpur, Bengaluru`}
                 className="aspect-[4/3] rounded-[1.5rem] lg:aspect-[4/5]"
                 sizes="(max-width: 1024px) 100vw, 45vw"

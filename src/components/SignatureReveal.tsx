@@ -148,8 +148,8 @@ export default function SignatureReveal() {
         >
           <Image
             data-sig="img"
-            src="/images/signature.svg"
-            alt="A furnished room at Infinity Living PG near Christ University Yeshwanthpur Campus"
+            src="/images/living-room.jpg"
+            alt="The living room at Infinity Living PG near Christ University Yeshwanthpur Campus, Bengaluru"
             fill
             sizes="100vw"
             className="scale-[1.35] object-cover will-change-transform"

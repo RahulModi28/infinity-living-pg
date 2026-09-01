@@ -46,7 +46,7 @@ export const audiences: Record<"ladies" | "gents", Audience> = {
         h2: "Safety, stated plainly",
         body: "Every PG website says \"safe\". Here is what that actually means at this address — and where we are still confirming details rather than guessing at them.",
         points: [
-          "[ENTRY & ACCESS CONTROL — CONFIRM]",
+          "Biometric entry at the main door",
           "[CCTV COVERAGE & AREAS — CONFIRM]",
           "[SECURITY PERSONNEL & TIMINGS — CONFIRM]",
           "[VISITOR POLICY — CONFIRM]",

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import {
   GraduationCap, TrainFront, Train, Coffee, ShoppingBasket, HeartPulse,
   Store, Landmark, Navigation, type LucideIcon,
@@ -34,20 +33,15 @@ export default function Location() {
                   className="absolute inset-0 size-full border-0"
                 />
               ) : (
-                <>
-                  <Image
-                    src="/images/map.svg"
-                    alt="Map placeholder — Infinity Living, Yeshwanthpur, Bengaluru"
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 45vw"
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-x-5 bottom-5 rounded-2xl border border-white/20 bg-black/45 p-4 text-[0.8125rem] leading-relaxed text-white/85 backdrop-blur-md">
-                    Add the Google Maps embed URL to{" "}
-                    <code className="rounded bg-white/15 px-1 [overflow-wrap:anywhere]">site.address.mapsEmbedUrl</code> to
-                    show the live interactive map here.
-                  </div>
-                </>
+                <div className="absolute inset-0 grid place-items-center bg-moss-2 p-8 text-center">
+                  <p className="max-w-sm text-[0.8125rem] leading-relaxed text-white/70">
+                    Add a Google Maps embed URL to{" "}
+                    <code className="rounded bg-white/15 px-1 [overflow-wrap:anywhere]">
+                      site.address.mapsEmbedUrl
+                    </code>{" "}
+                    to show the interactive map here.
+                  </p>
+                </div>
               )}
             </div>
           </Reveal>
