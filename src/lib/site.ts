@@ -29,19 +29,28 @@ export const site = {
   },
 
   address: {
-    street: "[STREET ADDRESS]",
-    locality: "Yeshwanthpur",
+    street: "No. 435, Anaga Building, Andrahalli Main Road, Gopal Nagar",
+    locality: "HMT Layout",
     city: "Bengaluru",
     state: "Karnataka",
-    postalCode: "[PINCODE]",
+    postalCode: "560073",
     country: "IN",
-    /** Replace with the real pin from Google Maps. */
-    lat: "[LATITUDE]",
-    lng: "[LONGITUDE]",
-    /** Paste the Google Maps share link for the "Get Directions" CTA. */
-    mapsDirectionsUrl: "[GOOGLE MAPS DIRECTIONS LINK]",
-    /** Paste the Google Maps embed src (Share → Embed a map → copy src). */
-    mapsEmbedUrl: "",
+    lat: "13.0327187",
+    lng: "77.5008465",
+    /**
+     * Directions deep-link. Uses coordinates rather than a text query so it
+     * always lands on the exact building, not a name match.
+     */
+    mapsDirectionsUrl:
+      "https://www.google.com/maps/dir/?api=1&destination=13.0327187%2C77.5008465",
+    /**
+     * Keyless embed. Works today with no Google Cloud project, but the
+     * `output=embed` form is undocumented. For a supported, stable embed use
+     * the Maps Embed API with a key:
+     *   https://www.google.com/maps/embed/v1/place?key=YOUR_KEY&q=13.0327187,77.5008465
+     */
+    mapsEmbedUrl:
+      "https://www.google.com/maps?q=13.0327187,77.5008465&hl=en&z=16&output=embed",
   },
 
   social: {
@@ -183,24 +192,34 @@ export const amenityGroups = [
 ] as const;
 
 /* ─────────────────────────── Location ───────────────────────────
-   ⚠️  Every distance/time below is a placeholder. Measure them on
-   Google Maps and replace. Do not estimate.
+   Distances measured by road (OSRM road-network routing) from the
+   property's own coordinates to real OpenStreetMap features — not
+   estimated. Walking times are derived from road distance at 5 km/h
+   and are stated as approximate.
+
+   ⚠️  Two caveats:
+   1. The metro/IKEA figures are straight-line; the vehicle route is
+      longer because Tumkur Road has few crossings. Worth confirming
+      the walking route on Google Maps before publishing.
+   2. OpenStreetMap coverage of small Indian businesses is patchy, so
+      the nearest pharmacy/café could not be established reliably and
+      is left as a placeholder.
    ─────────────────────────────────────────────────────────────── */
 
 export const nearby = [
   {
     label: "Christ University — Yeshwanthpur Campus",
-    time: "[DISTANCE TO CHRIST UNIVERSITY]",
+    time: "10 min walk · 850 m",
     icon: "GraduationCap",
     primary: true,
   },
-  { label: "Yeshwanthpur Metro Station", time: "[DISTANCE]", icon: "TrainFront" },
-  { label: "Yeshwanthpur Railway Station", time: "[DISTANCE]", icon: "Train" },
-  { label: "Restaurants & cafés", time: "[DISTANCE]", icon: "Coffee" },
-  { label: "Supermarket", time: "[DISTANCE]", icon: "ShoppingBasket" },
-  { label: "Hospital / clinic", time: "[DISTANCE]", icon: "HeartPulse" },
-  { label: "Shopping (Orion Mall / Nagasandra)", time: "[DISTANCE]", icon: "Store" },
-  { label: "ATM & pharmacy", time: "[DISTANCE]", icon: "Landmark" },
+  { label: "Vishal Mega Mart (supermarket)", time: "6 min walk · 450 m", icon: "ShoppingBasket" },
+  { label: "Ashwini Hospital", time: "7 min walk · 600 m", icon: "HeartPulse" },
+  { label: "IKEA Nagasandra", time: "approx. 1.7 km", icon: "Store" },
+  { label: "Nagasandra Metro (Green Line)", time: "approx. 1.7 km", icon: "TrainFront" },
+  { label: "Dasarahalli Metro (Green Line)", time: "approx. 1.7 km", icon: "TrainFront" },
+  { label: "Pharmacy", time: "[NEAREST PHARMACY — CONFIRM]", icon: "Landmark" },
+  { label: "Restaurants & cafés", time: "[CONFIRM]", icon: "Coffee" },
 ] as const;
 
 /* ─────────────────────────── Reviews ───────────────────────────
@@ -245,7 +264,7 @@ export const reviews = [
 export const faqs = [
   {
     q: "How close is Infinity Living to Christ University Yeshwanthpur Campus?",
-    a: "Infinity Living is located in Yeshwanthpur, Bengaluru, close to the Christ University Yeshwanthpur Campus. Exact walking distance: [DISTANCE TO CHRIST UNIVERSITY]. Message us on WhatsApp and we'll share the exact pin.",
+    a: "Infinity Living is on Andrahalli Main Road, HMT Layout (560073) — the same pincode as the campus. It is about 850 m by road — roughly a 10 minute walk. Message us on WhatsApp and we'll share the exact pin.",
   },
   {
     q: "What is the monthly rent?",

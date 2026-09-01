@@ -36,8 +36,8 @@ export const audiences: Record<"ladies" | "gents", Audience> = {
         h2: "Girls PG near Christ University Yeshwanthpur Campus",
         body: "The walk to campus is the whole point. No autos to negotiate at 8am, no depending on someone for a lift after an evening class, and no hour of your day lost to Bengaluru traffic in each direction.",
         points: [
-          "Short walk to Christ University Yeshwanthpur Campus — [DISTANCE TO CHRIST UNIVERSITY]",
-          "Close to Yeshwanthpur Metro for the rest of the city — [DISTANCE]",
+          "About 850 m by road to Christ University Yeshwanthpur Campus — roughly a 10 minute walk",
+          "Nagasandra Metro on the Green Line for the rest of the city — approx. 1.7 km",
           "[SEPARATE FLOOR / BLOCK ARRANGEMENT — CONFIRM]",
           "Housekeeping in rooms and common areas",
         ],
@@ -88,7 +88,7 @@ export const audiences: Record<"ladies" | "gents", Audience> = {
     slug: "gents-pg-yeshwanthpur",
     title: "Gents PG in Yeshwanthpur near Christ University",
     description:
-      "Gents PG in Yeshwanthpur, Bengaluru — near Christ University Yeshwanthpur Campus and Yeshwanthpur Metro. Furnished single, double & triple sharing rooms with meals, Wi-Fi and 24/7 security.",
+      "Gents PG near Christ University Yeshwanthpur Campus, Bengaluru — a 10 minute walk from campus, close to Nagasandra Metro. Furnished single, double & triple sharing rooms with meals, Wi-Fi and 24/7 security.",
     h1: "Gents PG in Yeshwanthpur, near Christ University",
     eyebrow: "For men students & working professionals",
     intro:
@@ -98,20 +98,20 @@ export const audiences: Record<"ladies" | "gents", Audience> = {
         h2: "Boys PG near Christ University Yeshwanthpur Campus",
         body: "Close enough to campus that you can go back between classes instead of killing three hours somewhere. That single fact changes how a semester actually runs.",
         points: [
-          "Short walk to Christ University Yeshwanthpur Campus — [DISTANCE TO CHRIST UNIVERSITY]",
+          "About 850 m by road to Christ University Yeshwanthpur Campus — roughly a 10 minute walk",
           "[SEPARATE FLOOR / BLOCK ARRANGEMENT — CONFIRM]",
           "Study desk and charging points at every bed",
           "Housekeeping in rooms and common areas",
         ],
       },
       {
-        h2: "Mens PG near Yeshwanthpur Metro Station",
-        body: "Not everyone here is a student. The metro and railway station put most of Bengaluru's office belt within a straightforward commute, which suits working professionals sharing the building.",
+        h2: "Mens PG near Nagasandra Metro",
+        body: "Not everyone here is a student. Nagasandra and Dasarahalli on the Green Line put the Tumkur Road industrial belt and the rest of the city within a straightforward commute, which suits working professionals sharing the building.",
         points: [
-          "Yeshwanthpur Metro Station — [DISTANCE]",
-          "Yeshwanthpur Railway Station — [DISTANCE]",
-          "TCS Yeshwanthpur and the surrounding offices — [DISTANCE]",
-          "Restaurants, supermarket and pharmacy nearby — [DISTANCE]",
+          "Nagasandra Metro (Green Line) — approx. 1.7 km",
+          "Dasarahalli Metro (Green Line) — approx. 1.7 km",
+          "IKEA Nagasandra — approx. 1.7 km",
+          "Vishal Mega Mart supermarket — 450 m, about a 6 minute walk",
         ],
       },
       {

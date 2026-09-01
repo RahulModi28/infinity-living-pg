@@ -32,7 +32,7 @@ const GROUPS = [
       "Separate floor / block — [CONFIRM ARRANGEMENT]",
       "Single, double and triple sharing rooms",
       "Study desks and reliable Wi-Fi in every room",
-      "Close to Yeshwanthpur Metro and the railway station",
+      "Close to Nagasandra Metro on the Green Line",
     ],
   },
 ];
