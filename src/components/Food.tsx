@@ -14,7 +14,7 @@ const MEALS = [
   {
     icon: Sunrise,
     name: "Breakfast",
-    time: "[TIMING]",
+    time: "7:00 – 10:00 am",
     menu: "[SAMPLE MENU — e.g. dosa, idli, poha, upma, tea/coffee]",
     src: "/images/food-breakfast.jpg",
     alt: "Breakfast at Infinity Space PG, Yeshwanthpur — masala dosa with sambar and coconut chutney",
@@ -22,7 +22,7 @@ const MEALS = [
   {
     icon: Sun,
     name: "Lunch",
-    time: "[TIMING]",
+    time: "12:00 – 2:00 pm",
     menu: "[SAMPLE MENU — e.g. rice, roti, dal, two sabzis, curd]",
     src: "/images/food-lunch.jpg",
     alt: "Lunch at Infinity Space PG near Christ University Yeshwanthpur — dal, rice, roti, bhindi and cabbage sabzi",
@@ -30,7 +30,7 @@ const MEALS = [
   {
     icon: CupSoda,
     name: "Evening snacks",
-    time: "[TIMING]",
+    time: "4:00 – 6:00 pm",
     menu: "[SAMPLE MENU — CONFIRM what's served and how often]",
     src: "/images/food-snack.jpg",
     alt: "Evening snack served at Infinity Space PG, Yeshwanthpur, Bengaluru",
@@ -38,7 +38,7 @@ const MEALS = [
   {
     icon: Moon,
     name: "Dinner",
-    time: "[TIMING]",
+    time: "8:00 – 9:30 pm",
     menu: "[SAMPLE MENU — CONFIRM, and whether there is a non-veg day]",
     src: "/images/food-dinner.jpg",
     alt: "Dinner at Infinity Space PG, Yeshwanthpur — curry with naan and rice",
