@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { ArrowUpRight, Users } from "lucide-react";
-import { rooms, type Room } from "@/lib/site";
+import { ArrowUpRight, Users, HelpCircle, MessageCircle } from "lucide-react";
+import { rooms, whatsappHref, type Room } from "@/lib/site";
 import SectionHead from "./ui/SectionHead";
 import Reveal from "./ui/Reveal";
+import Button from "./ui/Button";
 import RoomModal from "./RoomModal";
 import PriceTable from "./PriceTable";
 
@@ -68,6 +69,47 @@ function RoomCard({ room, onOpen }: { room: Room; onOpen: () => void }) {
   );
 }
 
+function HelpCard() {
+  return (
+    <div className="grain relative flex aspect-[4/5] flex-col justify-between overflow-hidden rounded-[1.5rem] bg-moss-2 p-7 text-ivory">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-16 -top-16 size-56 rounded-full bg-clay/20 blur-2xl"
+      />
+      <div className="relative">
+        <span className="grid size-11 place-items-center rounded-2xl bg-white/10 text-clay">
+          <HelpCircle className="size-5" aria-hidden="true" />
+        </span>
+        <h3 className="mt-5 font-display text-2xl leading-tight tracking-[-0.02em]">
+          Not sure which one?
+        </h3>
+        <p className="mt-3 text-[0.9375rem] leading-relaxed text-white/70">
+          Tell us your budget and roughly when you want to move in. We&apos;ll say which room
+          is free, what it costs and what&apos;s included — no obligation to visit.
+        </p>
+      </div>
+
+      <div className="relative mt-6 grid gap-2.5">
+        <Button
+          href={whatsappHref(
+            "Hi, I'm looking at rooms at Infinity Space near Christ University Yeshwanthpur Campus. Could you tell me what's available and the rent?"
+          )}
+          target="_blank"
+          rel="noopener noreferrer"
+          variant="whatsapp"
+          className="w-full !py-3 !text-[0.875rem]"
+          data-cta="whatsapp"
+        >
+          <MessageCircle className="size-[1.05em]" aria-hidden="true" /> Ask on WhatsApp
+        </Button>
+        <Button href="#enquire" variant="light" className="w-full !py-3 !text-[0.875rem]">
+          Check availability
+        </Button>
+      </div>
+    </div>
+  );
+}
+
 export default function Rooms() {
   const [active, setActive] = useState<Room | null>(null);
 
@@ -81,7 +123,7 @@ export default function Rooms() {
         />
 
         {/* Swipeable on mobile, grid from tablet up. */}
-        <div className="no-bar edge-fade -mx-5 mt-14 flex snap-x snap-mandatory scroll-pl-5 gap-5 overflow-x-auto px-5 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:[mask-image:none] lg:max-w-3xl lg:gap-7">
+        <div className="no-bar edge-fade -mx-5 mt-14 flex snap-x snap-mandatory scroll-pl-5 gap-5 overflow-x-auto px-5 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:[mask-image:none] lg:grid-cols-3 lg:gap-7">
           {rooms.map((r) => (
             <div key={r.id} className="w-[80vw] shrink-0 sm:w-auto">
               <Reveal>
@@ -89,6 +131,17 @@ export default function Rooms() {
               </Reveal>
             </div>
           ))}
+
+          {/* With two room types the third column would otherwise sit empty on
+              desktop. A help card is a better tenant than whitespace: it keeps
+              the grid rhythm and catches people who can't decide. Hidden on
+              mobile, where the row is a swipeable carousel and a non-room card
+              would just be something extra to swipe past. */}
+          <div className="hidden w-[80vw] shrink-0 sm:w-auto lg:block">
+            <Reveal>
+              <HelpCard />
+            </Reveal>
+          </div>
         </div>
 
         <Reveal>
