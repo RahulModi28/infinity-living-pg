@@ -16,6 +16,35 @@ const SIGNALS = [
   { icon: UtensilsCrossed, label: "Meals Available" },
 ];
 
+function SignalList({
+  wrap = false,
+  duplicate = false,
+}: {
+  wrap?: boolean;
+  duplicate?: boolean;
+}) {
+  return (
+    <ul
+      aria-hidden={duplicate || undefined}
+      className={
+        wrap
+          ? "flex flex-wrap gap-x-6 gap-y-3"
+          : `flex shrink-0 items-center gap-x-6 pr-6 ${duplicate ? "marquee__dupe" : ""}`
+      }
+    >
+      {SIGNALS.map(({ icon: Icon, label }) => (
+        <li
+          key={label}
+          className="flex shrink-0 items-center gap-2 text-[0.8125rem] sm:text-sm"
+        >
+          <Icon className="size-4 text-clay" aria-hidden="true" />
+          {label}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export default function Hero() {
   const root = useRef<HTMLElement>(null);
 
@@ -155,17 +184,22 @@ export default function Hero() {
           </Button>
         </div>
 
-        <ul
-          data-h="strip"
-          className="no-bar mt-12 flex gap-x-6 gap-y-3 overflow-x-auto border-t border-white/15 pt-6 text-white/72 sm:flex-wrap sm:overflow-visible"
-        >
-          {SIGNALS.map(({ icon: Icon, label }) => (
-            <li key={label} className="flex shrink-0 items-center gap-2 text-[0.8125rem] sm:text-sm">
-              <Icon className="size-4 text-clay" aria-hidden="true" />
-              {label}
-            </li>
-          ))}
-        </ul>
+        <div data-h="strip" className="mt-12 border-t border-white/15 pt-6 text-white/72">
+          {/* Phones: the five signals don't fit, so they travel instead of
+              being clipped mid-word. The second copy is aria-hidden so the
+              list is announced only once. */}
+          <div className="marquee sm:hidden">
+            <div className="marquee__track">
+              <SignalList />
+              <SignalList duplicate />
+            </div>
+          </div>
+
+          {/* From `sm` up they all fit on one or two lines — no motion needed. */}
+          <div className="hidden sm:block">
+            <SignalList wrap />
+          </div>
+        </div>
       </div>
     </section>
   );

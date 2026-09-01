@@ -107,6 +107,32 @@
     mask-image: linear-gradient(to right, #000 calc(100% - 3rem), transparent);
   }
 
+  /* ── Marquee ──────────────────────────────────────────────────────────
+     Used where a short row of items overflows a phone but fits a desktop,
+     so the clipping reads as intentional motion rather than a cut-off word.
+     The track holds the row twice and travels exactly -50%, which lands the
+     second copy where the first began — a seamless loop with no JS.
+     Both edges fade here (unlike .edge-fade) because content genuinely
+     enters and leaves on both sides. */
+  .marquee {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 2rem, #000 calc(100% - 2rem), transparent);
+    mask-image: linear-gradient(to right, transparent, #000 2rem, #000 calc(100% - 2rem), transparent);
+  }
+  .marquee__track {
+    display: flex;
+    width: max-content;
+    animation: marquee 28s linear infinite;
+    will-change: transform;
+  }
+  /* WCAG 2.2.2 — moving content that starts on its own must be pausable. */
+  .marquee:hover .marquee__track,
+  .marquee:focus-within .marquee__track {
+    animation-play-state: paused;
+  }
+
   .no-bar { scrollbar-width: none; -ms-overflow-style: none; }
   .no-bar::-webkit-scrollbar { display: none; }
 
@@ -138,9 +164,19 @@
   .rw > span { transform: none !important; }
   /* The signature section renders as a static composition instead. */
   [data-sig="caption"] { opacity: 1 !important; }
+  /* Marquee stops travelling and becomes a normal swipeable row. */
+  .marquee__track { animation: none !important; width: auto !important; }
+  .marquee { overflow-x: auto; scrollbar-width: none; }
+  .marquee::-webkit-scrollbar { display: none; }
+  .marquee__dupe { display: none !important; }
 }
 
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(1.015); }
   to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
