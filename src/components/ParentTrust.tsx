@@ -1,4 +1,4 @@
-import { ShieldCheck, Camera, UserCheck, Sparkles, PhoneCall, KeyRound, MapPin } from "lucide-react";
+import { ShieldCheck, Camera, UserCheck, Sparkles, PhoneCall, KeyRound, MapPin, Clock } from "lucide-react";
 import Figure from "./ui/Figure";
 import Reveal from "./ui/Reveal";
 import SplitText from "./ui/SplitText";
@@ -11,6 +11,7 @@ const POINTS = [
   { icon: UserCheck, t: "Professional management", d: "On-site staff, a name and number you can call." },
   { icon: Sparkles, t: "Clean environment", d: "Regular housekeeping in rooms and common areas." },
   { icon: MapPin, t: "Convenient location", d: "Short walk to Christ University Yeshwanthpur Campus." },
+  { icon: Clock, t: "11 pm curfew", d: "Later nights are possible, but only with your permission — not the resident's." },
   { icon: PhoneCall, t: "Reliable support", d: "[EMERGENCY CONTACT & RESPONSE PROCESS — CONFIRM]" },
 ];
 

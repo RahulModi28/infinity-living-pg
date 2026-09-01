@@ -314,11 +314,11 @@ export const faqs = [
   },
   {
     q: "What is the minimum stay?",
-    a: "[MINIMUM STAY / LOCK-IN PERIOD — CONFIRM].",
+    a: "12 months. That lines up with the deposit, which is adjusted against your April and May rent at the end of the term — so a full year is the arrangement the pricing is built around.",
   },
   {
     q: "Are visitors and parents allowed?",
-    a: "[VISITOR POLICY — CONFIRM]. Parents are always welcome to visit and see the property before booking.",
+    a: "Guests are allowed, but male visitors only. Parents are welcome to come and see the property before you book — we'd rather you visited than booked from photos.",
   },
   {
     q: "Is housekeeping available?",
@@ -326,7 +326,7 @@ export const faqs = [
   },
   {
     q: "Is there a curfew?",
-    a: "[CURFEW / ENTRY TIMING POLICY — CONFIRM].",
+    a: "Yes — 11 pm. It isn't absolute: later nights are possible with a parent's permission, which is the point of having it. It exists so that someone always knows where you are, not to police your evenings.",
   },
   {
     q: "Is this a gents-only PG?",

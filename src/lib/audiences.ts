@@ -81,7 +81,7 @@ export const audiences: Record<"gents", Audience> = {
       },
       {
         q: "Is there a minimum stay or lock-in?",
-        a: "[MINIMUM STAY / LOCK-IN PERIOD — CONFIRM]. We put the notice period in writing before you pay anything.",
+        a: "12 months. The deposit is adjusted against your April and May rent at the end of that term. We put the notice period in writing before you pay anything.",
       },
     ],
   },
