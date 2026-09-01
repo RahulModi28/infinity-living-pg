@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     template: "%s | Infinity Space",
   },
   description:
-    "Gents PG in Yeshwanthpur near Christ University Campus, Bengaluru — a 10 minute walk. Furnished single & double rooms with Wi-Fi, meals, gym and biometric entry.",
+    "Gents PG a 10 minute walk from Christ University Yeshwanthpur Campus, Bengaluru. Furnished single & double rooms, four meals a day, Wi-Fi, gym, biometric entry.",
   keywords: [
     "pg near christ university yeshwanthpur",
     "pg near christ university yeshwanthpur campus",

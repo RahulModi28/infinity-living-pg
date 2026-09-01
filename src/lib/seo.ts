@@ -1,4 +1,4 @@
-import { site, rooms, faqs, baseUrl } from "./site";
+import { site, rooms, faqs, amenityGroups, baseUrl } from "./site";
 import type { Audience } from "./audiences";
 
 /**
@@ -46,13 +46,16 @@ export function localBusinessJsonLd() {
       { "@type": "Place", name: "Nagasandra, Bengaluru" },
       { "@type": "Place", name: "Malleshwaram, Bengaluru" },
     ],
+    /**
+     * Derived from amenityGroups rather than listed again here. The previous
+     * hard-coded list silently fell behind as amenities were confirmed — it
+     * was still missing the gym, the rooftop dining hall, the attached
+     * bathroom and biometric entry long after those went live on the page.
+     * Anything still bracketed is unconfirmed and stays out of the schema.
+     */
     amenityFeature: [
-      "High-speed Wi-Fi",
-      "Meals",
-      "Housekeeping",
-      "Furnished rooms",
-      "24/7 security",
-      "Study desk",
+      ...amenityGroups.flatMap((g) => g.items.filter((i) => !i.includes("["))),
+      ...(site.foodAvailable ? ["Four meals a day, cooked on site"] : []),
     ].map((n) => ({ "@type": "LocationFeatureSpecification", name: n, value: true })),
     nearbyAttraction: {
       "@type": "CollegeOrUniversity",

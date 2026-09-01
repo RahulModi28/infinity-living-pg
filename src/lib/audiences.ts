@@ -28,7 +28,7 @@ export const audiences: Record<"gents", Audience> = {
     slug: "gents-pg-yeshwanthpur",
     title: "Gents PG in Yeshwanthpur near Christ University",
     description:
-      "Gents PG near Christ University Yeshwanthpur Campus, Bengaluru — a 10 minute walk from campus, close to Nagasandra Metro. Furnished single, double & triple sharing rooms with meals, Wi-Fi and 24/7 security.",
+      "A gents PG in Yeshwanthpur for students and working professionals — 10 minutes' walk to Christ University, close to Nagasandra Metro. Single & double rooms.",
     h1: "Gents PG in Yeshwanthpur, near Christ University",
     eyebrow: "For men students & working professionals",
     intro:
