@@ -123,8 +123,11 @@
   }
   .marquee__track {
     display: flex;
+    align-items: stretch;
     width: max-content;
-    animation: marquee 28s linear infinite;
+    /* Per-instance speed: a row of trust chips and a row of review cards
+       travel very different distances and need different durations. */
+    animation: marquee var(--marquee-duration, 28s) linear infinite;
     will-change: transform;
   }
   /* WCAG 2.2.2 — moving content that starts on its own must be pausable. */

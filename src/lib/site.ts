@@ -238,6 +238,20 @@ export const reviews = [
     text:
       "Food is home-style and the common area is where most of us end up in the evenings. Housekeeping is regular.",
   },
+  {
+    name: "[STUDENT NAME]",
+    course: "[COURSE], Christ University — Yeshwanthpur",
+    rating: 5,
+    text:
+      "Having the gym downstairs means I actually use it. Most nights it's snooker with whoever's around — I didn't expect that from a PG.",
+  },
+  {
+    name: "[PARENT NAME]",
+    course: "Parent, [CITY]",
+    rating: 5,
+    text:
+      "The biometric entry was what settled it for me. I can call the manager directly and get an answer, which is not something I could say about the other places we saw.",
+  },
 ] as const;
 
 /* ─────────────────────────────── FAQ ─────────────────────────────── */
