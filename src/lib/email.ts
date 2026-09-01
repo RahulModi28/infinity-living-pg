@@ -55,117 +55,187 @@ export function leadReplyHtml(lead: Lead) {
   const double = rooms.find((r) => r.id === "double");
   const wa = whatsappHref(`Hi, I just enquired on the website. My name is ${lead.name}.`);
   const img = (f: string) => `${site.url}/images/${f}`;
+  const F = "'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif";
 
-  // Tables and inline styles throughout — email clients support neither
-  // flexbox nor grid, and most strip <style> blocks. Every image carries alt
-  // text and every fact is repeated as text, because a large share of clients
-  // block images until the reader asks for them.
-  const priceCard = (name: string, price: string, note: string) => `
-    <td width="50%" style="padding:0 6px;">
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f7f4ef;border:1px solid #e4dccf;border-radius:14px;">
-        <tr><td style="padding:18px 16px;text-align:center;">
-          <div style="color:#6f6a63;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">${name}</div>
-          <div style="color:#121110;font-size:26px;font-weight:700;margin:8px 0 2px;letter-spacing:-0.5px;">&#8377;${price}</div>
-          <div style="color:#6f6a63;font-size:12px;">${note}</div>
-        </td></tr>
-      </table>
-    </td>`;
+  /** Outlook ignores border-radius and padding on links, so the button is
+   *  drawn as VML there and as a styled span everywhere else. */
+  const button = (href: string, label: string, bg: string, w: number) => `
+    <table class="button_block" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;">
+      <tr><td align="center" style="padding:6px 10px;">
+        <a href="${href}" target="_blank" style="color:#ffffff;text-decoration:none;"><!--[if mso]>
+<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="${href}" style="height:48px;width:${w}px;v-text-anchor:middle;" arcsize="50%" fillcolor="${bg}">
+<v:stroke dashstyle="Solid" weight="0px" color="${bg}"/><w:anchorlock/><v:textbox inset="0px,0px,0px,0px">
+<center dir="false" style="color:#ffffff;font-family:sans-serif;font-size:16px"><![endif]--><span style="background-color:${bg};border-radius:999px;color:#ffffff;display:inline-block;font-family:${F};font-size:16px;font-weight:700;text-align:center;width:auto;word-break:keep-all;"><span style="display:block;padding:15px 32px;line-height:120%;">${label}</span></span><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></a>
+      </td></tr>
+    </table>`;
 
-  const thumb = (file: string, alt: string) => `
-    <td width="33.33%" style="padding:0 4px;">
-      <img src="${img(file)}" alt="${alt}" width="168" style="width:100%;max-width:168px;height:auto;display:block;border-radius:10px;border:0;" />
-    </td>`;
+  const spacer = (h: number) =>
+    `<div class="spacer_block" style="height:${h}px;line-height:${h}px;font-size:1px;">&#8202;</div>`;
 
-  return `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"></head>
-<body style="margin:0;padding:0;background:#efeae1;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
-  <div style="display:none;max-height:0;overflow:hidden;opacity:0;">Rent, deposit, what's included and how far it is &mdash; all of it, before you ask.</div>
+  /** One 600px band. Everything is a row so Outlook keeps the rhythm. */
+  const row = (inner: string, bg = "#ffffff") => `
+    <table class="row" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;">
+      <tr><td>
+        <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;background-color:${bg};color:#121110;width:600px;margin:0 auto;" width="600">
+          <tbody>${inner}</tbody>
+        </table>
+      </td></tr>
+    </table>`;
 
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#efeae1;padding:24px 12px;">
-    <tr><td align="center">
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background:#ffffff;border-radius:20px;overflow:hidden;">
-
-        <tr><td style="padding:0;">
-          <img src="${img("hero.jpg")}" width="600" alt="The common area at Infinity Space &mdash; snooker table and lounge seating" style="width:100%;height:auto;display:block;border:0;" />
-        </td></tr>
-
-        <tr><td style="padding:30px 30px 0;">
-          <div style="color:#c8622f;font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;">Infinity Space &middot; Yeshwanthpur</div>
-          <h1 style="margin:12px 0 0;color:#121110;font-size:30px;line-height:1.15;font-weight:700;letter-spacing:-0.8px;">
-            Ten minutes' walk<br>from your first class.
-          </h1>
-          <p style="margin:16px 0 0;color:#2a2724;font-size:16px;line-height:1.6;">
-            Hi ${esc(lead.name.split(" ")[0])} &mdash; thanks for getting in touch. Rather than ask you to
-            call for details, here is all of it, so you can compare us properly against wherever
-            else you're looking.
-          </p>
-        </td></tr>
-
-        <tr><td style="padding:26px 24px 0;">
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-            ${priceCard("Single sharing", single?.price ?? "", "per month")}
-            ${priceCard("Double sharing", double?.price ?? "", "per person / month")}
-          </tr></table>
-          <p style="margin:14px 6px 0;color:#6f6a63;font-size:13px;line-height:1.6;text-align:center;">
-            Electricity, four meals a day, Wi&#8209;Fi, housekeeping and laundry are all in the rent
-            &mdash; not billed on top.
-          </p>
-        </td></tr>
-
-        <tr><td style="padding:24px 30px 0;">
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#1f3d33;border-radius:14px;">
-            <tr><td style="padding:20px 22px;">
-              <div style="color:#ffffff;font-size:15px;font-weight:700;margin-bottom:6px;">The deposit isn't money you lose</div>
-              <div style="color:rgba(247,244,239,0.78);font-size:14px;line-height:1.6;">
-                Two months' rent, adjusted against your April and May rent &mdash; so it comes back
-                as two rent&#8209;free months at the end of the year.
-              </div>
+  const priceCol = (name: string, price: string, note: string) => `
+    <td class="column" width="50%" style="mso-table-lspace:0pt;mso-table-rspace:0pt;vertical-align:top;">
+      <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;">
+        <tr><td style="padding:0 6px;">
+          <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;background-color:#f7f4ef;border:1px solid #e4dccf;border-radius:14px;">
+            <tr><td align="center" style="padding:20px 14px;">
+              <div style="color:#6f6a63;font-family:${F};font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">${name}</div>
+              <div style="color:#121110;font-family:${F};font-size:28px;font-weight:700;letter-spacing:-0.6px;padding:8px 0 3px;">&#8377;${price}</div>
+              <div style="color:#6f6a63;font-family:${F};font-size:12px;">${note}</div>
             </td></tr>
           </table>
         </td></tr>
+      </table>
+    </td>`;
 
-        <tr><td style="padding:28px 30px 0;">
-          <div style="color:#121110;font-size:17px;font-weight:700;margin-bottom:14px;">What's in the building</div>
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-            ${thumb("gym.jpg", "The gym at Infinity Space")}
-            ${thumb("room-double.jpg", "A double sharing room")}
-            ${thumb("dining-hall.jpg", "The rooftop dining hall")}
-          </tr></table>
-          <p style="margin:12px 4px 0;color:#6f6a63;font-size:13px;line-height:1.6;">
-            Gym, pool table and table tennis. A rooftop dining hall. Biometric entry, CCTV and
-            security staff on site.
-          </p>
+  const thumb = (file: string, alt: string, label: string) => `
+    <td width="33.33%" style="mso-table-lspace:0pt;mso-table-rspace:0pt;vertical-align:top;">
+      <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;">
+        <tr><td style="padding:0 4px;">
+          <img src="${img(file)}" alt="${alt}" width="176" style="display:block;width:100%;max-width:176px;height:auto;border:0;border-radius:10px;" />
+          <div style="color:#6f6a63;font-family:${F};font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:8px 0 0;text-align:center;">${label}</div>
         </td></tr>
+      </table>
+    </td>`;
 
-        <tr><td style="padding:28px 30px 0;">
-          <div style="color:#121110;font-size:17px;font-weight:700;">Come and see it before you decide</div>
-          <p style="margin:8px 0 20px;color:#2a2724;font-size:15px;line-height:1.65;">
-            No booking, no deposit, no brokerage &mdash; just come and look at the actual room and
-            meet the people who run it. Parents are welcome, and we'd rather you visited than took
-            our word for any of this.
-          </p>
-          <table role="presentation" cellpadding="0" cellspacing="0" width="100%"><tr><td align="center">
-            <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-              <td style="background:#1f8b4d;border-radius:999px;">
-                <a href="${wa}" style="display:inline-block;padding:15px 34px;color:#ffffff;font-size:16px;font-weight:700;text-decoration:none;">Message us on WhatsApp</a>
-              </td>
-            </tr></table>
-          </td></tr></table>
-          <p style="margin:14px 0 0;color:#6f6a63;font-size:14px;line-height:1.6;text-align:center;">
-            or call <a href="tel:${site.contact.phoneHref}" style="color:#121110;text-decoration:none;font-weight:600;">${site.contact.phoneDisplay}</a>
-          </p>
-        </td></tr>
+  return `<!DOCTYPE html>
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en">
+<head>
+<title>Infinity Space</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<!--[if mso]><xml><w:WordDocument xmlns:w="urn:schemas-microsoft-com:office:word"><w:DontUseAdvancedTypographyReadingMail/></w:WordDocument>
+<o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch><o:AllowPNG/></o:OfficeDocumentSettings></xml><![endif]-->
+<!--[if !mso]><!--><link href="https://fonts.googleapis.com/css?family=Inter:400,600,700" rel="stylesheet" type="text/css"><!--<![endif]-->
+<style>
+* { box-sizing: border-box; }
+body { margin:0; padding:0; }
+a[x-apple-data-detectors] { color:inherit !important; text-decoration:inherit !important; }
+#MessageViewBody a { color:inherit; text-decoration:none; }
+p { line-height:inherit; }
+.image_block img+div { display:none; }
+@media (max-width:620px) {
+  .row-content { width:100% !important; }
+  .stack .column { width:100%; display:block; }
+  .mobile_hide { display:none !important; max-height:0; overflow:hidden; }
+  .m-pad { padding-left:20px !important; padding-right:20px !important; }
+  .m-h1 { font-size:30px !important; }
+}
+</style>
+</head>
+<body style="margin:0;padding:0;-webkit-text-size-adjust:none;text-size-adjust:none;background-color:#efeae1;">
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;">Rent, deposit, what's included and how far it is &mdash; all of it, before you ask.</div>
 
-        <tr><td style="padding:28px 30px 30px;">
-          <div style="border-top:1px solid #e4dccf;padding-top:18px;color:#6f6a63;font-size:12px;line-height:1.7;">
-            <strong style="color:#121110;">Infinity Space</strong> &mdash; gents PG, Yeshwanthpur<br>
-            ${site.address.street}, ${site.address.locality}, ${site.address.city} ${site.address.postalCode}<br>
-            <a href="${site.url}" style="color:#c8622f;text-decoration:none;">${site.url.replace("https://", "")}</a>
+<table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;background-color:#efeae1;">
+<tbody><tr><td>
+
+${row(`<tr><td class="column" width="100%" style="vertical-align:top;">${spacer(24)}</td></tr>`, "#efeae1")}
+
+${row(`<tr><td class="column" width="100%" style="mso-table-lspace:0pt;mso-table-rspace:0pt;vertical-align:top;">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;">
+    <tr><td style="padding:0;">
+      <img src="${img("hero.jpg")}" width="600" alt="The common area at Infinity Space &mdash; snooker table and lounge seating" style="display:block;width:100%;height:auto;border:0;" />
+    </td></tr>
+    <tr><td class="m-pad" style="padding:32px 36px 0;">
+      <div style="color:#c8622f;font-family:${F};font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;">Infinity Space &middot; Yeshwanthpur</div>
+      <div class="m-h1" style="color:#121110;font-family:${F};font-size:36px;font-weight:700;line-height:1.12;letter-spacing:-1px;padding:14px 0 0;">Ten minutes' walk<br>from your first class.</div>
+      <div style="color:#2a2724;font-family:${F};font-size:16px;line-height:1.6;padding:16px 0 0;">
+        Hi ${esc(lead.name.split(" ")[0])} &mdash; thanks for getting in touch. Rather than ask you to call for
+        details, here is all of it, so you can compare us properly against wherever else you're looking.
+      </div>
+    </td></tr>
+  </table>
+</td></tr>`)}
+
+${row(`<tr><td class="column" width="100%" style="vertical-align:top;">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;">
+    <tr><td class="m-pad" style="padding:26px 30px 0;">
+      <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;">
+        <tr>${priceCol("Single sharing", single?.price ?? "", "per month")}${priceCol("Double sharing", double?.price ?? "", "per person / month")}</tr>
+      </table>
+      <div style="color:#6f6a63;font-family:${F};font-size:13px;line-height:1.6;padding:14px 6px 0;text-align:center;">
+        Electricity, four meals a day, Wi&#8209;Fi, housekeeping and laundry are all in the rent &mdash; not billed on top.
+      </div>
+    </td></tr>
+  </table>
+</td></tr>`)}
+
+${row(`<tr><td class="column" width="100%" style="vertical-align:top;">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;">
+    <tr><td class="m-pad" style="padding:24px 36px 0;">
+      <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;background-color:#1f3d33;border-radius:14px;">
+        <tr><td style="padding:22px 24px;">
+          <div style="color:#ffffff;font-family:${F};font-size:16px;font-weight:700;">The deposit isn't money you lose</div>
+          <div style="color:#cfd9d4;font-family:${F};font-size:14px;line-height:1.6;padding:7px 0 0;">
+            Two months' rent, adjusted against your April and May rent &mdash; so it comes back as
+            two rent&#8209;free months at the end of the year.
           </div>
         </td></tr>
-
       </table>
     </td></tr>
   </table>
+</td></tr>`)}
+
+${row(`<tr><td class="column" width="100%" style="vertical-align:top;">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;">
+    <tr><td class="m-pad" style="padding:30px 32px 0;">
+      <div style="color:#121110;font-family:${F};font-size:18px;font-weight:700;padding:0 4px 14px;">What's in the building</div>
+      <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;">
+        <tr>${thumb("gym.jpg", "The gym at Infinity Space", "Gym")}${thumb("room-double.jpg", "A double sharing room", "Rooms")}${thumb("dining-hall.jpg", "The rooftop dining hall", "Rooftop")}</tr>
+      </table>
+      <div style="color:#6f6a63;font-family:${F};font-size:13px;line-height:1.6;padding:14px 4px 0;">
+        Pool table and table tennis too. Biometric entry, CCTV and security staff on site.
+      </div>
+    </td></tr>
+  </table>
+</td></tr>`)}
+
+${row(`<tr><td class="column" width="100%" style="vertical-align:top;">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;">
+    <tr><td class="m-pad" style="padding:32px 36px 0;">
+      <div style="color:#121110;font-family:${F};font-size:18px;font-weight:700;">Come and see it before you decide</div>
+      <div style="color:#2a2724;font-family:${F};font-size:15px;line-height:1.65;padding:8px 0 4px;">
+        No booking, no deposit, no brokerage &mdash; just come and look at the actual room and meet
+        the people who run it. Parents are welcome, and we'd rather you visited than took our word
+        for any of this.
+      </div>
+    </td></tr></table>
+  ${button(wa, "Message us on WhatsApp", "#1f8b4d", 250)}
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;">
+    <tr><td align="center" style="padding:4px 20px 0;">
+      <div style="color:#6f6a63;font-family:${F};font-size:14px;">or call <a href="tel:${site.contact.phoneHref}" style="color:#121110;text-decoration:none;font-weight:700;">${site.contact.phoneDisplay}</a></div>
+    </td></tr>
+  </table>
+  ${spacer(28)}
+</td></tr>`)}
+
+${row(`<tr><td class="column" width="100%" style="vertical-align:top;">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;">
+    <tr><td class="m-pad" align="center" style="padding:24px 36px 30px;">
+      <div style="color:#121110;font-family:${F};font-size:15px;font-weight:700;">Infinity Space</div>
+      <div style="color:#6f6a63;font-family:${F};font-size:12px;line-height:1.7;padding:6px 0 0;">
+        Gents PG &middot; ${site.address.street}<br>${site.address.locality}, ${site.address.city} ${site.address.postalCode}<br>
+        <a href="${site.url}" style="color:#c8622f;text-decoration:none;">${site.url.replace("https://", "")}</a>
+        &nbsp;&middot;&nbsp;
+        <a href="${site.social.instagram}" style="color:#c8622f;text-decoration:none;">Instagram</a>
+      </div>
+    </td></tr>
+  </table>
+</td></tr>`, "#f7f4ef")}
+
+${row(`<tr><td class="column" width="100%" style="vertical-align:top;">${spacer(24)}</td></tr>`, "#efeae1")}
+
+</td></tr></tbody></table>
 </body></html>`;
 }
 
