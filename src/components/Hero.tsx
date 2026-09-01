@@ -172,32 +172,44 @@ export default function Hero() {
       />
 
       <div className="shell w-full text-ivory">
-        <p
-          data-h="badge"
-          className="t-label inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 backdrop-blur-md"
-        >
-          <MapPin className="size-3.5" aria-hidden="true" />
-          Yeshwanthpur, Bengaluru
-        </p>
+        {/*
+          The location pill is part of the h1, not a sibling of it.
 
-        <h1 className="t-hero mt-6 max-w-[16ch] font-medium">
-          {headline.map((w, i) => (
-            <span key={i}>
-              <span data-h="word" className="rw">
-                <span>{w}</span>
+          The h1 was "Your next chapter starts here." — good brand copy with
+          none of the term anyone actually searches, so the head keyword lived
+          only in the title and the h2s. Putting it in as a kicker fixes that
+          with real, visible text: no sr-only duplicate, no hidden-text risk,
+          and the big line stays the thing you read first.
+
+          It also inherits the pill's translucent background, which is what
+          makes small type legible over a photograph — plain text at this size
+          measured under AA on the bright frames.
+        */}
+        <h1 className="font-medium">
+          <span
+            data-h="badge"
+            className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-[0.6875rem] font-semibold uppercase leading-none tracking-[0.09em] backdrop-blur-md sm:text-xs sm:tracking-[0.14em]"
+          >
+            <MapPin className="size-3.5" aria-hidden="true" />
+            PG near Christ University · Yeshwanthpur
+          </span>{" "}
+          <span className="t-hero mt-6 block max-w-[16ch]">
+            {headline.map((w, i) => (
+              <span key={i}>
+                <span data-h="word" className="rw">
+                  <span>{w}</span>
+                </span>
+                {i < headline.length - 1 ? " " : ""}
               </span>
-              {i < headline.length - 1 ? " " : ""}
-            </span>
-          ))}
+            ))}
+          </span>
         </h1>
 
-        {/* Carries the head keyword in prose rather than as a tag — the badge
-            above states the location once, this states what the place is. */}
+        {/* The keyword now sits in the h1, so this can sell instead of repeat. */}
         <p data-h="sub" className="t-sub mt-7 max-w-[46ch] text-white/90">
-          <strong className="font-medium text-white">
-            A PG near Christ University, Yeshwanthpur Campus
-          </strong>{" "}
-          &mdash; furnished rooms, real Wi-Fi, meals and a short walk to class.
+          A <strong className="font-medium text-white">10 minute walk</strong> from campus.
+          Furnished rooms, four meals a day, a gym and a rooftop dining hall &mdash; from{" "}
+          <strong className="font-medium text-white">&#8377;15,000 a month</strong>.
         </p>
 
         <div className="mt-9 flex flex-wrap items-center gap-3">
