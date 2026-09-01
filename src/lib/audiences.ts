@@ -41,7 +41,8 @@ export const audiences: Record<"gents", Audience> = {
           "About 850 m by road to Christ University Yeshwanthpur Campus — roughly a 10 minute walk",
           "[SEPARATE FLOOR / BLOCK ARRANGEMENT — CONFIRM]",
           "Study desk and charging points at every bed",
-          "Housekeeping in rooms and common areas",
+          "Gym, pool table and table tennis on site",
+          "Housekeeping and laundry service",
         ],
       },
       {

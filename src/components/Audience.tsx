@@ -17,7 +17,8 @@ import Button from "./ui/Button";
 const POINTS = [
   "About 850 m by road to Christ University Yeshwanthpur Campus — roughly a 10 minute walk",
   "Single and double sharing rooms, both furnished with bed, wardrobe and study desk",
-  "Attached bathroom, gym, snooker and a shared living room",
+  "Gym, pool table and table tennis in the building",
+  "Attached bathroom, rooftop dining hall and a shared living room",
   "Biometric entry at the main door",
   "Nagasandra Metro on the Green Line for the rest of the city",
 ];

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRef } from "react";
-import { MapPin, Wifi, ShieldCheck, Sofa, UtensilsCrossed, Play } from "lucide-react";
+import { MapPin, Wifi, ShieldCheck, Sofa, UtensilsCrossed, Dumbbell, Play } from "lucide-react";
 import { useIsoLayoutEffect } from "@/lib/useIsoLayoutEffect";
 import { gsap, initGsap, prefersReducedMotion } from "@/lib/motion";
 import Button from "./ui/Button";
@@ -13,7 +13,8 @@ const SIGNALS = [
   { icon: Sofa, label: "Fully Furnished" },
   { icon: Wifi, label: "High-Speed Wi-Fi" },
   { icon: ShieldCheck, label: "24/7 Security" },
-  { icon: UtensilsCrossed, label: "Meals Available" },
+  { icon: UtensilsCrossed, label: "Four Meals a Day" },
+  { icon: Dumbbell, label: "Gym, Pool & Table Tennis" },
 ];
 
 function SignalList({

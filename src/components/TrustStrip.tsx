@@ -1,4 +1,4 @@
-import { GraduationCap, BedDouble, Wifi, ShieldCheck, UtensilsCrossed, Sparkles } from "lucide-react";
+import { GraduationCap, BedDouble, Wifi, ShieldCheck, UtensilsCrossed, Dumbbell } from "lucide-react";
 import Reveal from "./ui/Reveal";
 
 const ITEMS = [
@@ -7,7 +7,7 @@ const ITEMS = [
   { icon: Wifi, t: "Wi-Fi that holds", s: "Through submission week" },
   { icon: UtensilsCrossed, t: "Four meals a day", s: "Cooked on site, not ordered in" },
   { icon: ShieldCheck, t: "Secured entry", s: "24/7 — details on request" },
-  { icon: Sparkles, t: "Housekeeping", s: "Rooms & common areas" },
+  { icon: Dumbbell, t: "Gym, pool & TT", s: "Without leaving the building" },
 ];
 
 export default function TrustStrip() {

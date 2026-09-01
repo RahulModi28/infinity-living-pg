@@ -139,6 +139,8 @@ export const amenityGroups = [
       "Wardrobe",
       "Study table & chair",
       "Attached bathroom",
+      "Housekeeping",
+      "Laundry service",
     ],
   },
   {
@@ -151,24 +153,26 @@ export const amenityGroups = [
     ],
   },
   {
-    title: "Lifestyle",
-    icon: "Sofa",
+    // Regrouped from "Lifestyle". A gym, a pool table and table tennis in one
+    // building is unusual for a PG at this price — worth grouping so it reads
+    // as a set rather than three items lost in a longer list.
+    title: "Recreation",
+    icon: "Dumbbell",
     items: [
+      "Gym / fitness area",
+      "Pool table & snooker",
+      "Table tennis",
       "Common area & lounge",
       "Rooftop dining hall",
-      "Gym / fitness area",
-      "Snooker & recreation area",
-      "[LAUNDRY — CONFIRM]",
-      "Housekeeping",
     ],
   },
   {
     title: "Safety",
     icon: "ShieldCheck",
     items: [
-      "[CCTV COVERAGE — CONFIRM]",
       "Biometric secure entry",
-      "[SECURITY PERSONNEL — CONFIRM]",
+      "[CCTV COVERAGE & AREAS — CONFIRM]",
+      "[SECURITY PERSONNEL & TIMINGS — CONFIRM]",
     ],
   },
 ] as const;
@@ -234,7 +238,7 @@ export const reviews = [
     course: "Parent, [CITY]",
     rating: 5,
     text:
-      "We visited before booking. It was clean, the management answered every question, and we felt comfortable leaving her there.",
+      "We visited before booking. It was clean, the management answered every question, and we felt comfortable leaving him there.",
   },
   {
     name: "[STUDENT NAME]",

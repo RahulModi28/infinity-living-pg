@@ -2,14 +2,14 @@
 
 import { useRef } from "react";
 import {
-  BedDouble, Wifi, Sofa, ShieldCheck, Check, type LucideIcon,
+  BedDouble, Wifi, Dumbbell, ShieldCheck, Check, type LucideIcon,
 } from "lucide-react";
 import { amenityGroups } from "@/lib/site";
 import { useIsoLayoutEffect } from "@/lib/useIsoLayoutEffect";
 import { gsap, initGsap, prefersReducedMotion } from "@/lib/motion";
 import SectionHead from "./ui/SectionHead";
 
-const ICONS: Record<string, LucideIcon> = { BedDouble, Wifi, Sofa, ShieldCheck };
+const ICONS: Record<string, LucideIcon> = { BedDouble, Wifi, Dumbbell, ShieldCheck };
 
 export default function Amenities() {
   const root = useRef<HTMLDivElement>(null);
@@ -61,7 +61,7 @@ export default function Amenities() {
           className="no-bar edge-fade -mx-5 mt-14 flex snap-x snap-mandatory scroll-pl-5 gap-5 overflow-x-auto px-5 pb-2 md:mx-0 md:grid md:grid-cols-2 md:overflow-visible md:px-0 md:[mask-image:none] lg:grid-cols-4"
         >
           {amenityGroups.map((g) => {
-            const Icon = ICONS[g.icon] ?? Sofa;
+            const Icon = ICONS[g.icon] ?? BedDouble;
             return (
               <div
                 key={g.title}
