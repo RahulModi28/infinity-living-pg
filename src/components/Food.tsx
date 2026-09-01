@@ -81,6 +81,21 @@ export default function Food() {
           ))}
         </div>
 
+        <Reveal>
+          <figure className="mt-12">
+            <Figure
+              src="/images/dining-hall.jpg"
+              alt="The rooftop dining hall at Infinity Space PG, Yeshwanthpur — glass-walled, with tables, a water purifier and a city view"
+              className="aspect-[16/10] rounded-[1.5rem] sm:aspect-[21/9]"
+              sizes="(max-width: 1024px) 100vw, 80rem"
+            />
+            <figcaption className="mt-4 text-[0.875rem] leading-relaxed text-mute">
+              Meals are served in the rooftop dining hall — glass-walled, open on all sides, and
+              a floor above the noise.
+            </figcaption>
+          </figure>
+        </Reveal>
+
         {/* Hygiene was its own card competing with the meals; it belongs here,
             as a line parents can scan. */}
         <Reveal>

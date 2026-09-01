@@ -100,8 +100,8 @@ export const rooms: Room[] = [
       "Housekeeping",
     ],
     availability: "[ROOM AVAILABILITY]",
-    image: "/images/room-single.svg",
-    gallery: ["/images/room-single.svg", "/images/room-single-2.svg", "/images/room-single-3.svg"],
+    image: "/images/room-single.jpg",
+    gallery: ["/images/room-single.jpg", "/images/bathroom.jpg", "/images/dining-hall.jpg"],
   },
   {
     id: "double",
@@ -155,6 +155,7 @@ export const amenityGroups = [
     icon: "Sofa",
     items: [
       "Common area & lounge",
+      "Rooftop dining hall",
       "Gym / fitness area",
       "Snooker & recreation area",
       "[LAUNDRY — CONFIRM]",

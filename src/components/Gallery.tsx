@@ -8,10 +8,13 @@ import SectionHead from "./ui/SectionHead";
 import Figure from "./ui/Figure";
 
 const SHOTS = [
+  { src: "/images/room-single.jpg", alt: "Single sharing room with bed, study desk and chair at Infinity Space PG, Yeshwanthpur", span: "" },
   { src: "/images/room-double.jpg", alt: "Double sharing room with two beds, study table and storage at Infinity Space PG, Yeshwanthpur", span: "" },
+  { src: "/images/dining-hall.jpg", alt: "Rooftop dining hall at Infinity Space PG near Christ University Yeshwanthpur Campus", span: "" },
   { src: "/images/entrance.jpg", alt: "The entrance at Infinity Space PG near Christ University Yeshwanthpur Campus, Bengaluru", span: "" },
   { src: "/images/living-room.jpg", alt: "Shared living room with sofa seating at Infinity Space PG, Yeshwanthpur, Bengaluru", span: "" },
   { src: "/images/gym.jpg", alt: "Gym at Infinity Space PG — treadmills, cross trainer, bench and weights", span: "" },
+  { src: "/images/rooftop-view.jpg", alt: "View across Bengaluru from the rooftop at Infinity Space PG, Yeshwanthpur", span: "" },
   { src: "/images/bathroom.jpg", alt: "Attached bathroom at Infinity Space PG, Yeshwanthpur, Bengaluru", span: "" },
   { src: "/images/hero.jpg", alt: "Common area with snooker table and lounge seating at Infinity Space PG, Yeshwanthpur", span: "" },
   { src: "/images/entry-biometric.jpg", alt: "Biometric secure entry at Infinity Space PG, Yeshwanthpur", span: "" },
@@ -38,7 +41,7 @@ export default function Gallery() {
         <SectionHead
           eyebrow="Gallery"
           title="Look around before you visit."
-          intro="Real photographs of the rooms, common spaces, gym and entrance — taken at the property, not stock."
+          intro="Real photographs of the rooms, rooftop dining hall, gym and common spaces — taken at the property, not stock."
         />
 
         <div className="mt-14 columns-2 gap-4 sm:gap-5 lg:columns-4">

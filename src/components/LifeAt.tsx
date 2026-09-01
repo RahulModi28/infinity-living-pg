@@ -55,8 +55,8 @@ export default function LifeAt() {
 
             <div className="mt-5 grid gap-5 sm:grid-cols-[1.4fr_1fr] sm:items-end">
               <Figure
-                src="/images/room-double.jpg"
-                alt="A double sharing room at Infinity Space PG near Christ University Yeshwanthpur Campus"
+                src="/images/rooftop-view.jpg"
+                alt="The view from the rooftop at Infinity Space PG, Yeshwanthpur, Bengaluru at dusk"
                 className="hidden aspect-[16/10] rounded-[1.25rem] sm:block"
                 sizes="(max-width: 640px) 100vw, 35vw"
               />
