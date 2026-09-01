@@ -15,8 +15,14 @@ export const PLACEHOLDER = (label: string) => `[${label}]`;
 export const site = {
   name: "Infinity Space",
   tagline: "Premium student living near Christ University, Yeshwanthpur Campus",
-  /** Used for canonical URLs, sitemap, OG tags. */
-  url: "https://[YOUR-DOMAIN].com",
+  /**
+   * Canonical host. Note that at time of writing the bare
+   * infinityspace4u.com still serves the old GoDaddy placeholder and does
+   * NOT redirect here — both return 200 with different content. That needs
+   * a redirect at the DNS/host level, or Google will index them as two
+   * separate sites and split the ranking signals between them.
+   */
+  url: "https://www.infinityspace4u.com",
 
   contact: {
     /** Full international format, no spaces — e.g. 919876543210 */
