@@ -1,21 +1,48 @@
-import { Sunrise, Sun, Moon, SprayCan } from "lucide-react";
+import { Sunrise, Sun, CupSoda, Moon, SprayCan } from "lucide-react";
 import Figure from "./ui/Figure";
 import Reveal from "./ui/Reveal";
 import SectionHead from "./ui/SectionHead";
 
+/**
+ * One card per meal, photo and text together.
+ *
+ * The previous layout had five photo tiles in one row and four text cards in
+ * another, so nothing lined up — the third tile wasn't the third meal. Four
+ * meals, four photographs, paired.
+ */
 const MEALS = [
-  { icon: Sunrise, t: "Breakfast", time: "[TIMING]", ex: "[SAMPLE MENU — e.g. idli, poha, upma, eggs, tea/coffee]" },
-  { icon: Sun, t: "Lunch", time: "[TIMING]", ex: "[SAMPLE MENU — e.g. rice, roti, sabzi, dal, curd]" },
-  { icon: Moon, t: "Dinner", time: "[TIMING]", ex: "[SAMPLE MENU — e.g. roti, curry, rice, sweet on weekends]" },
-  { icon: SprayCan, t: "Hygiene", time: "Daily", ex: "[KITCHEN HYGIENE & FSSAI DETAILS — CONFIRM]" },
-];
-
-const SHOTS = [
-  { src: "/images/food-1.svg", alt: "Breakfast served at Infinity Space PG, Yeshwanthpur" },
-  { src: "/images/food-2.svg", alt: "Lunch thali served at Infinity Space PG near Christ University" },
-  { src: "/images/food-3.svg", alt: "Dinner spread at Infinity Space student accommodation, Bengaluru" },
-  { src: "/images/food-4.svg", alt: "Clean kitchen at Infinity Space PG, Yeshwanthpur" },
-  { src: "/images/food-5.svg", alt: "Dining area at Infinity Space PG, Yeshwanthpur, Bengaluru" },
+  {
+    icon: Sunrise,
+    name: "Breakfast",
+    time: "[TIMING]",
+    menu: "[SAMPLE MENU — e.g. dosa, idli, poha, upma, tea/coffee]",
+    src: "/images/food-breakfast.jpg",
+    alt: "Breakfast at Infinity Space PG, Yeshwanthpur — masala dosa with sambar and coconut chutney",
+  },
+  {
+    icon: Sun,
+    name: "Lunch",
+    time: "[TIMING]",
+    menu: "[SAMPLE MENU — e.g. rice, roti, dal, two sabzis, curd]",
+    src: "/images/food-lunch.jpg",
+    alt: "Lunch at Infinity Space PG near Christ University Yeshwanthpur — dal, rice, roti, bhindi and cabbage sabzi",
+  },
+  {
+    icon: CupSoda,
+    name: "Evening snacks",
+    time: "[TIMING]",
+    menu: "[SAMPLE MENU — CONFIRM what's served and how often]",
+    src: "/images/food-snack.jpg",
+    alt: "Evening snack served at Infinity Space PG, Yeshwanthpur, Bengaluru",
+  },
+  {
+    icon: Moon,
+    name: "Dinner",
+    time: "[TIMING]",
+    menu: "[SAMPLE MENU — CONFIRM, and whether there is a non-veg day]",
+    src: "/images/food-dinner.jpg",
+    alt: "Dinner at Infinity Space PG, Yeshwanthpur — curry with naan and rice",
+  },
 ];
 
 export default function Food() {
@@ -24,37 +51,47 @@ export default function Food() {
       <div className="shell">
         <SectionHead
           eyebrow="Food"
-          title="Three meals, made in-house."
-          intro="Home-style food, on a rotating menu, in a dining area you don't have to leave the building for. Exact menu and timings are being confirmed."
+          title="Four meals a day, made in-house."
+          intro="Breakfast, lunch, evening snacks and dinner, on a rotating menu, in a dining area you don't have to leave the building for."
         />
-      </div>
 
-      {/* Horizontal food gallery — full-bleed, swipeable */}
-      <div className="no-bar edge-fade mt-12 flex snap-x snap-mandatory scroll-pl-5 gap-4 overflow-x-auto px-5 pb-2 sm:gap-5 md:px-[max(1.25rem,calc((100vw-84rem)/2+2rem))]">
-        {SHOTS.map((s) => (
-          <Figure
-            key={s.src}
-            src={s.src}
-            alt={s.alt}
-            className="aspect-square w-[68vw] shrink-0 snap-start rounded-[1.25rem] sm:w-[38vw] lg:w-[26rem]"
-            sizes="(max-width: 640px) 68vw, 26rem"
-            reveal={false}
-          />
-        ))}
-      </div>
-
-      <div className="shell">
-        <Reveal stagger className="mt-12 grid gap-x-8 gap-y-7 sm:grid-cols-2 lg:grid-cols-4">
-          {MEALS.map(({ icon: Icon, t, time, ex }) => (
-            <div key={t} className="border-t border-ink/12 pt-5">
-              <span className="flex items-center gap-2.5">
-                <Icon className="size-[1.15rem] text-clay" aria-hidden="true" />
-                <h3 className="font-display text-lg tracking-[-0.02em]">{t}</h3>
-              </span>
-              <p className="mt-2 t-label text-mute">{time}</p>
-              <p className="mt-2.5 text-[0.875rem] leading-relaxed text-mute/80">{ex}</p>
+        {/* Swipeable on phones, grid from tablet up — same pattern as Rooms. */}
+        <div className="no-bar edge-fade -mx-5 mt-12 flex snap-x snap-mandatory scroll-pl-5 gap-5 overflow-x-auto px-5 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:[mask-image:none] lg:grid-cols-4 lg:gap-7">
+          {MEALS.map(({ icon: Icon, name, time, menu, src, alt }) => (
+            <div key={name} className="w-[68vw] shrink-0 snap-start sm:w-auto">
+              <Reveal>
+                <figure>
+                  <Figure
+                    src={src}
+                    alt={alt}
+                    className="aspect-[4/5] rounded-[1.25rem]"
+                    sizes="(max-width: 640px) 68vw, (max-width: 1024px) 45vw, 21rem"
+                  />
+                  <figcaption className="mt-4">
+                    <span className="flex items-center gap-2.5">
+                      <Icon className="size-[1.15rem] text-clay" aria-hidden="true" />
+                      <h3 className="font-display text-lg tracking-[-0.02em]">{name}</h3>
+                    </span>
+                    <p className="t-label mt-2 text-mute">{time}</p>
+                    <p className="mt-2 text-[0.875rem] leading-relaxed text-mute/80">{menu}</p>
+                  </figcaption>
+                </figure>
+              </Reveal>
             </div>
           ))}
+        </div>
+
+        {/* Hygiene was its own card competing with the meals; it belongs here,
+            as a line parents can scan. */}
+        <Reveal>
+          <p className="mt-10 flex max-w-2xl items-start gap-2.5 text-[0.8125rem] leading-relaxed text-mute">
+            <SprayCan className="mt-[0.15em] size-4 shrink-0 text-moss" aria-hidden="true" />
+            <span>
+              Cooked on site in our own kitchen. Kitchen hygiene and FSSAI details:{" "}
+              <span className="whitespace-nowrap">[CONFIRM]</span>. Menus rotate through the week —
+              ask us for the current one.
+            </span>
+          </p>
         </Reveal>
       </div>
     </section>

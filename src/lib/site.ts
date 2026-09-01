@@ -257,7 +257,7 @@ export const faqs = [
   },
   {
     q: "Is food included?",
-    a: "[FOOD PLAN & INCLUSION — CONFIRM]. We serve breakfast, lunch and dinner. Whether meals are bundled into rent or charged separately: [CONFIRM].",
+    a: "[FOOD PLAN & INCLUSION — CONFIRM]. We serve four meals a day — breakfast, lunch, evening snacks and dinner — cooked on site. Whether meals are bundled into rent or charged separately: [CONFIRM].",
   },
   {
     q: "Is Wi-Fi available?",
