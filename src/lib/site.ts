@@ -169,7 +169,11 @@ export const amenityGroups = [
       "Gym / fitness area",
       "Pool table & snooker",
       "Table tennis",
-      "Common area & lounge",
+      // Worded as shared on purpose. Both are in the living area, not in the
+      // rooms, and a list that lets someone assume otherwise buys a
+      // complaint on move-in day.
+      "Shared lounge with TV",
+      "Refrigerator in the shared living area",
       "Rooftop dining hall",
     ],
   },
