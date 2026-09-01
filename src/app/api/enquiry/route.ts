@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { notifyOnLead } from "@/lib/email";
 
 /**
  * Enquiry endpoint.
@@ -87,6 +88,15 @@ export async function POST(req: Request) {
     // when the sheet is unreachable.
     console.error("[enquiry] failed to store lead:", err, lead);
     return NextResponse.json({ ok: false, error: "Could not store enquiry" }, { status: 502 });
+  }
+
+  // Email after the row is safely stored, and never let it fail the request:
+  // a lead in the sheet with no email sent is recoverable, a lead lost
+  // because the mail provider was down is not.
+  try {
+    await notifyOnLead(lead);
+  } catch (err) {
+    console.error("[enquiry] stored, but notification failed:", err);
   }
 
   return NextResponse.json({ ok: true });
