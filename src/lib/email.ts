@@ -53,71 +53,111 @@ const esc = (v: string) =>
 export function leadReplyHtml(lead: Lead) {
   const single = rooms.find((r) => r.id === "single");
   const double = rooms.find((r) => r.id === "double");
-  const wa = whatsappHref(
-    `Hi, I just enquired on the website. My name is ${lead.name}.`
-  );
+  const wa = whatsappHref(`Hi, I just enquired on the website. My name is ${lead.name}.`);
+  const img = (f: string) => `${site.url}/images/${f}`;
 
-  const row = (label: string, value: string) => `
-    <tr>
-      <td style="padding:10px 0;border-bottom:1px solid #e4dccf;color:#6f6a63;font-size:14px;">${label}</td>
-      <td style="padding:10px 0;border-bottom:1px solid #e4dccf;color:#121110;font-size:14px;font-weight:600;text-align:right;">${value}</td>
-    </tr>`;
+  // Tables and inline styles throughout — email clients support neither
+  // flexbox nor grid, and most strip <style> blocks. Every image carries alt
+  // text and every fact is repeated as text, because a large share of clients
+  // block images until the reader asks for them.
+  const priceCard = (name: string, price: string, note: string) => `
+    <td width="50%" style="padding:0 6px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f7f4ef;border:1px solid #e4dccf;border-radius:14px;">
+        <tr><td style="padding:18px 16px;text-align:center;">
+          <div style="color:#6f6a63;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">${name}</div>
+          <div style="color:#121110;font-size:26px;font-weight:700;margin:8px 0 2px;letter-spacing:-0.5px;">&#8377;${price}</div>
+          <div style="color:#6f6a63;font-size:12px;">${note}</div>
+        </td></tr>
+      </table>
+    </td>`;
 
-  return `<!doctype html><html><body style="margin:0;background:#f7f4ef;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f7f4ef;padding:28px 16px;">
+  const thumb = (file: string, alt: string) => `
+    <td width="33.33%" style="padding:0 4px;">
+      <img src="${img(file)}" alt="${alt}" width="168" style="width:100%;max-width:168px;height:auto;display:block;border-radius:10px;border:0;" />
+    </td>`;
+
+  return `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"></head>
+<body style="margin:0;padding:0;background:#efeae1;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+  <div style="display:none;max-height:0;overflow:hidden;opacity:0;">Rent, deposit, what's included and how far it is &mdash; all of it, before you ask.</div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#efeae1;padding:24px 12px;">
     <tr><td align="center">
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border-radius:18px;overflow:hidden;border:1px solid #e4dccf;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background:#ffffff;border-radius:20px;overflow:hidden;">
 
-        <tr><td style="background:#1f3d33;padding:26px 28px;">
-          <div style="color:#f7f4ef;font-size:19px;font-weight:700;letter-spacing:-0.2px;">Infinity Space</div>
-          <div style="color:rgba(247,244,239,0.68);font-size:13px;margin-top:5px;">Gents PG · 10 minutes' walk from Christ University, Yeshwanthpur</div>
+        <tr><td style="padding:0;">
+          <img src="${img("hero.jpg")}" width="600" alt="The common area at Infinity Space &mdash; snooker table and lounge seating" style="width:100%;height:auto;display:block;border:0;" />
         </td></tr>
 
-        <tr><td style="padding:28px;">
-          <p style="margin:0 0 16px;color:#121110;font-size:16px;line-height:1.55;">Hi ${esc(lead.name.split(" ")[0])},</p>
-
-          <p style="margin:0 0 20px;color:#2a2724;font-size:15px;line-height:1.65;">
-            Thanks for getting in touch. Rather than ask you to call for details, here is
-            everything — so you can compare us properly against wherever else you're looking.
+        <tr><td style="padding:30px 30px 0;">
+          <div style="color:#c8622f;font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;">Infinity Space &middot; Yeshwanthpur</div>
+          <h1 style="margin:12px 0 0;color:#121110;font-size:30px;line-height:1.15;font-weight:700;letter-spacing:-0.8px;">
+            Ten minutes' walk<br>from your first class.
+          </h1>
+          <p style="margin:16px 0 0;color:#2a2724;font-size:16px;line-height:1.6;">
+            Hi ${esc(lead.name.split(" ")[0])} &mdash; thanks for getting in touch. Rather than ask you to
+            call for details, here is all of it, so you can compare us properly against wherever
+            else you're looking.
           </p>
+        </td></tr>
 
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 20px;">
-            ${row("Single sharing", `₹${single?.price} / month`)}
-            ${row("Double sharing", `₹${double?.price} per person`)}
-            ${row("Included in rent", "Electricity, 4 meals a day, Wi-Fi, housekeeping, laundry")}
-            ${row("Security deposit", `2 months — adjusted against your April &amp; May rent`)}
-            ${row("Walk to campus", "850 m, about 10 minutes")}
-            ${row("Also on site", "Gym, pool table, table tennis, rooftop dining hall")}
-          </table>
-
-          <p style="margin:0 0 22px;color:#2a2724;font-size:15px;line-height:1.65;">
-            The deposit isn't money you lose — it comes back as two rent-free months at the end
-            of the year. And electricity and food are in the rent, not billed on top, which is
-            usually where the surprises come from elsewhere.
+        <tr><td style="padding:26px 24px 0;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+            ${priceCard("Single sharing", single?.price ?? "", "per month")}
+            ${priceCard("Double sharing", double?.price ?? "", "per person / month")}
+          </tr></table>
+          <p style="margin:14px 6px 0;color:#6f6a63;font-size:13px;line-height:1.6;text-align:center;">
+            Electricity, four meals a day, Wi&#8209;Fi, housekeeping and laundry are all in the rent
+            &mdash; not billed on top.
           </p>
+        </td></tr>
 
-          <p style="margin:0 0 8px;color:#121110;font-size:15px;line-height:1.65;font-weight:600;">
-            Come and see it before you decide.
-          </p>
-          <p style="margin:0 0 22px;color:#2a2724;font-size:15px;line-height:1.65;">
-            No booking, no deposit, no brokerage — just come and look at the actual room and
-            meet the people who run it. Parents are welcome, and we'd rather you visited than
-            took our word for any of the above.
-          </p>
-
-          <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 22px;">
-            <tr><td style="background:#1f8b4d;border-radius:999px;">
-              <a href="${wa}" style="display:inline-block;padding:14px 26px;color:#ffffff;font-size:15px;font-weight:600;text-decoration:none;">Message us on WhatsApp</a>
+        <tr><td style="padding:24px 30px 0;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#1f3d33;border-radius:14px;">
+            <tr><td style="padding:20px 22px;">
+              <div style="color:#ffffff;font-size:15px;font-weight:700;margin-bottom:6px;">The deposit isn't money you lose</div>
+              <div style="color:rgba(247,244,239,0.78);font-size:14px;line-height:1.6;">
+                Two months' rent, adjusted against your April and May rent &mdash; so it comes back
+                as two rent&#8209;free months at the end of the year.
+              </div>
             </td></tr>
           </table>
+        </td></tr>
 
-          <p style="margin:0;color:#6f6a63;font-size:14px;line-height:1.6;">
-            Or call ${site.contact.phoneDisplay} — we usually reply the same day.
+        <tr><td style="padding:28px 30px 0;">
+          <div style="color:#121110;font-size:17px;font-weight:700;margin-bottom:14px;">What's in the building</div>
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+            ${thumb("gym.jpg", "The gym at Infinity Space")}
+            ${thumb("room-double.jpg", "A double sharing room")}
+            ${thumb("dining-hall.jpg", "The rooftop dining hall")}
+          </tr></table>
+          <p style="margin:12px 4px 0;color:#6f6a63;font-size:13px;line-height:1.6;">
+            Gym, pool table and table tennis. A rooftop dining hall. Biometric entry, CCTV and
+            security staff on site.
           </p>
         </td></tr>
 
-        <tr><td style="background:#f7f4ef;padding:18px 28px;border-top:1px solid #e4dccf;">
-          <div style="color:#6f6a63;font-size:12px;line-height:1.6;">
+        <tr><td style="padding:28px 30px 0;">
+          <div style="color:#121110;font-size:17px;font-weight:700;">Come and see it before you decide</div>
+          <p style="margin:8px 0 20px;color:#2a2724;font-size:15px;line-height:1.65;">
+            No booking, no deposit, no brokerage &mdash; just come and look at the actual room and
+            meet the people who run it. Parents are welcome, and we'd rather you visited than took
+            our word for any of this.
+          </p>
+          <table role="presentation" cellpadding="0" cellspacing="0" width="100%"><tr><td align="center">
+            <table role="presentation" cellpadding="0" cellspacing="0"><tr>
+              <td style="background:#1f8b4d;border-radius:999px;">
+                <a href="${wa}" style="display:inline-block;padding:15px 34px;color:#ffffff;font-size:16px;font-weight:700;text-decoration:none;">Message us on WhatsApp</a>
+              </td>
+            </tr></table>
+          </td></tr></table>
+          <p style="margin:14px 0 0;color:#6f6a63;font-size:14px;line-height:1.6;text-align:center;">
+            or call <a href="tel:${site.contact.phoneHref}" style="color:#121110;text-decoration:none;font-weight:600;">${site.contact.phoneDisplay}</a>
+          </p>
+        </td></tr>
+
+        <tr><td style="padding:28px 30px 30px;">
+          <div style="border-top:1px solid #e4dccf;padding-top:18px;color:#6f6a63;font-size:12px;line-height:1.7;">
+            <strong style="color:#121110;">Infinity Space</strong> &mdash; gents PG, Yeshwanthpur<br>
             ${site.address.street}, ${site.address.locality}, ${site.address.city} ${site.address.postalCode}<br>
             <a href="${site.url}" style="color:#c8622f;text-decoration:none;">${site.url.replace("https://", "")}</a>
           </div>
