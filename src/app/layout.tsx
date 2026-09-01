@@ -1,0 +1,107 @@
+import type { Metadata, Viewport } from "next";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import "./globals.css";
+import { site, baseUrl } from "@/lib/site";
+import { localBusinessJsonLd, faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import SmoothScroll from "@/components/SmoothScroll";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-jakarta",
+  display: "swap",
+  weight: ["500", "600", "700"],
+});
+
+/**
+ * Title (58 chars) and description (154 chars) sit inside Google's display
+ * limits and lead with the exact phrase people search — verified against live
+ * Autocomplete: "pg near christ university yeshwanthpur" is the head term, and
+ * "yeshwanthpur" is the spelling Google normalises to (not "yeshwantpur").
+ */
+export const metadata: Metadata = {
+  metadataBase: new URL(baseUrl()),
+  title: {
+    default: "PG near Christ University Yeshwanthpur Campus | Infinity Living",
+    template: "%s | Infinity Living",
+  },
+  description:
+    "Furnished PG in Yeshwanthpur near Christ University Campus, Bengaluru. Single, double & triple sharing rooms with Wi-Fi, meals, housekeeping and 24/7 security.",
+  keywords: [
+    "pg near christ university yeshwanthpur",
+    "pg near christ university yeshwanthpur campus",
+    "pg in yeshwanthpur",
+    "ladies pg yeshwanthpur",
+    "gents pg yeshwanthpur",
+    "pg near yeshwanthpur metro station",
+    "student accommodation near christ university bangalore",
+  ],
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: "/",
+    siteName: site.name,
+    title: "PG near Christ University Yeshwanthpur Campus | Infinity Living",
+    description:
+      "Premium student living in Yeshwanthpur, Bengaluru — furnished rooms, meals, Wi-Fi and a short walk to Christ University Yeshwanthpur Campus.",
+    images: [{ url: "/images/og.svg", width: 1200, height: 630, alt: "Infinity Living — PG near Christ University Yeshwanthpur Campus" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "PG near Christ University Yeshwanthpur Campus | Infinity Living",
+    description:
+      "Furnished PG in Yeshwanthpur, Bengaluru — rooms, meals, Wi-Fi and 24/7 security, minutes from campus.",
+    images: ["/images/og.svg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+  },
+  category: "Student accommodation",
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f7f4ef" },
+    { media: "(prefers-color-scheme: dark)", color: "#121110" },
+  ],
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en-IN" className={`${inter.variable} ${jakarta.variable}`}>
+      <body>
+        <a
+          href="#rooms"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-ivory"
+        >
+          Skip to rooms
+        </a>
+        <SmoothScroll />
+        {children}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd()) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd()) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd()) }}
+        />
+      </body>
+    </html>
+  );
+}

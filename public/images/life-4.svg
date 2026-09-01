@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" width="900" height="700" role="img" aria-label="PHOTO: Friends in the lounge">
+<defs>
+<linearGradient id="g" gradientTransform="rotate(160)"><stop offset="0" stop-color="#2C3A46"/><stop offset="1" stop-color="#121A20"/></linearGradient>
+<filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="900" height="700" fill="url(#g)"/>
+<rect x="22" y="126" width="399" height="146" rx="0" fill="#fff" opacity="0.095"/><rect x="296" y="514" width="614" height="147" rx="0" fill="#fff" opacity="0.051"/><rect x="231" y="575" width="367" height="215" rx="0" fill="#fff" opacity="0.115"/><circle cx="758" cy="582" r="116" fill="#fff" opacity="0.035"/><circle cx="866" cy="332" r="245" fill="#fff" opacity="0.073"/><circle cx="730" cy="302" r="180" fill="#fff" opacity="0.032"/><rect x="0" y="540" width="900" height="160" fill="#000" opacity="0.18"/>
+<rect width="900" height="700" filter="url(#n)" opacity="0.09"/>
+<g transform="translate(284,635)">
+    <rect width="332" height="44" rx="22" fill="#000" opacity="0.42"/>
+    <rect width="332" height="44" rx="22" fill="none" stroke="#fff" stroke-opacity="0.22"/>
+    <text x="166" y="28" text-anchor="middle" fill="#ffffff" fill-opacity="0.86"
+      font-family="ui-sans-serif,-apple-system,Segoe UI,Roboto,sans-serif" font-size="19" font-weight="500"
+      letter-spacing="0.04em">PHOTO: Friends in the lounge</text></g>
+</svg>

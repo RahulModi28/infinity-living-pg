@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1250" width="1000" height="1250" role="img" aria-label="PHOTO: Gallery — exterior">
+<defs>
+<linearGradient id="g" gradientTransform="rotate(160)"><stop offset="0" stop-color="#C8622F"/><stop offset="1" stop-color="#7A3418"/></linearGradient>
+<filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="1000" height="1250" fill="url(#g)"/>
+<rect x="883" y="22" width="515" height="822" rx="0" fill="#fff" opacity="0.133"/><rect x="278" y="264" width="334" height="359" rx="0" fill="#fff" opacity="0.119"/><rect x="878" y="918" width="594" height="637" rx="0" fill="#fff" opacity="0.067"/><rect x="81" y="899" width="522" height="653" rx="0" fill="#fff" opacity="0.058"/><circle cx="781" cy="890" r="219" fill="#fff" opacity="0.062"/><circle cx="520" cy="1142" r="208" fill="#fff" opacity="0.058"/><circle cx="424" cy="196" r="156" fill="#fff" opacity="0.055"/><rect x="0" y="793" width="1000" height="457" fill="#000" opacity="0.18"/>
+<rect width="1000" height="1250" filter="url(#n)" opacity="0.09"/>
+<g transform="translate(342,1182)">
+    <rect width="316" height="46" rx="23" fill="#000" opacity="0.42"/>
+    <rect width="316" height="46" rx="23" fill="none" stroke="#fff" stroke-opacity="0.22"/>
+    <text x="158" y="30" text-anchor="middle" fill="#ffffff" fill-opacity="0.86"
+      font-family="ui-sans-serif,-apple-system,Segoe UI,Roboto,sans-serif" font-size="20" font-weight="500"
+      letter-spacing="0.04em">PHOTO: Gallery — exterior</text></g>
+</svg>

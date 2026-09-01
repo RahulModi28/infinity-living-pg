@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1100" width="900" height="1100" role="img" aria-label="PHOTO: Rooms corridor">
+<defs>
+<linearGradient id="g" gradientTransform="rotate(35)"><stop offset="0" stop-color="#5C4A3A"/><stop offset="1" stop-color="#241C15"/></linearGradient>
+<filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="900" height="1100" fill="url(#g)"/>
+<rect x="80" y="813" width="444" height="374" rx="222" fill="#fff" opacity="0.08"/><rect x="545" y="859" width="593" height="713" rx="0" fill="#fff" opacity="0.051"/><rect x="589" y="810" width="433" height="711" rx="217" fill="#fff" opacity="0.056"/><rect x="91" y="927" width="508" height="744" rx="254" fill="#fff" opacity="0.078"/><rect x="161" y="545" width="490" height="667" rx="245" fill="#fff" opacity="0.079"/><circle cx="878" cy="1050" r="137" fill="#fff" opacity="0.047"/><circle cx="176" cy="655" r="198" fill="#fff" opacity="0.059"/><circle cx="266" cy="1021" r="114" fill="#fff" opacity="0.080"/><circle cx="750" cy="829" r="231" fill="#fff" opacity="0.078"/><rect x="0" y="725" width="900" height="375" fill="#000" opacity="0.18"/>
+<rect width="900" height="1100" filter="url(#n)" opacity="0.09"/>
+<g transform="translate(321,1035)">
+    <rect width="258" height="44" rx="22" fill="#000" opacity="0.42"/>
+    <rect width="258" height="44" rx="22" fill="none" stroke="#fff" stroke-opacity="0.22"/>
+    <text x="129" y="28" text-anchor="middle" fill="#ffffff" fill-opacity="0.86"
+      font-family="ui-sans-serif,-apple-system,Segoe UI,Roboto,sans-serif" font-size="19" font-weight="500"
+      letter-spacing="0.04em">PHOTO: Rooms corridor</text></g>
+</svg>

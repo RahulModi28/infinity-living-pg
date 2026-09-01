@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" width="900" height="900" role="img" aria-label="PHOTO: Breakfast plate">
+<defs>
+<linearGradient id="g" gradientTransform="rotate(50)"><stop offset="0" stop-color="#C8622F"/><stop offset="1" stop-color="#7A3418"/></linearGradient>
+<filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="900" height="900" fill="url(#g)"/>
+<rect x="610" y="394" width="360" height="573" rx="0" fill="#fff" opacity="0.099"/><rect x="521" y="486" width="503" height="397" rx="0" fill="#fff" opacity="0.099"/><rect x="49" y="166" width="556" height="258" rx="278" fill="#fff" opacity="0.094"/><circle cx="149" cy="782" r="209" fill="#fff" opacity="0.073"/><circle cx="703" cy="707" r="232" fill="#fff" opacity="0.070"/><rect x="0" y="584" width="900" height="316" fill="#000" opacity="0.18"/>
+<rect width="900" height="900" filter="url(#n)" opacity="0.09"/>
+<g transform="translate(316,835)">
+    <rect width="268" height="44" rx="22" fill="#000" opacity="0.42"/>
+    <rect width="268" height="44" rx="22" fill="none" stroke="#fff" stroke-opacity="0.22"/>
+    <text x="134" y="28" text-anchor="middle" fill="#ffffff" fill-opacity="0.86"
+      font-family="ui-sans-serif,-apple-system,Segoe UI,Roboto,sans-serif" font-size="19" font-weight="500"
+      letter-spacing="0.04em">PHOTO: Breakfast plate</text></g>
+</svg>

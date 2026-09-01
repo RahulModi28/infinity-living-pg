@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img" aria-label="PHOTO: Double sharing room">
+<defs>
+<linearGradient id="g" gradientTransform="rotate(20)"><stop offset="0" stop-color="#5C4A3A"/><stop offset="1" stop-color="#241C15"/></linearGradient>
+<filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="1200" height="900" fill="url(#g)"/>
+<rect x="15" y="264" width="669" height="242" rx="0" fill="#fff" opacity="0.06"/><rect x="734" y="36" width="830" height="195" rx="0" fill="#fff" opacity="0.055"/><rect x="523" y="313" width="523" height="628" rx="0" fill="#fff" opacity="0.058"/><rect x="804" y="709" width="484" height="273" rx="242" fill="#fff" opacity="0.085"/><circle cx="252" cy="195" r="222" fill="#fff" opacity="0.057"/><circle cx="1144" cy="755" r="170" fill="#fff" opacity="0.040"/><rect x="0" y="668" width="1200" height="232" fill="#000" opacity="0.18"/>
+<rect width="1200" height="900" filter="url(#n)" opacity="0.09"/>
+<g transform="translate(436,832)">
+    <rect width="327" height="46" rx="23" fill="#000" opacity="0.42"/>
+    <rect width="327" height="46" rx="23" fill="none" stroke="#fff" stroke-opacity="0.22"/>
+    <text x="164" y="30" text-anchor="middle" fill="#ffffff" fill-opacity="0.86"
+      font-family="ui-sans-serif,-apple-system,Segoe UI,Roboto,sans-serif" font-size="20" font-weight="500"
+      letter-spacing="0.04em">PHOTO: Double sharing room</text></g>
+</svg>

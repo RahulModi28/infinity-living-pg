@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img" aria-label="PHOTO: Single room — wardrobe &amp; storage">
+<defs>
+<linearGradient id="g" gradientTransform="rotate(110)"><stop offset="0" stop-color="#1F3D33"/><stop offset="1" stop-color="#0E1D18"/></linearGradient>
+<filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="1200" height="900" fill="url(#g)"/>
+<rect x="99" y="808" width="405" height="482" rx="0" fill="#fff" opacity="0.058"/><rect x="848" y="165" width="798" height="186" rx="399" fill="#fff" opacity="0.092"/><rect x="1065" y="14" width="579" height="611" rx="0" fill="#fff" opacity="0.117"/><rect x="698" y="360" width="837" height="489" rx="419" fill="#fff" opacity="0.073"/><rect x="69" y="204" width="465" height="424" rx="0" fill="#fff" opacity="0.083"/><circle cx="379" cy="805" r="106" fill="#fff" opacity="0.035"/><circle cx="798" cy="719" r="274" fill="#fff" opacity="0.080"/><rect x="0" y="673" width="1200" height="227" fill="#000" opacity="0.18"/>
+<rect width="1200" height="900" filter="url(#n)" opacity="0.09"/>
+<g transform="translate(364,832)">
+    <rect width="473" height="46" rx="23" fill="#000" opacity="0.42"/>
+    <rect width="473" height="46" rx="23" fill="none" stroke="#fff" stroke-opacity="0.22"/>
+    <text x="236" y="30" text-anchor="middle" fill="#ffffff" fill-opacity="0.86"
+      font-family="ui-sans-serif,-apple-system,Segoe UI,Roboto,sans-serif" font-size="20" font-weight="500"
+      letter-spacing="0.04em">PHOTO: Single room — wardrobe &amp; storage</text></g>
+</svg>

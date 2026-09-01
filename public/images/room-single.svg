@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img" aria-label="PHOTO: Single sharing room">
+<defs>
+<linearGradient id="g" gradientTransform="rotate(160)"><stop offset="0" stop-color="#3A322B"/><stop offset="1" stop-color="#17130F"/></linearGradient>
+<filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="1200" height="900" fill="url(#g)"/>
+<rect x="395" y="430" width="411" height="546" rx="206" fill="#fff" opacity="0.124"/><rect x="853" y="-59" width="565" height="214" rx="282" fill="#fff" opacity="0.136"/><rect x="1076" y="-50" width="764" height="451" rx="0" fill="#fff" opacity="0.084"/><circle cx="315" cy="157" r="158" fill="#fff" opacity="0.048"/><circle cx="548" cy="774" r="144" fill="#fff" opacity="0.052"/><circle cx="450" cy="525" r="143" fill="#fff" opacity="0.040"/><circle cx="1092" cy="483" r="264" fill="#fff" opacity="0.042"/><rect x="0" y="633" width="1200" height="267" fill="#000" opacity="0.18"/>
+<rect width="1200" height="900" filter="url(#n)" opacity="0.09"/>
+<g transform="translate(436,832)">
+    <rect width="327" height="46" rx="23" fill="#000" opacity="0.42"/>
+    <rect width="327" height="46" rx="23" fill="none" stroke="#fff" stroke-opacity="0.22"/>
+    <text x="164" y="30" text-anchor="middle" fill="#ffffff" fill-opacity="0.86"
+      font-family="ui-sans-serif,-apple-system,Segoe UI,Roboto,sans-serif" font-size="20" font-weight="500"
+      letter-spacing="0.04em">PHOTO: Single sharing room</text></g>
+</svg>
