@@ -7,14 +7,25 @@ export default function LifeAt() {
     <section className="relative overflow-hidden bg-ivory-2 py-14 sm:py-24 lg:py-36">
       <div className="shell">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
-          {/* Tall hero image, offset */}
-          <div className="lg:col-span-5 lg:pt-16">
+          {/* This column was built around a single tall portrait crop. Every
+              wide shot here is 4:3, so one of them left the column ending
+              roughly 400px short of the text beside it. Two stacked images
+              fill the height without cropping either one to fit. */}
+          <div className="flex flex-col gap-5 lg:col-span-5 lg:pt-16">
             <Figure
               src="/images/gym.jpg"
               alt="The gym at Infinity Space PG near Christ University Yeshwanthpur Campus — treadmills, cross trainer and weights"
-              className="aspect-[4/3] rounded-[1.5rem]"
+              className="aspect-[4/3] shrink-0 rounded-[1.5rem]"
               sizes="(max-width: 1024px) 100vw, 40vw"
               parallax={6}
+            />
+            <Figure
+              src="/images/dining-hall.jpg"
+              alt="The rooftop dining hall at Infinity Space PG, Yeshwanthpur — glass-walled with a view across the city"
+              /* Grows to whatever height the text column ends up needing,
+                 rather than a fixed ratio that leaves a gap under it. */
+              className="hidden min-h-[18rem] flex-1 rounded-[1.5rem] lg:block"
+              sizes="40vw"
             />
           </div>
 
