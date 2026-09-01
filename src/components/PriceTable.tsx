@@ -1,4 +1,4 @@
-import { Check, Minus } from "lucide-react";
+import { Check } from "lucide-react";
 import { rooms } from "@/lib/site";
 import Reveal from "./ui/Reveal";
 
@@ -21,18 +21,17 @@ import Reveal from "./ui/Reveal";
  * one is ever in layout — a `display:none` table contributes no width.
  */
 
+// Every row here is included in the rent. A deposit is a separate payment,
+// not something the rent covers, so it does not belong in this table.
 const INCLUDED = [
-  { label: "Furnished room, bed & mattress", all: true },
-  { label: "Wardrobe & study desk", all: true },
-  { label: "High-speed Wi-Fi", all: true },
-  { label: "Housekeeping", all: true },
-  { label: "Electricity", all: true },
-  { label: "Four meals a day", all: true },
-  { label: "Laundry service", all: true },
-  { label: "Security deposit", note: "[SECURITY DEPOSIT — CONFIRM]" },
+  "Furnished room, bed & mattress",
+  "Wardrobe & study desk",
+  "High-speed Wi-Fi",
+  "Housekeeping",
+  "Electricity",
+  "Four meals a day",
+  "Laundry service",
 ];
-
-const unconfirmed = INCLUDED.filter((r) => !r.all);
 
 export default function PriceTable() {
   return (
@@ -56,20 +55,13 @@ export default function PriceTable() {
           <div className="px-5 py-5">
             <h4 className="t-label text-mute">What the rent covers</h4>
             <ul className="mt-3 space-y-2.5">
-              {INCLUDED.map((row) => (
+              {INCLUDED.map((label) => (
                 <li
-                  key={row.label}
-                  className={`flex items-start gap-2.5 text-[0.875rem] leading-snug ${
-                    row.all ? "text-ink-2" : "text-mute/70"
-                  }`}
+                  key={label}
+                  className="flex items-start gap-2.5 text-[0.875rem] leading-snug text-ink-2"
                 >
-                  {row.all ? (
-                    <Check className="mt-[0.2em] size-4 shrink-0 text-moss" aria-hidden="true" />
-                  ) : (
-                    <Minus className="mt-[0.2em] size-4 shrink-0 text-mute/40" aria-hidden="true" />
-                  )}
-                  {row.label}
-                  {!row.all && <span className="sr-only"> — to be confirmed</span>}
+                  <Check className="mt-[0.2em] size-4 shrink-0 text-moss" aria-hidden="true" />
+                  {label}
                 </li>
               ))}
             </ul>
@@ -101,29 +93,18 @@ export default function PriceTable() {
               </tr>
             </thead>
             <tbody>
-              {INCLUDED.map((row) => (
-                <tr key={row.label} className="border-b border-ink/8 last:border-0">
+              {INCLUDED.map((label) => (
+                <tr key={label} className="border-b border-ink/8 last:border-0">
                   <th
                     scope="row"
-                    className={`px-5 py-3.5 text-[0.875rem] font-normal sm:px-7 ${
-                      row.all ? "text-ink-2" : "text-mute/75"
-                    }`}
+                    className="px-5 py-3.5 text-[0.875rem] font-normal text-ink-2 sm:px-7"
                   >
-                    {row.label}
+                    {label}
                   </th>
                   {rooms.map((r) => (
                     <td key={r.id} className="px-5 py-3.5 sm:px-7">
-                      {row.all ? (
-                        <>
-                          <Check className="size-4 text-moss" aria-hidden="true" />
-                          <span className="sr-only">Included</span>
-                        </>
-                      ) : (
-                        <>
-                          <Minus className="size-4 text-mute/40" aria-hidden="true" />
-                          <span className="sr-only">To be confirmed</span>
-                        </>
-                      )}
+                      <Check className="size-4 text-moss" aria-hidden="true" />
+                      <span className="sr-only">Included</span>
                     </td>
                   ))}
                 </tr>
@@ -134,10 +115,8 @@ export default function PriceTable() {
 
         <div className="border-t border-ink/12 px-5 py-4 sm:px-7">
           <p className="text-[0.8125rem] leading-relaxed text-mute">
-            Everything ticked above is included in the rent — electricity and meals are not
-            billed on top. Still to confirm:{" "}
-            {unconfirmed.map((r) => r.label.toLowerCase()).join(", ")}. We&apos;ll put the full
-            inclusion list in writing before you pay anything.
+            Everything above is included in the rent — electricity and meals are not billed on
+            top. We&apos;ll put the full inclusion list in writing before you pay anything.
           </p>
         </div>
       </div>
