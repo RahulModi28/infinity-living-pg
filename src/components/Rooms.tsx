@@ -77,11 +77,11 @@ export default function Rooms() {
         <SectionHead
           eyebrow="Rooms"
           title="Find your perfect space."
-          intro="Single, double or triple sharing — every room comes furnished, cleaned and connected. Pick the one that matches how you actually live."
+          intro="Single or double sharing — both furnished, cleaned and connected. Pick the one that matches how you actually live."
         />
 
         {/* Swipeable on mobile, grid from tablet up. */}
-        <div className="no-bar edge-fade -mx-5 mt-14 flex snap-x snap-mandatory scroll-pl-5 gap-5 overflow-x-auto px-5 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:[mask-image:none] lg:grid-cols-3 lg:gap-7">
+        <div className="no-bar edge-fade -mx-5 mt-14 flex snap-x snap-mandatory scroll-pl-5 gap-5 overflow-x-auto px-5 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:[mask-image:none] lg:max-w-3xl lg:gap-7">
           {rooms.map((r) => (
             <div key={r.id} className="w-[80vw] shrink-0 sm:w-auto">
               <Reveal>

@@ -1,11 +1,13 @@
 /**
- * Dedicated landing pages for the two strongest keyword clusters found in the
- * live Autocomplete research. One homepage cannot rank for both "ladies pg
- * yeshwanthpur" and "yeshwanthpur pg for gents" — they are distinct searches
- * with distinct intent, and no competitor currently gives either a real page.
+ * A dedicated landing page for the strongest keyword cluster the live
+ * Autocomplete research turned up that this property can actually serve:
+ * "yeshwanthpur pg for gents" and its variants. No competitor currently
+ * gives that audience a real page.
  *
- * Copy is deliberately different per audience: near-duplicate pages get
- * filtered as thin content and would be worse than not having them.
+ * There is deliberately no ladies page. The demand is there — "ladies pg
+ * yeshwanthpur" is a heavier cluster than the gents one — but the property
+ * is gents-only, so ranking for it would earn enquiries that waste
+ * everyone's time and produce nothing but bounces.
  */
 
 export type Audience = {
@@ -21,69 +23,7 @@ export type Audience = {
   faqs: { q: string; a: string }[];
 };
 
-export const audiences: Record<"ladies" | "gents", Audience> = {
-  ladies: {
-    slug: "ladies-pg-yeshwanthpur",
-    title: "Ladies PG in Yeshwanthpur near Christ University",
-    description:
-      "Ladies PG in Yeshwanthpur, Bengaluru — walking distance from Christ University Yeshwanthpur Campus. Furnished single, double & triple rooms with meals, Wi-Fi, CCTV and secure entry.",
-    h1: "Ladies PG in Yeshwanthpur, near Christ University",
-    eyebrow: "For women students & working professionals",
-    intro:
-      "A PG your parents can visit before they say yes. Furnished rooms, home-style meals and a short walk to the Yeshwanthpur campus — with the security arrangements written down rather than implied.",
-    sections: [
-      {
-        h2: "Girls PG near Christ University Yeshwanthpur Campus",
-        body: "The walk to campus is the whole point. No autos to negotiate at 8am, no depending on someone for a lift after an evening class, and no hour of your day lost to Bengaluru traffic in each direction.",
-        points: [
-          "About 850 m by road to Christ University Yeshwanthpur Campus — roughly a 10 minute walk",
-          "Nagasandra Metro on the Green Line for the rest of the city — approx. 1.7 km",
-          "[SEPARATE FLOOR / BLOCK ARRANGEMENT — CONFIRM]",
-          "Housekeeping in rooms and common areas",
-        ],
-      },
-      {
-        h2: "Safety, stated plainly",
-        body: "Every PG website says \"safe\". Here is what that actually means at this address — and where we are still confirming details rather than guessing at them.",
-        points: [
-          "Biometric entry at the main door",
-          "[CCTV COVERAGE & AREAS — CONFIRM]",
-          "[SECURITY PERSONNEL & TIMINGS — CONFIRM]",
-          "[VISITOR POLICY — CONFIRM]",
-          "On-site management with a name and number your parents can call",
-        ],
-      },
-      {
-        h2: "Single room PG in Yeshwanthpur for ladies",
-        body: "Single, double and triple sharing are all available. Single sharing suits light sleepers and anyone who studies late; triple is the most affordable and usually the most social.",
-        points: [
-          "Single sharing — private room, bed, wardrobe, study desk",
-          "Double sharing — one roommate, lower monthly rent",
-          "Triple sharing — the most affordable option",
-          "Current availability: [ROOM AVAILABILITY]",
-        ],
-      },
-    ],
-    faqs: [
-      {
-        q: "Is this a ladies-only PG?",
-        a: "[CONFIRM — ladies-only property, or separate floor/block within a co-ed building.] We'll tell you exactly how it's arranged before you visit.",
-      },
-      {
-        q: "What are the entry timings for the ladies PG?",
-        a: "[CURFEW / ENTRY TIMING POLICY — CONFIRM]. We'd rather give you the real policy up front than have it become a problem in month two.",
-      },
-      {
-        q: "Can my parents visit and see the room first?",
-        a: "Yes, and we'd prefer it. Come see the actual room, meet the staff and ask whatever you want to ask. Nothing is payable to look.",
-      },
-      {
-        q: "What is the rent for a ladies PG in Yeshwanthpur?",
-        a: "Rent depends on the room type — single, double or triple sharing. Current tariff: [PRICE] per month. Message us for the up-to-date rate card and what it includes.",
-      },
-    ],
-  },
-
+export const audiences: Record<"gents", Audience> = {
   gents: {
     slug: "gents-pg-yeshwanthpur",
     title: "Gents PG in Yeshwanthpur near Christ University",
@@ -115,12 +55,11 @@ export const audiences: Record<"ladies" | "gents", Audience> = {
         ],
       },
       {
-        h2: "Single, double and triple sharing rooms",
-        body: "Pick the room that matches how you actually live, not the one that photographs best. All three come furnished and cleaned.",
+        h2: "Single and double sharing rooms",
+        body: "Pick the room that matches how you actually live, not the one that photographs best. Both come furnished and cleaned.",
         points: [
           "Single sharing — your own room and your own schedule",
-          "Double sharing — the balance most people settle on",
-          "Triple sharing — lowest monthly rent",
+          "Double sharing — two beds, a study table each, lower monthly rent",
           "Current availability: [ROOM AVAILABILITY]",
         ],
       },
@@ -128,7 +67,7 @@ export const audiences: Record<"ladies" | "gents", Audience> = {
     faqs: [
       {
         q: "What is the rent for a gents PG in Yeshwanthpur?",
-        a: "Rent depends on the room type — single, double or triple sharing. Current tariff: [PRICE] per month. Ask us on WhatsApp for the current rate card.",
+        a: "Rent depends on the room type — single or double sharing. Current tariff: [PRICE] per month. Ask us on WhatsApp for the current rate card.",
       },
       {
         q: "Is food included for the gents PG?",

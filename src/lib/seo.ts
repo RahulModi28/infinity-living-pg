@@ -5,7 +5,7 @@ import type { Audience } from "./audiences";
  * Structured data. Keyword and phrasing choices below are grounded in live
  * Google Autocomplete data for this micro-market (see the keyword CSV):
  * people search "pg near christ university yeshwanthpur", "pg in yeshwanthpur
- * for ladies/gents", and landmark terms (metro, railway station) — not
+ * for gents", and landmark terms (metro, Nagasandra) — not
  * "student accommodation", which barely registers locally.
  */
 
@@ -18,7 +18,7 @@ export function localBusinessJsonLd() {
     "@id": `${baseUrl()}/#business`,
     name: site.name,
     description:
-      "PG near Christ University Yeshwanthpur Campus, Bengaluru. Furnished single, double and triple sharing rooms with Wi-Fi, meals, housekeeping and 24/7 security.",
+      "Gents PG near Christ University Yeshwanthpur Campus, Bengaluru. Furnished single and double sharing rooms with Wi-Fi, meals, gym, housekeeping and biometric entry.",
     url: baseUrl(),
     telephone: clean(site.contact.phoneDisplay),
     email: clean(site.contact.email),

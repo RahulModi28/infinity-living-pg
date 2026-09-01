@@ -86,13 +86,13 @@ src/
 | Route | Targets |
 |---|---|
 | `/` | `pg near christ university yeshwanthpur` |
-| `/ladies-pg-yeshwanthpur` | `ladies pg yeshwanthpur`, `girls pg near christ yeshwanthpur` |
 | `/gents-pg-yeshwanthpur` | `yeshwanthpur pg for gents`, `boys pg near christ university yeshwanthpur campus` |
 
-The two audience pages exist because one homepage can't rank for both
-clusters — they're distinct searches with distinct intent, and no competitor
-currently gives either a real page. Copy is deliberately different per page;
-near-duplicates get filtered as thin content.
+There is deliberately no ladies page. "ladies pg yeshwanthpur" is the heavier
+cluster of the two and no competitor covers it well — but the property is
+gents-only, so ranking for it would earn enquiries it can't serve. The site
+says so plainly on the homepage and in the FAQ rather than letting someone
+find out after a visit.
 
 ### The motion system
 
@@ -136,10 +136,9 @@ What the data changed:
    tag on this site uses `yeshwanthpur`.
 2. **"PG", not "student accommodation."** The local search language is "PG".
    `student accommodation` appears only as a secondary term.
-3. **"Ladies PG" / "gents PG".** Very high autocomplete density, and no
-   ranking competitor gives either a proper section. That's why
-   `Audience.tsx` exists — it's a real content section that also owns those
-   keywords.
+3. **"Gents PG".** Very high autocomplete density, and no ranking competitor
+   gives that audience a proper section. That's why `Audience.tsx` exists —
+   a real content section that also owns those keywords.
 4. **Landmark proximity is untapped.** `pg near yeshwanthpur metro station`,
    `...railway station`, `...tcs office`, `pg near ikea nagasandra` all return
    suggestions and nobody targets them. They're in the Location section list.

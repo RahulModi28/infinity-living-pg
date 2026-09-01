@@ -87,8 +87,10 @@ export default function Location() {
 
             <Reveal delay={0.1}>
               <p className="mt-5 text-[0.8125rem] leading-relaxed text-mute">
-                Distances and travel times above are placeholders. They will be measured on Google
-                Maps and published only once verified — we won&apos;t estimate them.
+                Distances are measured by road from the property, not estimated. Walking times
+                assume 5 km/h and are approximate. The two entries still marked{" "}
+                <span className="whitespace-nowrap">[CONFIRM]</span> are ones we haven&apos;t
+                verified yet — we&apos;d rather leave them blank than guess.
               </p>
 
               <div className="mt-7 flex flex-wrap gap-3">

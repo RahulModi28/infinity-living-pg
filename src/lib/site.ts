@@ -123,26 +123,6 @@ export const rooms: Room[] = [
     image: "/images/room-double.jpg",
     gallery: ["/images/room-double.jpg", "/images/bathroom.jpg", "/images/living-room-2.jpg"],
   },
-  {
-    id: "triple",
-    name: "Triple Sharing",
-    occupancy: "3 people",
-    price: "[PRICE]",
-    priceNote: "per person / month",
-    blurb:
-      "The most affordable way in — and usually the most social. First-years tend to pick this one and stay.",
-    features: [
-      "Large shared room",
-      "3 beds with mattresses",
-      "Wardrobe per person",
-      "Study desks",
-      "High-speed Wi-Fi",
-      "Housekeeping",
-    ],
-    availability: "[ROOM AVAILABILITY]",
-    image: "/images/room-triple.svg",
-    gallery: ["/images/room-triple.svg", "/images/room-triple-2.svg", "/images/room-triple-3.svg"],
-  },
 ];
 
 /* ─────────────────────────── Amenities ───────────────────────────
@@ -269,7 +249,7 @@ export const faqs = [
   },
   {
     q: "What is the monthly rent?",
-    a: "Rent depends on the room type you choose — single, double or triple sharing. Current tariff: [PRICE] per month. Ask us on WhatsApp for the up-to-date rate card for the room you want.",
+    a: "Rent depends on the room type you choose — single or double sharing. Current tariff: [PRICE] per month. Ask us on WhatsApp for the up-to-date rate card for the room you want.",
   },
   {
     q: "What is included in the rent?",
@@ -285,7 +265,7 @@ export const faqs = [
   },
   {
     q: "What room types are available?",
-    a: "Single sharing, double sharing and triple sharing. Live availability: [ROOM AVAILABILITY] — check with us before planning a visit.",
+    a: "Single sharing and double sharing. Live availability: [ROOM AVAILABILITY] — check with us before planning a visit.",
   },
   {
     q: "Is there a security deposit?",
@@ -306,6 +286,10 @@ export const faqs = [
   {
     q: "Is there a curfew?",
     a: "[CURFEW / ENTRY TIMING POLICY — CONFIRM].",
+  },
+  {
+    q: "Is this a gents-only PG?",
+    a: "Yes. Infinity Space is a gents PG — we don't currently have accommodation for women. If you're looking for a ladies PG near the campus we'd rather tell you now than after a visit.",
   },
   {
     q: "How do I book a room?",

@@ -33,13 +33,13 @@ export const metadata: Metadata = {
     template: "%s | Infinity Space",
   },
   description:
-    "Furnished PG in Yeshwanthpur near Christ University Campus, Bengaluru. Single, double & triple sharing rooms with Wi-Fi, meals, housekeeping and 24/7 security.",
+    "Gents PG in Yeshwanthpur near Christ University Campus, Bengaluru — a 10 minute walk. Furnished single & double rooms with Wi-Fi, meals, gym and biometric entry.",
   keywords: [
     "pg near christ university yeshwanthpur",
     "pg near christ university yeshwanthpur campus",
     "pg in yeshwanthpur",
-    "ladies pg yeshwanthpur",
     "gents pg yeshwanthpur",
+    "boys pg near christ university yeshwanthpur campus",
     "pg near yeshwanthpur metro station",
     "student accommodation near christ university bangalore",
   ],
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: "PG near Christ University Yeshwanthpur Campus | Infinity Space",
     description:
-      "Premium student living in Yeshwanthpur, Bengaluru — furnished rooms, meals, Wi-Fi and a short walk to Christ University Yeshwanthpur Campus.",
+      "A gents PG in Yeshwanthpur, Bengaluru — furnished rooms, meals, Wi-Fi, gym and a 10 minute walk to Christ University Yeshwanthpur Campus.",
     images: [{ url: "/images/og.png", width: 1200, height: 630, type: "image/png", alt: "Infinity Space — PG near Christ University Yeshwanthpur Campus" }],
   },
   twitter: {

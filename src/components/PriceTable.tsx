@@ -40,7 +40,10 @@ export default function PriceTable() {
         {/* ── Phones ── */}
         <div className="sm:hidden">
           <h3 className="t-label border-b border-ink/12 px-5 py-4 text-mute">Monthly rent</h3>
-          <dl className="grid grid-cols-3 divide-x divide-ink/10 border-b border-ink/12">
+          <dl
+            className="grid divide-x divide-ink/10 border-b border-ink/12"
+            style={{ gridTemplateColumns: `repeat(${rooms.length}, minmax(0, 1fr))` }}
+          >
             {rooms.map((r) => (
               <div key={r.id} className="px-3 py-4 text-center">
                 <dt className="text-[0.75rem] leading-tight text-mute">{r.name}</dt>
