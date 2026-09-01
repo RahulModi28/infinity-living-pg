@@ -3,11 +3,25 @@ import { NextResponse } from "next/server";
 /**
  * Enquiry endpoint.
  *
- * ⚠️  This currently only validates and logs. Before launch, wire it to
- * wherever leads should actually land — e.g. a Google Sheet, a CRM, an email
- * via Resend, or a WhatsApp Business API notification to the manager.
- * Every enquiry is a paid-for lead; losing one is losing a booking.
+ * Leads are forwarded to ENQUIRY_WEBHOOK_URL — a Google Apps Script web app
+ * bound to a spreadsheet (see README for the script and setup). A sheet was
+ * chosen over a database deliberately: these get read on a phone, sorted and
+ * counted, and a database would need an admin panel built purely to read it.
+ *
+ * The variable is server-side only — no NEXT_PUBLIC prefix — so the URL is
+ * never exposed to the browser.
  */
+
+type Lead = {
+  name: string;
+  phone: string;
+  email: string;
+  roomType: string;
+  moveIn: string;
+  message: string;
+  at: string;
+};
+
 export async function POST(req: Request) {
   let body: Record<string, unknown>;
   try {
@@ -20,19 +34,52 @@ export async function POST(req: Request) {
   const phone = String(body.phone ?? "").replace(/\D/g, "").slice(-10);
 
   if (!name || !/^[6-9]\d{9}$/.test(phone)) {
-    return NextResponse.json({ ok: false, error: "Name and a valid phone are required" }, { status: 422 });
+    return NextResponse.json(
+      { ok: false, error: "Name and a valid phone are required" },
+      { status: 422 }
+    );
   }
 
-  // TODO: replace with a real destination (CRM / sheet / email / WhatsApp API).
-  console.info("[enquiry]", {
+  const lead: Lead = {
     name,
     phone,
-    email: body.email,
-    roomType: body.roomType,
-    moveIn: body.moveIn,
-    message: body.message,
+    email: String(body.email ?? "").trim(),
+    roomType: String(body.roomType ?? "").trim(),
+    moveIn: String(body.moveIn ?? "").trim(),
+    message: String(body.message ?? "").trim(),
     at: new Date().toISOString(),
-  });
+  };
+
+  const endpoint = process.env.ENQUIRY_WEBHOOK_URL;
+
+  // Nowhere to store it. In development that's expected; in production it
+  // means the lead is lost, so fail rather than show a success animation to
+  // someone who thinks they've enquired — the form then points them at
+  // WhatsApp, which is the channel that actually works.
+  if (!endpoint) {
+    if (process.env.NODE_ENV !== "production") {
+      console.info("[enquiry] no ENQUIRY_WEBHOOK_URL set, logging instead:", lead);
+      return NextResponse.json({ ok: true });
+    }
+    console.error("[enquiry] ENQUIRY_WEBHOOK_URL is not set — lead not stored:", lead);
+    return NextResponse.json({ ok: false, error: "Storage not configured" }, { status: 503 });
+  }
+
+  try {
+    const res = await fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(lead),
+      // Apps Script can be slow to wake; still well inside the function limit.
+      signal: AbortSignal.timeout(10_000),
+    });
+    if (!res.ok) throw new Error(`webhook responded ${res.status}`);
+  } catch (err) {
+    // Log the whole lead so it is recoverable from the platform logs even
+    // when the sheet is unreachable.
+    console.error("[enquiry] failed to store lead:", err, lead);
+    return NextResponse.json({ ok: false, error: "Could not store enquiry" }, { status: 502 });
+  }
 
   return NextResponse.json({ ok: true });
 }

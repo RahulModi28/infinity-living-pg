@@ -53,10 +53,53 @@ Nothing loads while they're unset, so no consent banner is needed yet. Every
 contact route is tagged `data-cta="call|whatsapp|enquire"` and tracked
 automatically — see `src/components/Analytics.tsx`.
 
-**Lead capture is not wired up yet.** `src/app/api/enquiry/route.ts`
-validates and logs. Point it at a real destination (sheet, CRM, email, or a
-WhatsApp Business API notification) before you spend a rupee on ads — every
-enquiry is a paid-for lead.
+### Storing form enquiries
+
+Submissions POST to `/api/enquiry`, which forwards them to
+`ENQUIRY_WEBHOOK_URL` — a Google Apps Script web app bound to a spreadsheet.
+A sheet rather than a database on purpose: these get read on a phone, sorted
+and counted, and a database would need an admin panel built purely to read it.
+
+**Setup, about ten minutes:**
+
+1. Create a Google Sheet. First row headers:
+   `Timestamp | Name | Phone | Email | Room type | Move-in | Message`
+2. **Extensions → Apps Script**, replace the contents with:
+
+   ```js
+   function doPost(e) {
+     const d = JSON.parse(e.postData.contents);
+     SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().appendRow([
+       new Date(d.at), d.name, "'" + d.phone, d.email,
+       d.roomType, d.moveIn, d.message,
+     ]);
+     return ContentService
+       .createTextOutput(JSON.stringify({ ok: true }))
+       .setMimeType(ContentService.MimeType.JSON);
+   }
+   ```
+
+   The apostrophe before `d.phone` keeps Sheets from mangling the number into
+   scientific notation or stripping a leading digit.
+
+3. **Deploy → New deployment → Web app.** Execute as *Me*, access
+   *Anyone*. Copy the `/exec` URL.
+4. Set it as `ENQUIRY_WEBHOOK_URL` in Vercel (Settings → Environment
+   Variables) and in `.env.local` for local testing. No `NEXT_PUBLIC`
+   prefix — this URL must not reach the browser.
+
+**Failure behaviour is deliberate.** If the variable is missing in
+production, or the sheet is unreachable, the endpoint returns an error rather
+than success. The form then shows its "something went wrong — WhatsApp us
+instead" state. Showing a success animation to someone whose enquiry went
+nowhere is worse than showing an error, because they stop waiting for a reply
+that is never coming. The full lead is also written to the platform logs on
+failure, so it is recoverable.
+
+**Notification is a separate problem.** A sheet stores; it does not tell
+anyone. Until something emails or messages you on submit, someone has to
+remember to open the sheet. Resend's free tier covers this in about fifteen
+lines if you want it.
 
 ---
 
