@@ -210,20 +210,27 @@ export const amenityGroups = [
 export const nearby = [
   // Campus first regardless of distance — it's the reason anyone is reading
   // this list. Everything after it runs nearest to furthest.
+  //
+  // Coordinates drive the "show me the route" map: clicking a row swaps the
+  // embed to walking directions from the property to that pin. They are real
+  // lookups, not the label re-geocoded at click time, so the map can't land
+  // on a different branch of the same chain.
   {
     label: "Christ University — Yeshwanthpur Campus",
     time: "10 min walk · 850 m",
     icon: "GraduationCap",
+    lat: 13.0362625,
+    lng: 77.5046094,
     primary: true,
   },
-  { label: "Subway", time: "5 min walk · 400 m", icon: "Sandwich" },
-  { label: "Vishal Mega Mart (supermarket)", time: "6 min walk · 450 m", icon: "ShoppingBasket" },
-  { label: "Life Pharmacy", time: "6 min walk · 500 m", icon: "Pill" },
-  { label: "Ashwini Hospital", time: "7 min walk · 600 m", icon: "HeartPulse" },
-  { label: "KFC & Box8", time: "8 min walk · 700 m", icon: "Utensils" },
-  { label: "IKEA Nagasandra", time: "approx. 1.7 km", icon: "Store" },
-  { label: "Nagasandra Metro (Green Line)", time: "approx. 1.7 km", icon: "TrainFront" },
-  { label: "Dasarahalli Metro (Green Line)", time: "approx. 1.7 km", icon: "TrainFront" },
+  { label: "Subway", time: "5 min walk · 400 m", icon: "Sandwich", lat: 13.0339734, lng: 77.5029658 },
+  { label: "Vishal Mega Mart (supermarket)", time: "6 min walk · 450 m", icon: "ShoppingBasket", lat: 13.03352, lng: 77.5039 },
+  { label: "Life Pharmacy", time: "6 min walk · 500 m", icon: "Pill", lat: 13.033876, lng: 77.5034494 },
+  { label: "Ashwini Hospital", time: "7 min walk · 600 m", icon: "HeartPulse", lat: 13.03134, lng: 77.5056 },
+  { label: "KFC & Box8", time: "8 min walk · 700 m", icon: "Utensils", lat: 13.0340423, lng: 77.5040783 },
+  { label: "IKEA Nagasandra", time: "approx. 1.7 km", icon: "Store", lat: 13.04928, lng: 77.50035 },
+  { label: "Nagasandra Metro (Green Line)", time: "approx. 1.7 km", icon: "TrainFront", lat: 13.04795, lng: 77.50014 },
+  { label: "Dasarahalli Metro (Green Line)", time: "approx. 1.7 km", icon: "TrainFront", lat: 13.04326, lng: 77.51255 },
 ] as const;
 
 /* ─────────────────────────── Reviews ───────────────────────────
@@ -350,6 +357,11 @@ export function depositFor(room: { price: string }) {
   const n = Number(room.price.replace(/[^\d]/g, ""));
   if (!n) return null;
   return (n * DEPOSIT_MONTHS).toLocaleString("en-IN");
+}
+
+/** Keyless walking-directions embed from the property to a nearby pin. */
+export function directionsEmbed(lat: number, lng: number) {
+  return `https://maps.google.com/maps?saddr=${site.address.lat},${site.address.lng}&daddr=${lat},${lng}&dirflg=w&hl=en&output=embed`;
 }
 
 export function whatsappHref(message: string = site.contact.whatsappMessage) {

@@ -1,10 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import {
   GraduationCap, TrainFront, ShoppingBasket, HeartPulse, Store,
-  Pill, Sandwich, Utensils, Navigation, type LucideIcon,
+  Pill, Sandwich, Utensils, Navigation, CornerUpLeft, type LucideIcon,
 } from "lucide-react";
-import { nearby, site } from "@/lib/site";
+import { nearby, site, directionsEmbed } from "@/lib/site";
 import SectionHead from "./ui/SectionHead";
 import Reveal from "./ui/Reveal";
 import Button from "./ui/Button";
@@ -14,6 +15,8 @@ const ICONS: Record<string, LucideIcon> = {
 };
 
 export default function Location() {
+  // Which nearby pin the map is currently routing to, if any.
+  const [routeTo, setRouteTo] = useState<(typeof nearby)[number] | null>(null);
   const directions = site.address.mapsDirectionsUrl;
   const hasDirections = !directions.startsWith("[");
 
@@ -26,8 +29,17 @@ export default function Location() {
             <div className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] bg-moss-2 lg:aspect-[5/6]">
               {site.address.mapsEmbedUrl ? (
                 <iframe
-                  src={site.address.mapsEmbedUrl}
-                  title="Map showing Infinity Space PG near Christ University Yeshwanthpur Campus, Bengaluru"
+                  key={routeTo ? routeTo.label : "property"}
+                  src={
+                    routeTo
+                      ? directionsEmbed(routeTo.lat, routeTo.lng)
+                      : site.address.mapsEmbedUrl
+                  }
+                  title={
+                    routeTo
+                      ? `Walking route from Infinity Space to ${routeTo.label}`
+                      : "Map showing Infinity Space PG near Christ University Yeshwanthpur Campus, Bengaluru"
+                  }
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   className="absolute inset-0 size-full border-0"
@@ -43,6 +55,20 @@ export default function Location() {
                   </p>
                 </div>
               )}
+
+              {/* Top-right: Google's embed puts its own origin/destination card
+                  top-left and its controls bottom-right, so this is the one
+                  corner that stays clear. */}
+              {routeTo && (
+                <button
+                  type="button"
+                  onClick={() => setRouteTo(null)}
+                  className="absolute right-4 top-4 inline-flex items-center gap-2 rounded-full bg-ivory/95 px-4 py-2.5 text-[0.8125rem] font-medium text-ink shadow-[0_6px_20px_-8px_rgba(18,17,16,0.5)] backdrop-blur-sm transition hover:bg-ivory"
+                >
+                  <CornerUpLeft className="size-4" aria-hidden="true" />
+                  Back to the property
+                </button>
+              )}
             </div>
           </Reveal>
 
@@ -53,15 +79,27 @@ export default function Location() {
               intro="The single biggest reason students pick this address: the walk to campus is short enough that an 8:30 class stops being a problem."
             />
 
-            <Reveal stagger className="mt-10 divide-y divide-ink/10 border-y border-ink/10">
+            <p className="mt-8 text-[0.8125rem] text-mute">
+              Tap any of these to see the walking route from the front door.
+            </p>
+
+            <Reveal stagger className="mt-4 divide-y divide-ink/10 border-y border-ink/10">
               {nearby.map((n) => {
                 const Icon = ICONS[n.icon] ?? Store;
                 const primary = "primary" in n && n.primary;
+                const active = routeTo?.label === n.label;
                 return (
-                  <div
+                  <button
                     key={n.label}
-                    className={`flex items-center justify-between gap-4 py-4 ${
-                      primary ? "bg-clay/[0.05] -mx-3 px-3 rounded-lg" : ""
+                    type="button"
+                    onClick={() => setRouteTo(active ? null : n)}
+                    aria-pressed={active}
+                    className={`flex w-full items-center justify-between gap-4 rounded-lg px-3 py-4 text-left transition-colors duration-300 -mx-3 ${
+                      active
+                        ? "bg-moss/[0.10]"
+                        : primary
+                          ? "bg-clay/[0.05] hover:bg-clay/[0.09]"
+                          : "hover:bg-ink/[0.04]"
                     }`}
                   >
                     <span className="flex items-center gap-3.5">
@@ -77,10 +115,10 @@ export default function Location() {
                         {n.label}
                       </span>
                     </span>
-                    <span className="max-w-[45%] text-right font-display text-[0.8125rem] text-mute">
-                      {n.time}
+                    <span className="shrink-0 text-right font-display text-[0.8125rem] text-mute">
+                      {active ? "Showing route" : n.time}
                     </span>
-                  </div>
+                  </button>
                 );
               })}
             </Reveal>
