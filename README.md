@@ -75,39 +75,24 @@ row has five empty columns.
 
 1. Create one Google Sheet. Don't add tabs or headers — the script creates
    both on the first submission of each kind.
-2. **Extensions → Apps Script**, replace the contents with:
+2. **Extensions → Apps Script**, and replace the contents with
+   [`apps-script/Code.gs`](apps-script/Code.gs) from this repo.
 
-   ```js
-   function doPost(e) {
-     const d = JSON.parse(e.postData.contents);
-     const isWhatsApp = d.source === 'whatsapp';
-     const name = isWhatsApp ? 'WhatsApp Contacts' : 'Enquiries';
+   It writes the row, then emails the enquirer and the owner. The config
+   block at the top of that file is a **hand-kept copy** of values from
+   `src/lib/site.ts` — Apps Script cannot import from the repo, so if you
+   change rent, the phone number or the address on the site, change it there
+   too.
 
-     const ss = SpreadsheetApp.getActiveSpreadsheet();
-     const sheet = ss.getSheetByName(name) || ss.insertSheet(name);
+3. **Run `sendTestEmails` once from the editor** (Run → sendTestEmails) and
+   accept the permission prompt. Do this before deploying: a web app request
+   cannot raise the Gmail authorisation dialog itself, so an unauthorised
+   script writes the row and then fails silently at the first send. Running it
+   once also puts both emails in your inbox to check on a real phone.
 
-     if (sheet.getLastRow() === 0) {
-       sheet.appendRow(isWhatsApp
-         ? ['Timestamp', 'Name', 'Phone']
-         : ['Timestamp', 'Name', 'Phone', 'Email', 'Room type', 'Move-in', 'Message']);
-       sheet.setFrozenRows(1);
-     }
-
-     // The apostrophe forces Sheets to treat the number as text — without it
-     // a 10-digit mobile becomes scientific notation or loses a leading digit.
-     sheet.appendRow(isWhatsApp
-       ? [new Date(d.at), d.name, "'" + d.phone]
-       : [new Date(d.at), d.name, "'" + d.phone, d.email, d.roomType, d.moveIn, d.message]);
-
-     return ContentService
-       .createTextOutput(JSON.stringify({ ok: true }))
-       .setMimeType(ContentService.MimeType.JSON);
-   }
-   ```
-
-3. **Deploy → New deployment → Web app.** Execute as *Me*, access
+4. **Deploy → New deployment → Web app.** Execute as *Me*, access
    *Anyone*. Copy the `/exec` URL.
-4. Set it as `ENQUIRY_WEBHOOK_URL` in Vercel (Settings → Environment
+5. Set it as `ENQUIRY_WEBHOOK_URL` in Vercel (Settings → Environment
    Variables) and in `.env.local` for local testing. No `NEXT_PUBLIC`
    prefix — this URL must not reach the browser.
 
@@ -124,10 +109,17 @@ nowhere is worse than showing an error, because they stop waiting for a reply
 that is never coming. The full lead is also written to the platform logs on
 failure, so it is recoverable.
 
-**Notification is a separate problem.** A sheet stores; it does not tell
-anyone. Until something emails or messages you on submit, someone has to
-remember to open the sheet. Resend's free tier covers this in about fifteen
-lines if you want it.
+**Email is sent from Apps Script, not from the site.** The script already
+has the lead and can send from the owner's own Google account, so there is no
+mail provider, no API key and no per-send cost — and mail keeps working even
+if the site is redeployed or moved. The enquirer gets the full reply (rent,
+deposit, inclusions, distance); the owner gets a short actionable alert,
+because a sheet stores but tells nobody. A send failure is caught and logged:
+the row is written first and never lost to a mail error.
+
+**Watch the daily quota.** A consumer Gmail account allows 100 sends a day, a
+Workspace account 1500. Each lead with an email address costs two. The script
+stops short and logs rather than half-sending when the quota runs out.
 
 ### The WhatsApp gate
 
@@ -144,11 +136,6 @@ JavaScript broken they still work, just ungated.
 Someone who has filled it once is remembered in `localStorage` and not asked
 again. Storage failure never blocks the hand-off: the conversation is worth
 more than the row in the sheet.
-
-**Notification is a separate problem.** A sheet stores; it does not tell
-anyone. Until something emails or messages you on submit, someone has to
-remember to open the sheet. Resend's free tier covers this in about fifteen
-lines if you want it.
 
 ---
 

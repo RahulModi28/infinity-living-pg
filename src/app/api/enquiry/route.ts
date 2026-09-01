@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { notifyOnLead } from "@/lib/email";
 
 /**
  * Enquiry endpoint.
@@ -16,6 +15,11 @@ import { notifyOnLead } from "@/lib/email";
  *
  * The variable is server-side only — no NEXT_PUBLIC prefix — so the URL is
  * never exposed to the browser.
+ *
+ * Email is deliberately not sent from here. The Apps Script already has the
+ * lead and can mail from the owner's own Google account, so doing it there
+ * needs no mail provider, no API key and no per-send cost — and it keeps
+ * sending alive even if this route is never called. See apps-script/Code.gs.
  */
 
 type Lead = {
@@ -88,15 +92,6 @@ export async function POST(req: Request) {
     // when the sheet is unreachable.
     console.error("[enquiry] failed to store lead:", err, lead);
     return NextResponse.json({ ok: false, error: "Could not store enquiry" }, { status: 502 });
-  }
-
-  // Email after the row is safely stored, and never let it fail the request:
-  // a lead in the sheet with no email sent is recoverable, a lead lost
-  // because the mail provider was down is not.
-  try {
-    await notifyOnLead(lead);
-  } catch (err) {
-    console.error("[enquiry] stored, but notification failed:", err);
   }
 
   return NextResponse.json({ ok: true });
