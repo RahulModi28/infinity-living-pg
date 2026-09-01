@@ -125,9 +125,9 @@ export default function Location() {
 
             <Reveal delay={0.1}>
               <p className="mt-5 text-[0.8125rem] leading-relaxed text-mute">
-                Distances are measured by road from the property, not estimated. Walking times
-                assume 5 km/h and are approximate — the metro figures in particular are worth
-                checking against your own route, since Tumkur Road has few crossings.
+                Distances are measured by road from the property, not estimated. The short walks
+                assume 5 km/h; the longer three are Google&apos;s own walking routes — the same
+                ones the map draws when you tap a row.
               </p>
 
               <div className="mt-7 flex flex-wrap gap-3">

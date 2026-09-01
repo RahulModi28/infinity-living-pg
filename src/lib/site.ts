@@ -202,9 +202,11 @@ export const amenityGroups = [
    which is why they sat unconfirmed until now. Their walking times are
    derived from the supplied distances at the same 5 km/h as the rest.
 
-   ⚠️  One caveat left: the metro/IKEA figures are straight-line; the
-   vehicle route is longer because Tumkur Road has few crossings. Worth
-   confirming the walking route on Google Maps before publishing.
+   The three longer entries now carry Google's own walking distances rather
+   than straight-line ones. They had read "approx. 1.7 km" while the map,
+   which anyone can now open from the row itself, drew 2.1–2.6 km. Two
+   numbers on the same screen disagreeing is worse than either being
+   slightly off.
    ─────────────────────────────────────────────────────────────── */
 
 export const nearby = [
@@ -222,23 +224,28 @@ export const nearby = [
     lat: 13.0362625,
     lng: 77.5046094,
     /**
-     * Routed by name rather than coordinates so the map labels the
-     * destination "CHRIST (Deemed to be University)…" instead of dropping an
-     * unnamed pin. Only used where the name is unambiguous — the chains below
-     * stay on coordinates, because a text query for "Subway" is free to
-     * resolve to a branch five kilometres away.
+     * Every destination routes by an exact place name.
+     *
+     * Coordinates alone are not enough: Google's directions embed snaps a
+     * bare lat/lng to the nearest addressable business, so routing to the
+     * metro station's coordinates labelled the destination "ARPITHA N COFFEE
+     * SHOP" and drew a 2.1 km route to it. The names below are the ones
+     * Google's own listings use, so each resolves to the intended place.
+     *
+     * The coordinates are kept — they drive the zoom calculation, which needs
+     * a real distance rather than a string.
      */
     q: "CHRIST (Deemed to be University) Bangalore Yeshwanthpur Campus, Nalagadderanahalli, Peenya, Bengaluru, Karnataka 560073, India",
     primary: true,
   },
-  { label: "Subway", time: "5 min walk · 400 m", icon: "Sandwich", lat: 13.0339734, lng: 77.5029658 },
-  { label: "Vishal Mega Mart (supermarket)", time: "6 min walk · 450 m", icon: "ShoppingBasket", lat: 13.03352, lng: 77.5039 },
-  { label: "Life Pharmacy", time: "6 min walk · 500 m", icon: "Pill", lat: 13.033876, lng: 77.5034494 },
-  { label: "Ashwini Hospital", time: "7 min walk · 600 m", icon: "HeartPulse", lat: 13.03134, lng: 77.5056 },
-  { label: "KFC & Box8", time: "8 min walk · 700 m", icon: "Utensils", lat: 13.0340423, lng: 77.5040783 },
-  { label: "IKEA Nagasandra", time: "approx. 1.7 km", icon: "Store", lat: 13.04928, lng: 77.50035 },
-  { label: "Nagasandra Metro (Green Line)", time: "approx. 1.7 km", icon: "TrainFront", lat: 13.04795, lng: 77.50014 },
-  { label: "Dasarahalli Metro (Green Line)", time: "approx. 1.7 km", icon: "TrainFront", lat: 13.04326, lng: 77.51255 },
+  { label: "Subway", time: "5 min walk · 400 m", icon: "Sandwich", lat: 13.0339734, lng: 77.5029658, q: "Subway HMT Layout, Bengaluru" },
+  { label: "Vishal Mega Mart (supermarket)", time: "6 min walk · 450 m", icon: "ShoppingBasket", lat: 13.03352, lng: 77.5039, q: "Vishal Mega Mart, Andrahalli Main Road, Bengaluru" },
+  { label: "Life Pharmacy", time: "6 min walk · 500 m", icon: "Pill", lat: 13.033876, lng: 77.5034494, q: "Life care pharma, Nelagadaranahalli, Bengaluru" },
+  { label: "Ashwini Hospital", time: "7 min walk · 600 m", icon: "HeartPulse", lat: 13.03134, lng: 77.5056, q: "Ashwini Hospital, Nelagadaranahalli, Bengaluru" },
+  { label: "KFC & Box8", time: "8 min walk · 700 m", icon: "Utensils", lat: 13.0340423, lng: 77.5040783, q: "KFC, Andrahalli Main Road, Bengaluru" },
+  { label: "IKEA Nagasandra", time: "2.6 km walk", icon: "Store", lat: 13.04928, lng: 77.50035, q: "IKEA Nagasandra, Bengaluru" },
+  { label: "Nagasandra Metro (Green Line)", time: "2.1 km walk", icon: "TrainFront", lat: 13.04795, lng: 77.50014, q: "Nagasandra Metro Station, Bengaluru" },
+  { label: "Dasarahalli Metro (Green Line)", time: "2.5 km walk", icon: "TrainFront", lat: 13.04326, lng: 77.51255, q: "Dasarahalli Metro Station, Bengaluru" },
 ] as const;
 
 /* ─────────────────────────── Reviews ───────────────────────────
@@ -369,12 +376,29 @@ export function depositFor(room: { price: string }) {
 
 /**
  * Keyless walking-directions embed from the property to a nearby place.
- * Prefers a named query when the entry carries one, so the destination shows
- * its name on the map; otherwise routes by coordinates.
+ *
+ * The embed does not reliably frame the whole route on its own — a 1.7 km
+ * walk came out cropped at both ends — so the zoom is derived from the real
+ * straight-line distance between the two points. Short walks stay legible;
+ * longer ones pull back far enough to show both pins.
  */
 export function directionsEmbed(place: { lat: number; lng: number; q?: string }) {
   const dest = place.q ? encodeURIComponent(place.q) : `${place.lat},${place.lng}`;
-  return `https://maps.google.com/maps?saddr=${site.address.lat},${site.address.lng}&daddr=${dest}&dirflg=w&hl=en&output=embed`;
+  const from = { lat: Number(site.address.lat), lng: Number(site.address.lng) };
+
+  const R = 6371000;
+  const toRad = (d: number) => (d * Math.PI) / 180;
+  const dLat = toRad(place.lat - from.lat);
+  const dLng = toRad(place.lng - from.lng);
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(from.lat)) * Math.cos(toRad(place.lat)) * Math.sin(dLng / 2) ** 2;
+  const metres = 2 * R * Math.asin(Math.sqrt(a));
+
+  // Road routes wander, so allow well over the straight-line distance.
+  const zoom = metres < 500 ? 16 : metres < 1000 ? 15 : metres < 2000 ? 14 : 13;
+
+  return `https://maps.google.com/maps?saddr=${site.address.lat},${site.address.lng}&daddr=${dest}&dirflg=w&z=${zoom}&hl=en&output=embed`;
 }
 
 export function whatsappHref(message: string = site.contact.whatsappMessage) {
