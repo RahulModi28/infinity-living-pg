@@ -64,9 +64,7 @@ export const site = {
   },
 
   social: {
-    instagram: "[INSTAGRAM URL]",
-    facebook: "[FACEBOOK URL]",
-    youtube: "[YOUTUBE URL]",
+    instagram: "https://www.instagram.com/infinityspace4u/",
   },
 
   /** Set to false if meals are not provided — the Food section is removed entirely. */

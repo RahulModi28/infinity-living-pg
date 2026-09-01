@@ -40,6 +40,7 @@ export function localBusinessJsonLd() {
         }
       : {}),
     image: `${baseUrl()}/images/og.png`,
+    sameAs: [site.social.instagram],
     priceRange: "₹₹",
     areaServed: [
       { "@type": "Place", name: "Yeshwanthpur, Bengaluru" },

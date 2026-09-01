@@ -1,4 +1,4 @@
-import { Instagram, Facebook, Youtube, Mail, Phone, MapPin, MessageCircle } from "lucide-react";
+import { Instagram, Mail, Phone, MapPin, MessageCircle } from "lucide-react";
 import { site, whatsappHref } from "@/lib/site";
 import Logo from "./Logo";
 
@@ -11,11 +11,7 @@ const NAV = [
   { href: "#faq", label: "FAQ" },
 ];
 
-const SOCIAL = [
-  { href: site.social.instagram, label: "Instagram", icon: Instagram },
-  { href: site.social.facebook, label: "Facebook", icon: Facebook },
-  { href: site.social.youtube, label: "YouTube", icon: Youtube },
-];
+const SOCIAL = [{ href: site.social.instagram, label: "Instagram", icon: Instagram }];
 
 export default function Footer() {
   return (
@@ -29,24 +25,19 @@ export default function Footer() {
               Yeshwanthpur Campus. Furnished rooms, meals, Wi-Fi and a short walk to class.
             </p>
             <ul className="mt-7 flex gap-2.5">
-              {SOCIAL.map(({ href, label, icon: Icon }) => {
-                const placeholder = href.startsWith("[");
-                return (
-                  <li key={label}>
-                    <a
-                      href={placeholder ? "#enquire" : href}
-                      {...(placeholder ? {} : { target: "_blank", rel: "noopener noreferrer" })}
-                      aria-label={label}
-                      title={placeholder ? `Add the ${label} URL in src/lib/site.ts` : label}
-                      className={`grid size-11 place-items-center rounded-full border border-white/15 transition-colors duration-300 hover:border-white/45 hover:bg-white/10 ${
-                        placeholder ? "opacity-45" : ""
-                      }`}
-                    >
-                      <Icon className="size-[1.05rem]" aria-hidden="true" />
-                    </a>
-                  </li>
-                );
-              })}
+              {SOCIAL.map(({ href, label, icon: Icon }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="grid size-11 place-items-center rounded-full border border-white/15 transition-colors duration-300 hover:border-white/45 hover:bg-white/10"
+                  >
+                    <Icon className="size-[1.05rem]" aria-hidden="true" />
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
