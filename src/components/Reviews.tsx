@@ -1,5 +1,5 @@
 import { Star, Quote } from "lucide-react";
-import { reviews, site } from "@/lib/site";
+import { reviews } from "@/lib/site";
 import SectionHead from "./ui/SectionHead";
 import Reveal from "./ui/Reveal";
 
@@ -55,17 +55,6 @@ export default function Reviews() {
           intro="Short, honest and from the people who actually live here — students and the parents who dropped them off."
         />
 
-        {!site.reviewsAreReal && (
-          <Reveal>
-            <p className="mt-8 rounded-xl border border-clay/30 bg-clay/[0.07] px-4 py-3 text-[0.8125rem] leading-relaxed text-ink-2 [overflow-wrap:anywhere]">
-              <span className="t-label mr-2 text-clay">Placeholder</span>
-              The reviews below are illustrative development copy. Replace them with real,
-              permissioned reviews before launch — and set{" "}
-              <code className="rounded bg-ink/8 px-1">reviewsAreReal</code> to true to hide this
-              notice.
-            </p>
-          </Reveal>
-        )}
       </div>
 
       {/*

@@ -61,9 +61,6 @@ export const site = {
 
   /** Set to false if meals are not provided — the Food section is removed entirely. */
   foodAvailable: true,
-
-  /** Set to true only once real, verified Google/written reviews exist. */
-  reviewsAreReal: false,
 } as const;
 
 /* ───────────────────────────── Rooms ───────────────────────────── */
@@ -213,9 +210,16 @@ export const nearby = [
 ] as const;
 
 /* ─────────────────────────── Reviews ───────────────────────────
-   ⚠️  PLACEHOLDER COPY. These are illustrative only and are visibly
-   labelled in the UI while site.reviewsAreReal === false.
-   Replace with real, permissioned reviews before launch.
+   ⚠️⚠️  THESE ARE NOT REAL REVIEWS.  ⚠️⚠️
+
+   Illustrative copy written to design the section. Nothing on the page
+   marks them as placeholders any more, so they now read to a visitor as
+   genuine testimonials from real residents.
+
+   Replace every one of them with real, permissioned reviews before this
+   site goes live. Publishing invented testimonials as real is a consumer
+   protection problem, not a styling one — and if AggregateRating schema is
+   ever added on top of them it also breaks Google's review policies.
    ─────────────────────────────────────────────────────────────── */
 
 export const reviews = [
