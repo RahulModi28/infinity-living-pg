@@ -51,7 +51,7 @@ export default function Navbar() {
             className={`transition-[color,transform,font-size] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
               solid ? "text-ink text-[0.95rem]" : "text-white text-[1.05rem]"
             }`}
-            aria-label="Infinity Living — home"
+            aria-label="Infinity Space — home"
           >
             <Logo />
           </a>

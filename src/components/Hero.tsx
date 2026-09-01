@@ -125,7 +125,7 @@ export default function Hero() {
       <div data-h="img" className="absolute inset-0 -z-20 will-change-transform">
         <Image
           src="/images/hero.jpg"
-          alt="The common area at Infinity Living PG near Christ University Yeshwanthpur Campus, Bengaluru — lounge seating, snooker table and gym"
+          alt="The common area at Infinity Space PG near Christ University Yeshwanthpur Campus, Bengaluru — lounge seating, snooker table and gym"
           fill
           priority
           // Full-bleed background: one source at every width, so let the

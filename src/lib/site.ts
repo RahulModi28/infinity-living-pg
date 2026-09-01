@@ -13,7 +13,7 @@
 export const PLACEHOLDER = (label: string) => `[${label}]`;
 
 export const site = {
-  name: "Infinity Living",
+  name: "Infinity Space",
   tagline: "Premium student living near Christ University, Yeshwanthpur Campus",
   /** Used for canonical URLs, sitemap, OG tags. */
   url: "https://[YOUR-DOMAIN].com",
@@ -25,7 +25,7 @@ export const site = {
     phoneHref: "[PHONE NUMBER]",
     email: "[EMAIL ADDRESS]",
     whatsappMessage:
-      "Hi, I'm interested in a room at Infinity Living near Christ University Yeshwanthpur Campus. Could you share the available room options and pricing?",
+      "Hi, I'm interested in a room at Infinity Space near Christ University Yeshwanthpur Campus. Could you share the available room options and pricing?",
   },
 
   address: {
@@ -264,8 +264,8 @@ export const reviews = [
 
 export const faqs = [
   {
-    q: "How close is Infinity Living to Christ University Yeshwanthpur Campus?",
-    a: "Infinity Living is on Andrahalli Main Road, HMT Layout (560073) — the same pincode as the campus. It is about 850 m by road — roughly a 10 minute walk. Message us on WhatsApp and we'll share the exact pin.",
+    q: "How close is Infinity Space to Christ University Yeshwanthpur Campus?",
+    a: "Infinity Space is on Andrahalli Main Road, HMT Layout (560073) — the same pincode as the campus. It is about 850 m by road — roughly a 10 minute walk. Message us on WhatsApp and we'll share the exact pin.",
   },
   {
     q: "What is the monthly rent?",
@@ -329,7 +329,7 @@ export const isPlaceholder = (v: string) => /^\[.*\]$/.test(v.trim());
  * host is not a parseable URL. Fall back to a valid stand-in so builds,
  * sitemaps and OG tags keep working — swap site.url and this goes away.
  */
-export const FALLBACK_URL = "https://infinity-living.example.com";
+export const FALLBACK_URL = "https://infinity-space.example.com";
 
 export function baseUrl() {
   try {

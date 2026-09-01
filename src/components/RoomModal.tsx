@@ -58,7 +58,7 @@ export default function RoomModal({
               <Image
                 key={src}
                 src={src}
-                alt={`${room.name} room at Infinity Living — view ${idx + 1}`}
+                alt={`${room.name} room at Infinity Space — view ${idx + 1}`}
                 fill
                 sizes="(max-width: 768px) 100vw, 55vw"
                 className={`object-cover transition-opacity duration-500 ${
@@ -139,7 +139,7 @@ export default function RoomModal({
               </Button>
               <Button
                 href={whatsappHref(
-                  `Hi, I'm interested in the ${room.name} room at Infinity Living near Christ University Yeshwanthpur Campus. Is it available, and what is the rent?`
+                  `Hi, I'm interested in the ${room.name} room at Infinity Space near Christ University Yeshwanthpur Campus. Is it available, and what is the rent?`
                 )}
                 target="_blank"
                 rel="noopener noreferrer"

@@ -8,13 +8,13 @@ import SectionHead from "./ui/SectionHead";
 import Figure from "./ui/Figure";
 
 const SHOTS = [
-  { src: "/images/room-double.jpg", alt: "Double sharing room with two beds, study table and storage at Infinity Living PG, Yeshwanthpur", span: "" },
-  { src: "/images/entrance.jpg", alt: "The entrance at Infinity Living PG near Christ University Yeshwanthpur Campus, Bengaluru", span: "" },
-  { src: "/images/living-room.jpg", alt: "Shared living room with sofa seating at Infinity Living PG, Yeshwanthpur, Bengaluru", span: "" },
-  { src: "/images/gym.jpg", alt: "Gym at Infinity Living PG — treadmills, cross trainer, bench and weights", span: "" },
-  { src: "/images/bathroom.jpg", alt: "Attached bathroom at Infinity Living PG, Yeshwanthpur, Bengaluru", span: "" },
-  { src: "/images/hero.jpg", alt: "Common area with snooker table and lounge seating at Infinity Living PG, Yeshwanthpur", span: "" },
-  { src: "/images/entry-biometric.jpg", alt: "Biometric secure entry at Infinity Living PG, Yeshwanthpur", span: "" },
+  { src: "/images/room-double.jpg", alt: "Double sharing room with two beds, study table and storage at Infinity Space PG, Yeshwanthpur", span: "" },
+  { src: "/images/entrance.jpg", alt: "The entrance at Infinity Space PG near Christ University Yeshwanthpur Campus, Bengaluru", span: "" },
+  { src: "/images/living-room.jpg", alt: "Shared living room with sofa seating at Infinity Space PG, Yeshwanthpur, Bengaluru", span: "" },
+  { src: "/images/gym.jpg", alt: "Gym at Infinity Space PG — treadmills, cross trainer, bench and weights", span: "" },
+  { src: "/images/bathroom.jpg", alt: "Attached bathroom at Infinity Space PG, Yeshwanthpur, Bengaluru", span: "" },
+  { src: "/images/hero.jpg", alt: "Common area with snooker table and lounge seating at Infinity Space PG, Yeshwanthpur", span: "" },
+  { src: "/images/entry-biometric.jpg", alt: "Biometric secure entry at Infinity Space PG, Yeshwanthpur", span: "" },
 ];
 
 export default function Gallery() {

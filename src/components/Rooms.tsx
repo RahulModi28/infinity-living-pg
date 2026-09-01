@@ -20,7 +20,7 @@ function RoomCard({ room, onOpen }: { room: Room; onOpen: () => void }) {
         <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-moss-2 transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1.5">
           <Image
             src={room.image}
-            alt={`${room.name} room — ${room.occupancy} — at Infinity Living PG, Yeshwanthpur`}
+            alt={`${room.name} room — ${room.occupancy} — at Infinity Space PG, Yeshwanthpur`}
             fill
             sizes="(max-width: 640px) 82vw, (max-width: 1024px) 46vw, 31vw"
             className="object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"

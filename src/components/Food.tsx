@@ -11,11 +11,11 @@ const MEALS = [
 ];
 
 const SHOTS = [
-  { src: "/images/food-1.svg", alt: "Breakfast served at Infinity Living PG, Yeshwanthpur" },
-  { src: "/images/food-2.svg", alt: "Lunch thali served at Infinity Living PG near Christ University" },
-  { src: "/images/food-3.svg", alt: "Dinner spread at Infinity Living student accommodation, Bengaluru" },
-  { src: "/images/food-4.svg", alt: "Clean kitchen at Infinity Living PG, Yeshwanthpur" },
-  { src: "/images/food-5.svg", alt: "Dining area at Infinity Living PG, Yeshwanthpur, Bengaluru" },
+  { src: "/images/food-1.svg", alt: "Breakfast served at Infinity Space PG, Yeshwanthpur" },
+  { src: "/images/food-2.svg", alt: "Lunch thali served at Infinity Space PG near Christ University" },
+  { src: "/images/food-3.svg", alt: "Dinner spread at Infinity Space student accommodation, Bengaluru" },
+  { src: "/images/food-4.svg", alt: "Clean kitchen at Infinity Space PG, Yeshwanthpur" },
+  { src: "/images/food-5.svg", alt: "Dining area at Infinity Space PG, Yeshwanthpur, Bengaluru" },
 ];
 
 export default function Food() {

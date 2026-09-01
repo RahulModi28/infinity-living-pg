@@ -27,7 +27,7 @@ export default function Location() {
               {site.address.mapsEmbedUrl ? (
                 <iframe
                   src={site.address.mapsEmbedUrl}
-                  title="Map showing Infinity Living PG near Christ University Yeshwanthpur Campus, Bengaluru"
+                  title="Map showing Infinity Space PG near Christ University Yeshwanthpur Campus, Bengaluru"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   className="absolute inset-0 size-full border-0"

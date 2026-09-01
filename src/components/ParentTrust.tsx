@@ -23,7 +23,7 @@ export default function ParentTrust() {
       <div className="shell grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:items-center lg:gap-16">
         <Figure
           src="/images/entrance.jpg"
-          alt="The entrance at Infinity Living PG near Christ University Yeshwanthpur Campus, Bengaluru"
+          alt="The entrance at Infinity Space PG near Christ University Yeshwanthpur Campus, Bengaluru"
           className="aspect-[4/5] rounded-[1.5rem]"
           sizes="(max-width: 1024px) 100vw, 42vw"
         />

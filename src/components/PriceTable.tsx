@@ -76,7 +76,7 @@ export default function PriceTable() {
         <div className="hidden sm:block">
           <table className="w-full border-collapse text-left">
             <caption className="sr-only">
-              Monthly rent and inclusions by room type at Infinity Living, Yeshwanthpur
+              Monthly rent and inclusions by room type at Infinity Space, Yeshwanthpur
             </caption>
             <thead>
               <tr className="border-b border-ink/12">

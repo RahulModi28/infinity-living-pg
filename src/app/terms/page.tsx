@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Terms",
-  description: "Terms of use for the Infinity Living website.",
+  description: "Terms of use for the Infinity Space website.",
   robots: { index: false, follow: true },
 };
 

@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "How Infinity Living handles the information you share when you enquire about a room.",
+  description: "How Infinity Space handles the information you share when you enquire about a room.",
   robots: { index: false, follow: true },
 };
 
@@ -25,7 +25,7 @@ export default function Privacy() {
               accommodation requirements.
             </p>
             <p>
-              We use this only to respond to your enquiry about a room at Infinity Living. We do not
+              We use this only to respond to your enquiry about a room at Infinity Space. We do not
               sell your details to brokers, listing platforms or third parties.
             </p>
             <p>[RETENTION PERIOD — CONFIRM]. [DATA CONTROLLER NAME & ADDRESS — CONFIRM].</p>

@@ -29,8 +29,8 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl()),
   title: {
-    default: "PG near Christ University Yeshwanthpur Campus | Infinity Living",
-    template: "%s | Infinity Living",
+    default: "PG near Christ University Yeshwanthpur Campus | Infinity Space",
+    template: "%s | Infinity Space",
   },
   description:
     "Furnished PG in Yeshwanthpur near Christ University Campus, Bengaluru. Single, double & triple sharing rooms with Wi-Fi, meals, housekeeping and 24/7 security.",
@@ -49,14 +49,14 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: "/",
     siteName: site.name,
-    title: "PG near Christ University Yeshwanthpur Campus | Infinity Living",
+    title: "PG near Christ University Yeshwanthpur Campus | Infinity Space",
     description:
       "Premium student living in Yeshwanthpur, Bengaluru — furnished rooms, meals, Wi-Fi and a short walk to Christ University Yeshwanthpur Campus.",
-    images: [{ url: "/images/og.png", width: 1200, height: 630, type: "image/png", alt: "Infinity Living — PG near Christ University Yeshwanthpur Campus" }],
+    images: [{ url: "/images/og.png", width: 1200, height: 630, type: "image/png", alt: "Infinity Space — PG near Christ University Yeshwanthpur Campus" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "PG near Christ University Yeshwanthpur Campus | Infinity Living",
+    title: "PG near Christ University Yeshwanthpur Campus | Infinity Space",
     description:
       "Furnished PG in Yeshwanthpur, Bengaluru — rooms, meals, Wi-Fi and 24/7 security, minutes from campus.",
     images: ["/images/og.png"],

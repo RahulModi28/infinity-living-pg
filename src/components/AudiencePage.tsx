@@ -28,7 +28,7 @@ export default function AudiencePage({ a }: { a: Audience }) {
               href="/"
               className="link-u inline-flex items-center gap-2 text-[0.875rem] text-white/60 hover:text-white"
             >
-              <ArrowLeft className="size-4" aria-hidden="true" /> Infinity Living
+              <ArrowLeft className="size-4" aria-hidden="true" /> Infinity Space
             </a>
             <p className="t-label mt-6 text-clay">{a.eyebrow}</p>
             <SplitText
@@ -42,7 +42,7 @@ export default function AudiencePage({ a }: { a: Audience }) {
               <div className="mt-8 flex flex-wrap gap-3">
                 <Button
                   href={whatsappHref(
-                    `Hi, I'm interested in the ${a.h1.split(",")[0].toLowerCase()} at Infinity Living. Could you share availability and pricing?`
+                    `Hi, I'm interested in the ${a.h1.split(",")[0].toLowerCase()} at Infinity Space. Could you share availability and pricing?`
                   )}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -98,7 +98,7 @@ export default function AudiencePage({ a }: { a: Audience }) {
               </div>
               <Figure
                 src={["/images/room-double.jpg", "/images/entrance.jpg", "/images/living-room.jpg"][i % 3]}
-                alt={`${s.h2} — Infinity Living, Yeshwanthpur, Bengaluru`}
+                alt={`${s.h2} — Infinity Space, Yeshwanthpur, Bengaluru`}
                 className="aspect-[4/3] rounded-[1.5rem] lg:aspect-[4/5]"
                 sizes="(max-width: 1024px) 100vw, 45vw"
               />

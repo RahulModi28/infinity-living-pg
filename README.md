@@ -1,6 +1,6 @@
-# Infinity Living
+# Infinity Space
 
-Marketing site for **Infinity Living** — a PG / student accommodation in
+Marketing site for **Infinity Space** — a PG / student accommodation in
 Yeshwanthpur, Bengaluru, near Christ University Yeshwanthpur Campus.
 
 Next.js 15 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · GSAP +

@@ -10,7 +10,7 @@ export default function Logo({ className = "" }: { className?: string }) {
         />
       </svg>
       <span className="font-display text-[1.05em] font-semibold tracking-[-0.02em]">
-        Infinity Living
+        Infinity Space
       </span>
     </span>
   );
