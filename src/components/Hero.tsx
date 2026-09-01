@@ -115,7 +115,7 @@ export default function Hero() {
           className="t-label inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 backdrop-blur-md"
         >
           <MapPin className="size-3.5" aria-hidden="true" />
-          PG near Christ University · Yeshwanthpur, Bengaluru
+          Yeshwanthpur, Bengaluru
         </p>
 
         <h1 className="t-hero mt-6 max-w-[16ch] font-medium">
@@ -129,12 +129,13 @@ export default function Hero() {
           ))}
         </h1>
 
+        {/* Carries the head keyword in prose rather than as a tag — the badge
+            above states the location once, this states what the place is. */}
         <p data-h="sub" className="t-sub mt-7 max-w-[46ch] text-white/78">
-          Premium student living near{" "}
           <strong className="font-medium text-white">
-            Christ University, Yeshwanthpur Campus
-          </strong>
-          . Furnished rooms, real Wi-Fi, meals and a short walk to class.
+            A PG near Christ University, Yeshwanthpur Campus
+          </strong>{" "}
+          &mdash; furnished rooms, real Wi-Fi, meals and a short walk to class.
         </p>
 
         <div className="mt-9 flex flex-wrap items-center gap-3">
