@@ -296,7 +296,7 @@ export const faqs = [
   },
   {
     q: "Is there a security deposit?",
-    a: "Yes — two months' rent, paid on move-in: ₹40,000 for single sharing, ₹30,000 for double. It isn't money you lose. It's adjusted against your rent for April and May, so you pay no rent in those two months. If you move out before April: [CONFIRM].",
+    a: "Yes — two months' rent, paid on move-in: ₹40,000 for single sharing, ₹30,000 for double. It isn't money you lose. It's adjusted against your rent for April and May, so you pay no rent in those two months.",
   },
   {
     q: "What is the minimum stay?",
