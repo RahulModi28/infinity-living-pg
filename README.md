@@ -53,43 +53,68 @@ Nothing loads while they're unset, so no consent banner is needed yet. Every
 contact route is tagged `data-cta="call|whatsapp|enquire"` and tracked
 automatically — see `src/components/Analytics.tsx`.
 
-### Storing form enquiries
+### Where leads are stored
 
-Submissions POST to `/api/enquiry`, which forwards them to
-`ENQUIRY_WEBHOOK_URL` — a Google Apps Script web app bound to a spreadsheet.
-A sheet rather than a database on purpose: these get read on a phone, sorted
-and counted, and a database would need an admin panel built purely to read it.
+Both the enquiry form and the WhatsApp gate POST to `/api/enquiry`, which
+forwards to `ENQUIRY_WEBHOOK_URL` — a Google Apps Script web app bound to one
+spreadsheet. A sheet rather than a database on purpose: these get read on a
+phone, sorted and counted, and a database would need an admin panel built
+purely to read it.
+
+The two sources land in **separate tabs**, because they are different things.
+A form enquiry carries a room type and a move-in date; a WhatsApp lead is a
+name and a number captured on the way out. Mixing them means every WhatsApp
+row has five empty columns.
+
+| Tab | Filled by | Columns |
+|---|---|---|
+| `Enquiries` | the enquiry form | Timestamp, Name, Phone, Email, Room type, Move-in, Message |
+| `WhatsApp Contacts` | the WhatsApp gate | Timestamp, Name, Phone |
 
 **Setup, about ten minutes:**
 
-1. Create a Google Sheet. First row headers:
-   `Timestamp | Name | Phone | Email | Room type | Move-in | Message | Source`
-
-   `Source` is `form` or `whatsapp` — leads from the enquiry form carry every
-   field, leads captured by the WhatsApp gate carry only name and phone.
+1. Create one Google Sheet. Don't add tabs or headers — the script creates
+   both on the first submission of each kind.
 2. **Extensions → Apps Script**, replace the contents with:
 
    ```js
    function doPost(e) {
      const d = JSON.parse(e.postData.contents);
-     SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().appendRow([
-       new Date(d.at), d.name, "'" + d.phone, d.email,
-       d.roomType, d.moveIn, d.message, d.source,
-     ]);
+     const isWhatsApp = d.source === 'whatsapp';
+     const name = isWhatsApp ? 'WhatsApp Contacts' : 'Enquiries';
+
+     const ss = SpreadsheetApp.getActiveSpreadsheet();
+     const sheet = ss.getSheetByName(name) || ss.insertSheet(name);
+
+     if (sheet.getLastRow() === 0) {
+       sheet.appendRow(isWhatsApp
+         ? ['Timestamp', 'Name', 'Phone']
+         : ['Timestamp', 'Name', 'Phone', 'Email', 'Room type', 'Move-in', 'Message']);
+       sheet.setFrozenRows(1);
+     }
+
+     // The apostrophe forces Sheets to treat the number as text — without it
+     // a 10-digit mobile becomes scientific notation or loses a leading digit.
+     sheet.appendRow(isWhatsApp
+       ? [new Date(d.at), d.name, "'" + d.phone]
+       : [new Date(d.at), d.name, "'" + d.phone, d.email, d.roomType, d.moveIn, d.message]);
+
      return ContentService
        .createTextOutput(JSON.stringify({ ok: true }))
        .setMimeType(ContentService.MimeType.JSON);
    }
    ```
 
-   The apostrophe before `d.phone` keeps Sheets from mangling the number into
-   scientific notation or stripping a leading digit.
-
 3. **Deploy → New deployment → Web app.** Execute as *Me*, access
    *Anyone*. Copy the `/exec` URL.
 4. Set it as `ENQUIRY_WEBHOOK_URL` in Vercel (Settings → Environment
    Variables) and in `.env.local` for local testing. No `NEXT_PUBLIC`
    prefix — this URL must not reach the browser.
+
+If you would rather the WhatsApp contacts lived in a wholly separate
+spreadsheet, swap `SpreadsheetApp.getActiveSpreadsheet()` for
+`SpreadsheetApp.openById('<other-sheet-id>')` inside the `isWhatsApp` branch.
+One deployment either way.
 
 **Failure behaviour is deliberate.** If the variable is missing in
 production, or the sheet is unreachable, the endpoint returns an error rather
@@ -98,6 +123,11 @@ instead" state. Showing a success animation to someone whose enquiry went
 nowhere is worse than showing an error, because they stop waiting for a reply
 that is never coming. The full lead is also written to the platform logs on
 failure, so it is recoverable.
+
+**Notification is a separate problem.** A sheet stores; it does not tell
+anyone. Until something emails or messages you on submit, someone has to
+remember to open the sheet. Resend's free tier covers this in about fifteen
+lines if you want it.
 
 ### The WhatsApp gate
 

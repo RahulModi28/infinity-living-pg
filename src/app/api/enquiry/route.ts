@@ -8,6 +8,11 @@ import { NextResponse } from "next/server";
  * chosen over a database deliberately: these get read on a phone, sorted and
  * counted, and a database would need an admin panel built purely to read it.
  *
+ * `source` decides which tab the row lands in: form enquiries go to
+ * "Enquiries" with a room type and move-in date, WhatsApp gate captures go to
+ * "WhatsApp Contacts" with just a name and number. Same endpoint, same
+ * webhook — the script does the routing.
+ *
  * The variable is server-side only — no NEXT_PUBLIC prefix — so the URL is
  * never exposed to the browser.
  */
@@ -20,7 +25,7 @@ type Lead = {
   moveIn: string;
   message: string;
   at: string;
-  /** Which route produced it — the enquiry form, or the WhatsApp gate. */
+  /** Which route produced it, and which tab it is filed under. */
   source: "form" | "whatsapp";
 };
 
