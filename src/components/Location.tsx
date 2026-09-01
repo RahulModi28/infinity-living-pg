@@ -1,8 +1,8 @@
 "use client";
 
 import {
-  GraduationCap, TrainFront, Train, Coffee, ShoppingBasket, HeartPulse,
-  Store, Landmark, Navigation, type LucideIcon,
+  GraduationCap, TrainFront, ShoppingBasket, HeartPulse, Store,
+  Pill, Sandwich, Utensils, Navigation, type LucideIcon,
 } from "lucide-react";
 import { nearby, site } from "@/lib/site";
 import SectionHead from "./ui/SectionHead";
@@ -10,7 +10,7 @@ import Reveal from "./ui/Reveal";
 import Button from "./ui/Button";
 
 const ICONS: Record<string, LucideIcon> = {
-  GraduationCap, TrainFront, Train, Coffee, ShoppingBasket, HeartPulse, Store, Landmark,
+  GraduationCap, TrainFront, ShoppingBasket, HeartPulse, Store, Pill, Sandwich, Utensils,
 };
 
 export default function Location() {
@@ -55,7 +55,7 @@ export default function Location() {
 
             <Reveal stagger className="mt-10 divide-y divide-ink/10 border-y border-ink/10">
               {nearby.map((n) => {
-                const Icon = ICONS[n.icon] ?? Landmark;
+                const Icon = ICONS[n.icon] ?? Store;
                 const primary = "primary" in n && n.primary;
                 return (
                   <div
@@ -88,9 +88,8 @@ export default function Location() {
             <Reveal delay={0.1}>
               <p className="mt-5 text-[0.8125rem] leading-relaxed text-mute">
                 Distances are measured by road from the property, not estimated. Walking times
-                assume 5 km/h and are approximate. The two entries still marked{" "}
-                <span className="whitespace-nowrap">[CONFIRM]</span> are ones we haven&apos;t
-                verified yet — we&apos;d rather leave them blank than guess.
+                assume 5 km/h and are approximate — the metro figures in particular are worth
+                checking against your own route, since Tumkur Road has few crossings.
               </p>
 
               <div className="mt-7 flex flex-wrap gap-3">

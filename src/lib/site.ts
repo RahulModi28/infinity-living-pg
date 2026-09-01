@@ -178,29 +178,33 @@ export const amenityGroups = [
    estimated. Walking times are derived from road distance at 5 km/h
    and are stated as approximate.
 
-   ⚠️  Two caveats:
-   1. The metro/IKEA figures are straight-line; the vehicle route is
-      longer because Tumkur Road has few crossings. Worth confirming
-      the walking route on Google Maps before publishing.
-   2. OpenStreetMap coverage of small Indian businesses is patchy, so
-      the nearest pharmacy/café could not be established reliably and
-      is left as a placeholder.
+   The pharmacy and the food places came from the owner, who knows the
+   street better than OpenStreetMap does — OSM has none of them mapped,
+   which is why they sat unconfirmed until now. Their walking times are
+   derived from the supplied distances at the same 5 km/h as the rest.
+
+   ⚠️  One caveat left: the metro/IKEA figures are straight-line; the
+   vehicle route is longer because Tumkur Road has few crossings. Worth
+   confirming the walking route on Google Maps before publishing.
    ─────────────────────────────────────────────────────────────── */
 
 export const nearby = [
+  // Campus first regardless of distance — it's the reason anyone is reading
+  // this list. Everything after it runs nearest to furthest.
   {
     label: "Christ University — Yeshwanthpur Campus",
     time: "10 min walk · 850 m",
     icon: "GraduationCap",
     primary: true,
   },
+  { label: "Subway", time: "5 min walk · 400 m", icon: "Sandwich" },
   { label: "Vishal Mega Mart (supermarket)", time: "6 min walk · 450 m", icon: "ShoppingBasket" },
+  { label: "Life Pharmacy", time: "6 min walk · 500 m", icon: "Pill" },
   { label: "Ashwini Hospital", time: "7 min walk · 600 m", icon: "HeartPulse" },
+  { label: "KFC & Box8", time: "8 min walk · 700 m", icon: "Utensils" },
   { label: "IKEA Nagasandra", time: "approx. 1.7 km", icon: "Store" },
   { label: "Nagasandra Metro (Green Line)", time: "approx. 1.7 km", icon: "TrainFront" },
   { label: "Dasarahalli Metro (Green Line)", time: "approx. 1.7 km", icon: "TrainFront" },
-  { label: "Pharmacy", time: "[NEAREST PHARMACY — CONFIRM]", icon: "Landmark" },
-  { label: "Restaurants & cafés", time: "[CONFIRM]", icon: "Coffee" },
 ] as const;
 
 /* ─────────────────────────── Reviews ───────────────────────────

@@ -52,6 +52,7 @@ export const audiences: Record<"gents", Audience> = {
           "Dasarahalli Metro (Green Line) — approx. 1.7 km",
           "IKEA Nagasandra — approx. 1.7 km",
           "Vishal Mega Mart supermarket — 450 m, about a 6 minute walk",
+          "Subway, KFC and Box8 all within a 10 minute walk",
         ],
       },
       {
