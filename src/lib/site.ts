@@ -221,6 +221,14 @@ export const nearby = [
     icon: "GraduationCap",
     lat: 13.0362625,
     lng: 77.5046094,
+    /**
+     * Routed by name rather than coordinates so the map labels the
+     * destination "CHRIST (Deemed to be University)…" instead of dropping an
+     * unnamed pin. Only used where the name is unambiguous — the chains below
+     * stay on coordinates, because a text query for "Subway" is free to
+     * resolve to a branch five kilometres away.
+     */
+    q: "CHRIST (Deemed to be University) Bangalore Yeshwanthpur Campus, Nalagadderanahalli, Peenya, Bengaluru, Karnataka 560073, India",
     primary: true,
   },
   { label: "Subway", time: "5 min walk · 400 m", icon: "Sandwich", lat: 13.0339734, lng: 77.5029658 },
@@ -359,9 +367,14 @@ export function depositFor(room: { price: string }) {
   return (n * DEPOSIT_MONTHS).toLocaleString("en-IN");
 }
 
-/** Keyless walking-directions embed from the property to a nearby pin. */
-export function directionsEmbed(lat: number, lng: number) {
-  return `https://maps.google.com/maps?saddr=${site.address.lat},${site.address.lng}&daddr=${lat},${lng}&dirflg=w&hl=en&output=embed`;
+/**
+ * Keyless walking-directions embed from the property to a nearby place.
+ * Prefers a named query when the entry carries one, so the destination shows
+ * its name on the map; otherwise routes by coordinates.
+ */
+export function directionsEmbed(place: { lat: number; lng: number; q?: string }) {
+  const dest = place.q ? encodeURIComponent(place.q) : `${place.lat},${place.lng}`;
+  return `https://maps.google.com/maps?saddr=${site.address.lat},${site.address.lng}&daddr=${dest}&dirflg=w&hl=en&output=embed`;
 }
 
 export function whatsappHref(message: string = site.contact.whatsappMessage) {

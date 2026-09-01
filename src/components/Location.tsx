@@ -32,7 +32,7 @@ export default function Location() {
                   key={routeTo ? routeTo.label : "property"}
                   src={
                     routeTo
-                      ? directionsEmbed(routeTo.lat, routeTo.lng)
+                      ? directionsEmbed(routeTo)
                       : site.address.mapsEmbedUrl
                   }
                   title={
