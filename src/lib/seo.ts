@@ -56,7 +56,7 @@ export function localBusinessJsonLd() {
      */
     amenityFeature: [
       ...amenityGroups.flatMap((g) => g.items.filter((i) => !i.includes("["))),
-      ...(site.foodAvailable ? ["Four meals a day, cooked on site"] : []),
+      ...(site.foodAvailable ? ["Four meals a day cooked on site (Mon–Fri)"] : []),
     ].map((n) => ({ "@type": "LocationFeatureSpecification", name: n, value: true })),
     nearbyAttraction: {
       "@type": "CollegeOrUniversity",

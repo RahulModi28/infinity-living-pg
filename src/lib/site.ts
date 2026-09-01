@@ -315,15 +315,15 @@ export const faqs = [
   },
   {
     q: "What is the monthly rent?",
-    a: "₹20,000 a month for single sharing, and ₹15,000 per person a month for double sharing. Electricity and all four meals are included — the rent is the rent.",
+    a: "₹20,000 a month for single sharing, and ₹15,000 per person a month for double sharing. Electricity and meals are included — the rent is the rent.",
   },
   {
     q: "What is included in the rent?",
-    a: "The furnished room, electricity, all four meals, Wi-Fi, housekeeping and laundry. The security deposit is separate, paid once on move-in, and adjusted against your April and May rent.",
+    a: "The furnished room, electricity, meals, Wi-Fi, housekeeping and laundry. The security deposit is separate, paid once on move-in, and adjusted against your April and May rent.",
   },
   {
     q: "Is food included?",
-    a: "Yes, and it is included in the rent — not charged on top. Four meals a day, cooked on site: breakfast, lunch, evening snacks and dinner.",
+    a: "Yes, and it is included in the rent — not charged on top. Four meals a day Monday to Friday, cooked on site: breakfast, lunch, evening snacks and dinner. On Saturday we serve breakfast and lunch only — the kitchen is closed in the evening. Sunday is back to full, with chicken and paneer biryani at lunch and chole bhature at night.",
   },
   {
     q: "Is Wi-Fi available?",
@@ -424,3 +424,75 @@ export function baseUrl() {
     return FALLBACK_URL;
   }
 }
+
+/**
+ * The actual weekly menu, as run by the kitchen.
+ *
+ * Published in full rather than summarised as "rotating home-style food",
+ * which is what every competing listing says and which tells nobody
+ * anything. A student comparing four PGs can compare this; they cannot
+ * compare four identical claims.
+ *
+ * Saturday evening is deliberately blank — snacks and dinner are not served,
+ * and saying so plainly is better than being found out in week one.
+ */
+export const weeklyMenu = [
+  {
+    day: "Monday",
+    breakfast: "Aloo paratha",
+    lunch: "Aloo jeera with moong dal",
+    snack: "Momos with chutney",
+    dinner: "Pav bhaji",
+  },
+  {
+    day: "Tuesday",
+    breakfast: "Besan chilla with chutney",
+    lunch: "Soya chilli with chutney",
+    snack: "Chilli potato fingers",
+    dinner: "Palak paneer with bhindi masala",
+  },
+  {
+    day: "Wednesday",
+    breakfast: "Masala dosa with sambar and chutney",
+    lunch: "Urad dal with aloo masala",
+    snack: "Fruit salad",
+    dinner: "Kadhai chicken and paneer butter masala, with sweets",
+  },
+  {
+    day: "Thursday",
+    breakfast: "Veg sandwich",
+    lunch: "Veg kofta curry",
+    snack: "Samosas",
+    dinner: "Fried rice with manchurian",
+  },
+  {
+    day: "Friday",
+    breakfast: "White sauce pasta",
+    lunch: "Dal makhani with patta gobi",
+    snack: "Vada pav",
+    dinner: "Chapati with vegetable kurma",
+  },
+  {
+    day: "Saturday",
+    breakfast: "Banana with peanut butter bread",
+    lunch: "Rajma with chawal and roti",
+    snack: null,
+    dinner: null,
+  },
+  {
+    day: "Sunday",
+    breakfast: "Noodles",
+    lunch: "Chicken and paneer biryani with raita",
+    snack: "Tea",
+    dinner: "Chole bhature with onion salad, and kheer",
+  },
+] as const;
+
+/** Breakfast moves half an hour earlier on Saturday. */
+export const mealTimes = {
+  breakfast: "7:45 am",
+  breakfastSaturday: "7:30 am",
+  lunch: "12:00 - 2:00 pm",
+  snack: "4:00 - 6:00 pm",
+  dinner: "8:00 - 9:30 pm",
+};

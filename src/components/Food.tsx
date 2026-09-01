@@ -1,4 +1,5 @@
 import { Sunrise, Sun, CupSoda, Moon, SprayCan } from "lucide-react";
+import { weeklyMenu, mealTimes } from "@/lib/site";
 import Figure from "./ui/Figure";
 import Reveal from "./ui/Reveal";
 import SectionHead from "./ui/SectionHead";
@@ -14,32 +15,32 @@ const MEALS = [
   {
     icon: Sunrise,
     name: "Breakfast",
-    time: "7:00 – 10:00 am",
-    menu: "[SAMPLE MENU — e.g. dosa, idli, poha, upma, tea/coffee]",
+    time: `${mealTimes.breakfast} · ${mealTimes.breakfastSaturday} on Saturday`,
+    menu: "Masala dosa, aloo paratha, besan chilla, pasta — it changes daily.",
     src: "/images/food-breakfast.jpg",
     alt: "Breakfast at Infinity Space PG, Yeshwanthpur — masala dosa with sambar and coconut chutney",
   },
   {
     icon: Sun,
     name: "Lunch",
-    time: "12:00 – 2:00 pm",
-    menu: "[SAMPLE MENU — e.g. rice, roti, dal, two sabzis, curd]",
+    time: mealTimes.lunch,
+    menu: "Dal makhani, rajma chawal, veg kofta — and biryani on Sunday.",
     src: "/images/food-lunch.jpg",
     alt: "Lunch at Infinity Space PG near Christ University Yeshwanthpur — dal, rice, roti, bhindi and cabbage sabzi",
   },
   {
     icon: CupSoda,
     name: "Evening snacks",
-    time: "4:00 – 6:00 pm",
-    menu: "[SAMPLE MENU — CONFIRM what's served and how often]",
+    time: mealTimes.snack,
+    menu: "Momos, samosas, vada pav, chilli potato. Not served on Saturday.",
     src: "/images/food-snack.jpg",
     alt: "Evening snack served at Infinity Space PG, Yeshwanthpur, Bengaluru",
   },
   {
     icon: Moon,
     name: "Dinner",
-    time: "8:00 – 9:30 pm",
-    menu: "[SAMPLE MENU — CONFIRM, and whether there is a non-veg day]",
+    time: mealTimes.dinner,
+    menu: "Pav bhaji, palak paneer, chole bhature. Chicken on Wednesday. Not served on Saturday.",
     src: "/images/food-dinner.jpg",
     alt: "Dinner at Infinity Space PG, Yeshwanthpur — curry with naan and rice",
   },
@@ -51,8 +52,8 @@ export default function Food() {
       <div className="shell">
         <SectionHead
           eyebrow="Food"
-          title="Four meals a day, made in-house."
-          intro="Breakfast, lunch, evening snacks and dinner, on a rotating menu, in a dining area you don't have to leave the building for."
+          title="Four meals a day, Monday to Friday."
+          intro="Breakfast, lunch, evening snacks and dinner, cooked on site and eaten a floor above the noise. Saturday evening the kitchen rests — and Sunday makes up for it."
         />
 
         {/* Swipeable on phones, grid from tablet up — same pattern as Rooms. */}
@@ -81,6 +82,55 @@ export default function Food() {
           ))}
         </div>
 
+
+        {/* The whole week, published. Every competing listing says "rotating
+            home-style food", which is unfalsifiable and therefore worthless
+            to someone comparing four PGs. Days run down rather than across:
+            four columns fit a phone, seven do not. */}
+        <Reveal>
+          <div className="mt-14">
+            <h3 className="font-display text-xl tracking-[-0.02em]">This week, in full</h3>
+            <p className="mt-2 max-w-2xl text-[0.875rem] leading-relaxed text-mute">
+              The kitchen&apos;s actual menu — not a sample. It rotates weekly, so the dishes move
+              around, but this is the shape of every week.
+            </p>
+
+            <div className="no-bar mt-6 overflow-x-auto rounded-[1.25rem] border border-ink/10">
+              <table className="w-full min-w-[44rem] border-collapse text-left">
+                <thead>
+                  <tr className="bg-moss-2 text-white">
+                    <th scope="col" className="t-label px-4 py-3 font-medium">Day</th>
+                    <th scope="col" className="t-label px-4 py-3 font-medium">Breakfast</th>
+                    <th scope="col" className="t-label px-4 py-3 font-medium">Lunch</th>
+                    <th scope="col" className="t-label px-4 py-3 font-medium">Snacks</th>
+                    <th scope="col" className="t-label px-4 py-3 font-medium">Dinner</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-ink/10">
+                  {weeklyMenu.map((d) => (
+                    <tr key={d.day} className="align-top odd:bg-white/40">
+                      <th scope="row" className="whitespace-nowrap px-4 py-4 text-[0.875rem] font-medium text-ink">
+                        {d.day}
+                      </th>
+                      {[d.breakfast, d.lunch, d.snack, d.dinner].map((dish, i) => (
+                        <td key={i} className="px-4 py-4 text-[0.875rem] leading-relaxed text-ink-2">
+                          {dish ?? <span className="text-mute/60">&mdash;</span>}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <p className="mt-3 text-[0.8125rem] leading-relaxed text-mute">
+              Saturday evening the kitchen is closed &mdash; no snacks, no dinner. Everything else
+              runs seven days. Chicken appears twice a week; there is always a vegetarian dish
+              alongside it.
+            </p>
+          </div>
+        </Reveal>
+
         <Reveal>
           <figure className="mt-12">
             <Figure
@@ -103,8 +153,7 @@ export default function Food() {
             <SprayCan className="mt-[0.15em] size-4 shrink-0 text-moss" aria-hidden="true" />
             <span>
               Cooked on site in our own kitchen. Kitchen hygiene and FSSAI details:{" "}
-              <span className="whitespace-nowrap">[CONFIRM]</span>. Menus rotate through the week —
-              ask us for the current one.
+              <span className="whitespace-nowrap">[CONFIRM]</span>.
             </span>
           </p>
         </Reveal>

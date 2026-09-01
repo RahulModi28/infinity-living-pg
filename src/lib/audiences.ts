@@ -69,11 +69,11 @@ export const audiences: Record<"gents", Audience> = {
     faqs: [
       {
         q: "What is the rent for a gents PG in Yeshwanthpur?",
-        a: "₹20,000 a month for single sharing, ₹15,000 per person for double sharing. Electricity and four meals a day are included in that.",
+        a: "₹20,000 a month for single sharing, ₹15,000 per person for double sharing. Electricity and meals are included in that.",
       },
       {
         q: "Is food included for the gents PG?",
-        a: "Yes, and included in the rent rather than charged on top — four meals a day, cooked on site.",
+        a: "Yes, and included in the rent rather than charged on top — four meals a day Monday to Friday, cooked on site. Saturday is breakfast and lunch only.",
       },
       {
         q: "Do you take working professionals as well as students?",

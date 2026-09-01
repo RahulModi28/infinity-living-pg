@@ -5,7 +5,7 @@ const ITEMS = [
   { icon: GraduationCap, t: "Walk to campus", s: "Christ University, Yeshwanthpur" },
   { icon: BedDouble, t: "Move-in ready", s: "Bed, wardrobe, desk — done" },
   { icon: Wifi, t: "Wi-Fi that holds", s: "Through submission week" },
-  { icon: UtensilsCrossed, t: "Four meals a day", s: "Cooked on site, not ordered in" },
+  { icon: UtensilsCrossed, t: "Four meals a day, Mon–Fri", s: "Cooked on site, not ordered in" },
   { icon: ShieldCheck, t: "Secured entry", s: "24/7 — details on request" },
   { icon: Dumbbell, t: "Gym, pool & TT", s: "Without leaving the building" },
 ];

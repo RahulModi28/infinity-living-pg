@@ -29,7 +29,7 @@ const INCLUDED = [
   "High-speed Wi-Fi",
   "Housekeeping",
   "Electricity",
-  "Four meals a day",
+  "Four meals a day (Mon–Fri; breakfast and lunch on Saturday)",
   "Laundry service",
 ];
 

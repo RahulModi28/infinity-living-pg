@@ -152,7 +152,7 @@ export default function Rooms() {
 
         <Reveal>
           <p className="mt-8 text-[0.8125rem] text-mute">
-            Rent includes electricity and all four meals. Live availability changes week to week —
+            Rent includes electricity and meals. Live availability changes week to week —
             message us before planning a visit.
           </p>
         </Reveal>

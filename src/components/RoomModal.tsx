@@ -150,7 +150,7 @@ export default function RoomModal({
               </Button>
             </div>
             <p className="mt-4 text-xs leading-relaxed text-mute">
-              Rent includes electricity and all four meals. Availability moves week to week —
+              Rent includes electricity and meals. Availability moves week to week —
               message us to confirm before planning a visit.
             </p>
           </div>
