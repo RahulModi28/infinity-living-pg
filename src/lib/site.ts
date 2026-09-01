@@ -20,10 +20,14 @@ export const site = {
 
   contact: {
     /** Full international format, no spaces — e.g. 919876543210 */
-    whatsappNumber: "[WHATSAPP NUMBER]",
-    phoneDisplay: "[PHONE NUMBER]",
-    phoneHref: "[PHONE NUMBER]",
-    email: "[EMAIL ADDRESS]",
+    whatsappNumber: "919959560047",
+    phoneDisplay: "+91 99595 60047",
+    phoneHref: "+919959560047",
+    email: "contact@infinityspace4u.com",
+    /** Second line, from the existing site: M Venkata Reddy. */
+    phoneAlt: "+91 99000 05497",
+    phoneAltHref: "+919900005497",
+    emailAlt: "infinityspace0501@gmail.com",
     whatsappMessage:
       "Hi, I'm interested in a room at Infinity Space near Christ University Yeshwanthpur Campus. Could you share the available room options and pricing?",
   },
