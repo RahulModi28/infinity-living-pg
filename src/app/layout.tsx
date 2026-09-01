@@ -33,11 +33,13 @@ export const metadata: Metadata = {
     template: "%s | Infinity Space",
   },
   description:
-    "Gents PG a 10 minute walk from Christ University Yeshwanthpur Campus, Bengaluru. Furnished single & double rooms, four meals a day, Wi-Fi, gym, biometric entry.",
+    "Gents PG a 10 minute walk from Christ University Yeshwanthpur Campus, Bengaluru. Single ₹20,000, double ₹15,000 — electricity, four meals and Wi-Fi included.",
   keywords: [
     "pg near christ university yeshwanthpur",
     "pg near christ university yeshwanthpur campus",
     "pg in yeshwanthpur",
+    "yeshwanthpur pg for gents price",
+    "yeshwanthpur pg room rent",
     "gents pg yeshwanthpur",
     "boys pg near christ university yeshwanthpur campus",
     "pg near yeshwanthpur metro station",

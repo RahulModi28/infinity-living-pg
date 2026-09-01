@@ -146,8 +146,8 @@ export default function Rooms() {
 
         <Reveal>
           <p className="mt-8 text-[0.8125rem] text-mute">
-            Prices and availability are placeholders pending confirmation — ask us for the current
-            rate card.
+            Rent includes electricity and all four meals. Live availability changes week to week —
+            message us before planning a visit.
           </p>
         </Reveal>
 

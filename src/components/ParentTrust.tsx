@@ -7,7 +7,7 @@ import { site } from "@/lib/site";
 
 const POINTS = [
   { icon: KeyRound, t: "Secure premises", d: "Biometric entry at the main door — no shared keys floating around." },
-  { icon: Camera, t: "CCTV", d: "[CAMERA COVERAGE & AREAS — CONFIRM]" },
+  { icon: Camera, t: "CCTV", d: "Cameras across the property, and security staff on site." },
   { icon: UserCheck, t: "Professional management", d: "On-site staff, a name and number you can call." },
   { icon: Sparkles, t: "Clean environment", d: "Regular housekeeping in rooms and common areas." },
   { icon: MapPin, t: "Convenient location", d: "Short walk to Christ University Yeshwanthpur Campus." },

@@ -26,8 +26,9 @@ const INCLUDED = [
   { label: "Wardrobe & study desk", all: true },
   { label: "High-speed Wi-Fi", all: true },
   { label: "Housekeeping", all: true },
-  { label: "Electricity", note: "[CONFIRM — included up to a limit?]" },
-  { label: "Meals", note: "[CONFIRM — bundled or charged separately?]" },
+  { label: "Electricity", all: true },
+  { label: "Four meals a day", all: true },
+  { label: "Laundry service", all: true },
   { label: "Security deposit", note: "[SECURITY DEPOSIT — CONFIRM]" },
 ];
 
@@ -133,9 +134,10 @@ export default function PriceTable() {
 
         <div className="border-t border-ink/12 px-5 py-4 sm:px-7">
           <p className="text-[0.8125rem] leading-relaxed text-mute">
-            Still being confirmed: {unconfirmed.map((r) => r.label.toLowerCase()).join(", ")}. We&apos;ll
-            put the full inclusion list in writing before you pay anything, so there are no
-            surprises in month two.
+            Everything ticked above is included in the rent — electricity and meals are not
+            billed on top. Still to confirm:{" "}
+            {unconfirmed.map((r) => r.label.toLowerCase()).join(", ")}. We&apos;ll put the full
+            inclusion list in writing before you pay anything.
           </p>
         </div>
       </div>

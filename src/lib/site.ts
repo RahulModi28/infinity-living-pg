@@ -84,7 +84,7 @@ export const rooms: Room[] = [
     id: "single",
     name: "Single Sharing",
     occupancy: "1 person",
-    price: "[PRICE]",
+    price: "20,000",
     priceNote: "per month",
     blurb:
       "A room that's entirely yours. Good for light sleepers, late-night study sessions and anyone who needs their own space to reset.",
@@ -104,7 +104,7 @@ export const rooms: Room[] = [
     id: "double",
     name: "Double Sharing",
     occupancy: "2 people",
-    price: "[PRICE]",
+    price: "15,000",
     priceNote: "per person / month",
     blurb:
       "The sweet spot. Enough room to spread out, one roommate to split the day with, and a lower monthly outgo than a single.",
@@ -145,7 +145,7 @@ export const amenityGroups = [
     icon: "Wifi",
     items: [
       "High-speed Wi-Fi",
-      "[POWER BACKUP — CONFIRM]",
+      "Power backup",
       "Charging points at every bed",
     ],
   },
@@ -168,8 +168,8 @@ export const amenityGroups = [
     icon: "ShieldCheck",
     items: [
       "Biometric secure entry",
-      "[CCTV COVERAGE & AREAS — CONFIRM]",
-      "[SECURITY PERSONNEL & TIMINGS — CONFIRM]",
+      "CCTV surveillance",
+      "Security personnel on site",
     ],
   },
 ] as const;
@@ -276,15 +276,15 @@ export const faqs = [
   },
   {
     q: "What is the monthly rent?",
-    a: "Rent depends on the room type you choose — single or double sharing. Current tariff: [PRICE] per month. Ask us on WhatsApp for the up-to-date rate card for the room you want.",
+    a: "₹20,000 a month for single sharing, and ₹15,000 per person a month for double sharing. Electricity and all four meals are included — the rent is the rent.",
   },
   {
     q: "What is included in the rent?",
-    a: "[INCLUSIONS — CONFIRM] Typically covers the furnished room, Wi-Fi, housekeeping and electricity up to a limit. We'll send you the exact inclusion list so there are no surprises later.",
+    a: "The furnished room, electricity, all four meals, Wi-Fi, housekeeping and laundry. Deposit is separate: [SECURITY DEPOSIT — CONFIRM].",
   },
   {
     q: "Is food included?",
-    a: "[FOOD PLAN & INCLUSION — CONFIRM]. We serve four meals a day — breakfast, lunch, evening snacks and dinner — cooked on site. Whether meals are bundled into rent or charged separately: [CONFIRM].",
+    a: "Yes, and it is included in the rent — not charged on top. Four meals a day, cooked on site: breakfast, lunch, evening snacks and dinner.",
   },
   {
     q: "Is Wi-Fi available?",

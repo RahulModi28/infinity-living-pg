@@ -72,7 +72,10 @@ export function localBusinessJsonLd() {
       name: `${r.name} room — PG in Yeshwanthpur`,
       // Price is intentionally omitted while it is a placeholder: publishing a
       // fabricated price in schema is worse than publishing none.
-      ...(clean(r.price) ? { price: r.price, priceCurrency: "INR" } : {}),
+      // Display string is "20,000"; schema needs a bare number.
+      ...(clean(r.price)
+        ? { price: r.price.replace(/[^\d.]/g, ""), priceCurrency: "INR" }
+        : {}),
       itemOffered: { "@type": "Accommodation", name: r.name, occupancy: r.occupancy },
     })),
   };
