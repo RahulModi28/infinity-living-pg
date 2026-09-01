@@ -44,7 +44,7 @@ export default function Location() {
                   />
                   <div className="absolute inset-x-5 bottom-5 rounded-2xl border border-white/20 bg-black/45 p-4 text-[0.8125rem] leading-relaxed text-white/85 backdrop-blur-md">
                     Add the Google Maps embed URL to{" "}
-                    <code className="rounded bg-white/15 px-1">site.address.mapsEmbedUrl</code> to
+                    <code className="rounded bg-white/15 px-1 [overflow-wrap:anywhere]">site.address.mapsEmbedUrl</code> to
                     show the live interactive map here.
                   </div>
                 </>
@@ -83,7 +83,7 @@ export default function Location() {
                         {n.label}
                       </span>
                     </span>
-                    <span className="shrink-0 font-display text-[0.8125rem] text-mute">
+                    <span className="max-w-[45%] text-right font-display text-[0.8125rem] text-mute">
                       {n.time}
                     </span>
                   </div>
