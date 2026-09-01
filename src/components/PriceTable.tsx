@@ -129,7 +129,8 @@ export default function PriceTable() {
                 {i > 0 ? ", " : ""}₹{depositFor(r)} for {r.name.toLowerCase()}
               </span>
             ))}
-            .
+            . It&apos;s adjusted against your April and May rent, so it comes back to you as two
+            rent-free months rather than a sum you wait to get returned.
           </p>
         </div>
       </div>

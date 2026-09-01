@@ -280,7 +280,7 @@ export const faqs = [
   },
   {
     q: "What is included in the rent?",
-    a: "The furnished room, electricity, all four meals, Wi-Fi, housekeeping and laundry. The security deposit — two months' rent — is separate and paid once, on move-in.",
+    a: "The furnished room, electricity, all four meals, Wi-Fi, housekeeping and laundry. The security deposit is separate, paid once on move-in, and adjusted against your April and May rent.",
   },
   {
     q: "Is food included?",
@@ -296,7 +296,7 @@ export const faqs = [
   },
   {
     q: "Is there a security deposit?",
-    a: "Yes — two months' rent, paid on move-in. That's ₹40,000 for single sharing and ₹30,000 for double. It is separate from the rent and is not an ongoing charge. [REFUND TERMS & DEDUCTIONS — CONFIRM].",
+    a: "Yes — two months' rent, paid on move-in: ₹40,000 for single sharing, ₹30,000 for double. It isn't money you lose. It's adjusted against your rent for April and May, so you pay no rent in those two months. If you move out before April: [CONFIRM].",
   },
   {
     q: "What is the minimum stay?",
