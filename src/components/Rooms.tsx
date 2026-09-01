@@ -56,8 +56,14 @@ function RoomCard({ room, onOpen }: { room: Room; onOpen: () => void }) {
                 <p className="pt-3 text-[0.875rem] leading-relaxed text-white/72">
                   {room.features.slice(0, 4).join(" · ")}
                 </p>
-                <p className="pt-2 text-[0.8125rem] text-white/55">
-                  Availability: {room.availability}
+                {/* "Availability: Available now" read badly. A status dot
+                    carries the label instead. */}
+                <p className="flex items-center gap-2 pt-2.5 text-[0.8125rem] text-white/70">
+                  <span
+                    className="inline-block size-1.5 shrink-0 rounded-full bg-emerald-400"
+                    aria-hidden="true"
+                  />
+                  {room.availability}
                 </p>
               </div>
             </div>

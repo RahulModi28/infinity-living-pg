@@ -62,7 +62,7 @@ export const audiences: Record<"gents", Audience> = {
         points: [
           "Single sharing — your own room and your own schedule",
           "Double sharing — two beds, a study table each, lower monthly rent",
-          "Current availability: [ROOM AVAILABILITY]",
+          "Both room types have space right now",
         ],
       },
     ],

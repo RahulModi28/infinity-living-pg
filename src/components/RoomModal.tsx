@@ -150,8 +150,8 @@ export default function RoomModal({
               </Button>
             </div>
             <p className="mt-4 text-xs leading-relaxed text-mute">
-              Rent and availability shown are placeholders until confirmed. We&apos;ll send the
-              current rate card and inclusions when you enquire.
+              Rent includes electricity and all four meals. Availability moves week to week —
+              message us to confirm before planning a visit.
             </p>
           </div>
         </div>

@@ -84,6 +84,11 @@ export type Room = {
   priceNote: string;
   blurb: string;
   features: string[];
+  /**
+   * Shown verbatim on the room card and in the modal. This is the one value
+   * on the site that goes stale silently — nothing derives it and nothing
+   * checks it, so it needs updating by hand when rooms fill or free up.
+   */
   availability: string;
   image: string;
   gallery: string[];
@@ -106,7 +111,7 @@ export const rooms: Room[] = [
       "High-speed Wi-Fi",
       "Housekeeping",
     ],
-    availability: "[ROOM AVAILABILITY]",
+    availability: "Available now",
     image: "/images/room-single.jpg",
     gallery: ["/images/room-single.jpg", "/images/bathroom.jpg", "/images/dining-hall.jpg"],
   },
@@ -126,7 +131,7 @@ export const rooms: Room[] = [
       "High-speed Wi-Fi",
       "Housekeeping",
     ],
-    availability: "[ROOM AVAILABILITY]",
+    availability: "Available now",
     image: "/images/room-double.jpg",
     gallery: ["/images/room-double.jpg", "/images/bathroom.jpg", "/images/living-room-2.jpg"],
   },
@@ -306,7 +311,7 @@ export const faqs = [
   },
   {
     q: "What room types are available?",
-    a: "Single sharing and double sharing. Live availability: [ROOM AVAILABILITY] — check with us before planning a visit.",
+    a: "Single sharing and double sharing, and both have rooms available now. Availability moves week to week, so message us to confirm before planning a visit.",
   },
   {
     q: "Is there a security deposit?",
