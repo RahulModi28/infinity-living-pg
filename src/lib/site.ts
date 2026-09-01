@@ -426,15 +426,14 @@ export function baseUrl() {
 }
 
 /**
- * The actual weekly menu, as run by the kitchen.
+ * The weekly menu as transcribed from the kitchen's own sheet.
  *
- * Published in full rather than summarised as "rotating home-style food",
- * which is what every competing listing says and which tells nobody
- * anything. A student comparing four PGs can compare this; they cannot
- * compare four identical claims.
+ * NOT PUBLISHED ANYWHERE YET, and deliberately so — the menu is still being
+ * finalised, and a menu printed as fact is a promise. Kept here so the
+ * transcription is not lost and so publishing it later is a render, not a
+ * retyping.
  *
- * Saturday evening is deliberately blank — snacks and dinner are not served,
- * and saying so plainly is better than being found out in week one.
+ * Saturday snacks and dinner are null: the sheet marks both "Break".
  */
 export const weeklyMenu = [
   {
@@ -488,7 +487,8 @@ export const weeklyMenu = [
   },
 ] as const;
 
-/** Breakfast moves half an hour earlier on Saturday. */
+/** From the kitchen sheet. Unused while the menu is unconfirmed —
+ *  the Food section shows the serving windows given by the owner. */
 export const mealTimes = {
   breakfast: "7:45 am",
   breakfastSaturday: "7:30 am",

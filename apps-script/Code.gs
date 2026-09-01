@@ -42,19 +42,6 @@ const CFG = {
   priceDouble: '15,000',
 
   cloudinary: 'https://res.cloudinary.com/ny4waxgb/image/upload',
-
-  // Dinners only — the full four-meal grid does not survive a 600px email,
-  // and dinner is the meal people actually picture themselves eating.
-  // Mirrors weeklyMenu in src/lib/site.ts; keep the two in step.
-  dinners: [
-    ['Mon', 'Pav bhaji'],
-    ['Tue', 'Palak paneer with bhindi masala'],
-    ['Wed', 'Kadhai chicken &amp; paneer butter masala'],
-    ['Thu', 'Fried rice with manchurian'],
-    ['Fri', 'Chapati with vegetable kurma'],
-    ['Sat', 'Kitchen closed'],
-    ['Sun', 'Chole bhature, and kheer'],
-  ],
 };
 
 /* ──────────────────────────────── entry ──────────────────────────────── */
@@ -286,33 +273,6 @@ ${row(`<tr><td class="column" width="100%" style="vertical-align:top;">
       </table>
       <div style="color:#6f6a63;font-family:${F};font-size:13px;line-height:1.6;padding:14px 6px 0;text-align:center;">
         Electricity, meals, Wi&#8209;Fi, housekeeping and laundry are all in the rent &mdash; not billed on top.
-      </div>
-    </td></tr>
-  </table>
-</td></tr>`)}
-
-${row(`<tr><td class="column" width="100%" style="vertical-align:top;">
-  <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;">
-    <tr><td class="m-pad" style="padding:30px 36px 0;">
-      <div style="color:#121110;font-family:${F};font-size:18px;font-weight:700;">A week of dinners</div>
-      <div style="color:#6f6a63;font-family:${F};font-size:13px;line-height:1.6;padding:6px 0 12px;">
-        Every other PG will tell you the food is &ldquo;home&#8209;style&rdquo;. This is the actual menu.
-      </div>
-      <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;background-color:#f7f4ef;border:1px solid #e4dccf;border-radius:14px;">
-        <tr><td style="padding:6px 18px;">
-          <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;">
-            ${CFG.dinners.map(function (d) {
-              return `<tr>
-                <td width="52" style="padding:7px 0;color:#6f6a63;font-family:${F};font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;vertical-align:top;">${d[0]}</td>
-                <td style="padding:7px 0;color:#121110;font-family:${F};font-size:14px;line-height:1.45;">${d[1]}</td>
-              </tr>`;
-            }).join('')}
-          </table>
-        </td></tr>
-      </table>
-      <div style="color:#6f6a63;font-family:${F};font-size:12px;line-height:1.6;padding:10px 2px 0;">
-        Breakfast, lunch and evening snacks too &mdash; four meals a day, Monday to Friday.
-        Saturday is breakfast and lunch only.
       </div>
     </td></tr>
   </table>
