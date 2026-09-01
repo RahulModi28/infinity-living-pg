@@ -143,11 +143,16 @@ ${row(`<tr><td class="column" width="100%" style="vertical-align:top;">${spacer(
 
 ${row(`<tr><td class="column" width="100%" style="mso-table-lspace:0pt;mso-table-rspace:0pt;vertical-align:top;">
   <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;">
+    <tr><td align="center" style="padding:28px 20px 24px;">
+      <a href="${site.url}" target="_blank" style="text-decoration:none;">
+        <img src="${img("logo-email.png")}" width="150" alt="Infinity Space" style="display:block;width:150px;max-width:150px;height:auto;border:0;margin:0 auto;" />
+      </a>
+    </td></tr>
     <tr><td style="padding:0;">
       <img src="${img("hero.jpg")}" width="600" alt="The common area at Infinity Space &mdash; snooker table and lounge seating" style="display:block;width:100%;height:auto;border:0;" />
     </td></tr>
     <tr><td class="m-pad" style="padding:32px 36px 0;">
-      <div style="color:#c8622f;font-family:${F};font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;">Infinity Space &middot; Yeshwanthpur</div>
+      <div style="color:#c8622f;font-family:${F};font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;">Gents PG &middot; Yeshwanthpur, Bengaluru</div>
       <div class="m-h1" style="color:#121110;font-family:${F};font-size:36px;font-weight:700;line-height:1.12;letter-spacing:-1px;padding:14px 0 0;">Ten minutes' walk<br>from your first class.</div>
       <div style="color:#2a2724;font-family:${F};font-size:16px;line-height:1.6;padding:16px 0 0;">
         Hi ${esc(lead.name.split(" ")[0])} &mdash; thanks for getting in touch. Rather than ask you to call for
