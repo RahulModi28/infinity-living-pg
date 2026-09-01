@@ -20,6 +20,8 @@ type Lead = {
   moveIn: string;
   message: string;
   at: string;
+  /** Which route produced it — the enquiry form, or the WhatsApp gate. */
+  source: "form" | "whatsapp";
 };
 
 export async function POST(req: Request) {
@@ -48,6 +50,7 @@ export async function POST(req: Request) {
     moveIn: String(body.moveIn ?? "").trim(),
     message: String(body.message ?? "").trim(),
     at: new Date().toISOString(),
+    source: body.source === "whatsapp" ? "whatsapp" : "form",
   };
 
   const endpoint = process.env.ENQUIRY_WEBHOOK_URL;

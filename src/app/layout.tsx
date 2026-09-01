@@ -6,6 +6,7 @@ import { localBusinessJsonLd, faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import SmoothScroll from "@/components/SmoothScroll";
 import Analytics from "@/components/Analytics";
 import OverflowGuard from "@/components/OverflowGuard";
+import WhatsAppGate from "@/components/WhatsAppGate";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -103,6 +104,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SmoothScroll />
         <Analytics />
         <OverflowGuard />
+        <WhatsAppGate />
         {children}
         <script
           type="application/ld+json"

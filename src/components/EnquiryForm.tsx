@@ -32,7 +32,7 @@ export default function EnquiryForm() {
       const res = await fetch("/api/enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, source: "form" }),
       });
       if (!res.ok) throw new Error("Request failed");
       trackLead("enquiry_submitted", { roomType: data.roomType });

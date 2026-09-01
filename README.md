@@ -63,7 +63,10 @@ and counted, and a database would need an admin panel built purely to read it.
 **Setup, about ten minutes:**
 
 1. Create a Google Sheet. First row headers:
-   `Timestamp | Name | Phone | Email | Room type | Move-in | Message`
+   `Timestamp | Name | Phone | Email | Room type | Move-in | Message | Source`
+
+   `Source` is `form` or `whatsapp` — leads from the enquiry form carry every
+   field, leads captured by the WhatsApp gate carry only name and phone.
 2. **Extensions → Apps Script**, replace the contents with:
 
    ```js
@@ -71,7 +74,7 @@ and counted, and a database would need an admin panel built purely to read it.
      const d = JSON.parse(e.postData.contents);
      SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().appendRow([
        new Date(d.at), d.name, "'" + d.phone, d.email,
-       d.roomType, d.moveIn, d.message,
+       d.roomType, d.moveIn, d.message, d.source,
      ]);
      return ContentService
        .createTextOutput(JSON.stringify({ ok: true }))
@@ -95,6 +98,22 @@ instead" state. Showing a success animation to someone whose enquiry went
 nowhere is worse than showing an error, because they stop waiting for a reply
 that is never coming. The full lead is also written to the platform logs on
 failure, so it is recoverable.
+
+### The WhatsApp gate
+
+Tapping any WhatsApp button opens a short name-and-number form first, then
+hands off to WhatsApp with the message still prefilled. Without it a WhatsApp
+tap is an anonymous exit — you only learn who it was if they actually type,
+and many open the app and never do.
+
+It is a document-level click interceptor (`WhatsAppGate.tsx`) rather than a
+change to the ten components that link to WhatsApp. Any link added later is
+covered automatically, and the anchors stay real `wa.me` hrefs, so with
+JavaScript broken they still work, just ungated.
+
+Someone who has filled it once is remembered in `localStorage` and not asked
+again. Storage failure never blocks the hand-off: the conversation is worth
+more than the row in the sheet.
 
 **Notification is a separate problem.** A sheet stores; it does not tell
 anyone. Until something emails or messages you on submit, someone has to
