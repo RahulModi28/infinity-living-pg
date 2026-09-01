@@ -45,6 +45,8 @@ async function send(to: string, subject: string, html: string, replyTo?: string)
   return { skipped: false as const };
 }
 
+const CLD = "https://res.cloudinary.com/ny4waxgb/image/upload";
+
 const esc = (v: string) =>
   v.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
@@ -54,7 +56,14 @@ export function leadReplyHtml(lead: Lead) {
   const single = rooms.find((r) => r.id === "single");
   const double = rooms.find((r) => r.id === "double");
   const wa = whatsappHref(`Hi, I just enquired on the website. My name is ${lead.name}.`);
-  const img = (f: string) => `${site.url}/images/${f}`;
+  // Served from Cloudinary rather than the site's own /images, so the email
+  // does not depend on a deploy being live and so every file arrives resized
+  // and re-encoded for the width it is actually displayed at. Email clients
+  // ignore srcset, so each is requested above its CSS width and no larger
+  // (c_limit never upscales). f_auto negotiates WebP/AVIF where the client
+  // supports it and falls back to JPEG/PNG where it does not.
+  const img = (f: string, w: number) =>
+    `${CLD}/f_auto,q_auto,w_${w},c_limit/infinity-space/email/${f.replace(/\.\w+$/, "")}`;
   const F = "'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif";
 
   /** Outlook ignores border-radius and padding on links, so the button is
@@ -101,7 +110,7 @@ export function leadReplyHtml(lead: Lead) {
     <td width="33.33%" style="mso-table-lspace:0pt;mso-table-rspace:0pt;vertical-align:top;">
       <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;">
         <tr><td style="padding:0 4px;">
-          <img src="${img(file)}" alt="${alt}" width="176" style="display:block;width:100%;max-width:176px;height:auto;border:0;border-radius:10px;" />
+          <img src="${img(file, 352)}" alt="${alt}" width="176" style="display:block;width:100%;max-width:176px;height:auto;border:0;border-radius:10px;" />
           <div style="color:#6f6a63;font-family:${F};font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:8px 0 0;text-align:center;">${label}</div>
         </td></tr>
       </table>
@@ -145,11 +154,11 @@ ${row(`<tr><td class="column" width="100%" style="mso-table-lspace:0pt;mso-table
   <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;">
     <tr><td align="center" style="padding:28px 20px 24px;">
       <a href="${site.url}" target="_blank" style="text-decoration:none;">
-        <img src="${img("logo-email.png")}" width="150" alt="Infinity Space" style="display:block;width:150px;max-width:150px;height:auto;border:0;margin:0 auto;" />
+        <img src="${img("logo-email.png", 300)}" width="150" alt="Infinity Space" style="display:block;width:150px;max-width:150px;height:auto;border:0;margin:0 auto;" />
       </a>
     </td></tr>
     <tr><td style="padding:0;">
-      <img src="${img("hero.jpg")}" width="600" alt="The common area at Infinity Space &mdash; snooker table and lounge seating" style="display:block;width:100%;height:auto;border:0;" />
+      <img src="${img("hero.jpg", 900)}" width="600" alt="The common area at Infinity Space &mdash; snooker table and lounge seating" style="display:block;width:100%;height:auto;border:0;" />
     </td></tr>
     <tr><td class="m-pad" style="padding:32px 36px 0;">
       <div style="color:#c8622f;font-family:${F};font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;">Gents PG &middot; Yeshwanthpur, Bengaluru</div>
