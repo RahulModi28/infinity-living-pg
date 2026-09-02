@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { ArrowUpRight, Users, HelpCircle, MessageCircle } from "lucide-react";
+import { ArrowUpRight, HelpCircle, MessageCircle } from "lucide-react";
 import { rooms, whatsappHref, type Room } from "@/lib/site";
 import SectionHead from "./ui/SectionHead";
 import Reveal from "./ui/Reveal";
@@ -30,11 +30,6 @@ function RoomCard({ room, onOpen }: { room: Room; onOpen: () => void }) {
             aria-hidden="true"
             className="absolute inset-0 bg-[linear-gradient(180deg,transparent_38%,rgba(10,20,16,0.82)_100%)] transition-opacity duration-500 group-hover:opacity-90"
           />
-
-          <span className="t-label absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-black/25 px-3 py-1.5 text-white backdrop-blur-md">
-            <Users className="size-3" aria-hidden="true" />
-            {room.occupancy}
-          </span>
 
           <span className="absolute right-4 top-4 grid size-11 place-items-center rounded-full bg-white/12 text-white backdrop-blur-md transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:bg-clay">
             <ArrowUpRight
