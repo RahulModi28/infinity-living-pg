@@ -12,7 +12,7 @@ const POINTS = [
   { icon: Sparkles, t: "Clean environment", d: "Regular housekeeping in rooms and common areas." },
   { icon: MapPin, t: "Convenient location", d: "Short walk to Christ University Yeshwanthpur Campus." },
   { icon: Clock, t: "11 pm curfew", d: "Later nights are possible, but only with your permission — not the resident's." },
-  { icon: PhoneCall, t: "Reliable support", d: "[EMERGENCY CONTACT & RESPONSE PROCESS — CONFIRM]" },
+  { icon: PhoneCall, t: "A number that gets answered", d: `Call ${site.contact.phoneDisplay} — it reaches the people who run the building.` },
 ];
 
 export default function ParentTrust() {

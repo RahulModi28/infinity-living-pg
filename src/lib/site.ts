@@ -261,50 +261,20 @@ export const nearby = [
    ever added on top of them it also breaks Google's review policies.
    ─────────────────────────────────────────────────────────────── */
 
-export const reviews = [
-  {
-    name: "[STUDENT NAME]",
-    course: "[COURSE], Christ University — Yeshwanthpur",
-    rating: 5,
-    text:
-      "The location makes college life so much easier. The rooms are comfortable and the overall environment feels really welcoming.",
-  },
-  {
-    name: "[STUDENT NAME]",
-    course: "[COURSE], Christ University — Yeshwanthpur",
-    rating: 5,
-    text:
-      "Walking to campus instead of fighting traffic every morning changed my whole routine. Wi-Fi holds up during submissions too.",
-  },
-  {
-    name: "[PARENT NAME]",
-    course: "Parent, [CITY]",
-    rating: 5,
-    text:
-      "We visited before booking. It was clean, the management answered every question, and we felt comfortable leaving him there.",
-  },
-  {
-    name: "[STUDENT NAME]",
-    course: "[COURSE], Christ University — Yeshwanthpur",
-    rating: 4,
-    text:
-      "Food is home-style and the common area is where most of us end up in the evenings. Housekeeping is regular.",
-  },
-  {
-    name: "[STUDENT NAME]",
-    course: "[COURSE], Christ University — Yeshwanthpur",
-    rating: 5,
-    text:
-      "Having the gym downstairs means I actually use it. Most nights it's snooker with whoever's around — I didn't expect that from a PG.",
-  },
-  {
-    name: "[PARENT NAME]",
-    course: "Parent, [CITY]",
-    rating: 5,
-    text:
-      "The biometric entry was what settled it for me. I can call the manager directly and get an answer, which is not something I could say about the other places we saw.",
-  },
-] as const;
+export const reviews: {
+  name: string;
+  course: string;
+  rating: number;
+  text: string;
+}[] = [
+  // Empty on purpose. The six entries that were here were written as filler
+  // and rendered to visitors as real testimonials, names and all.
+  //
+  // Add real, permissioned reviews here and the section returns on its own —
+  // Reviews.tsx renders nothing while this is empty, and the nav and footer
+  // links drop with it. Invented ones are a consumer-protection problem, not
+  // a styling one.
+];
 
 /* ─────────────────────────────── FAQ ─────────────────────────────── */
 

@@ -1,3 +1,4 @@
+import { site } from "@/lib/site";
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -28,10 +29,26 @@ export default function Privacy() {
               We use this only to respond to your enquiry about a room at Infinity Space. We do not
               sell your details to brokers, listing platforms or third parties.
             </p>
-            <p>[RETENTION PERIOD — CONFIRM]. [DATA CONTROLLER NAME & ADDRESS — CONFIRM].</p>
+            <p>
+              Analytics: we use Google Analytics to count visits and see which pages are read. It
+              sets a cookie and records the pages you view, but we never send it your name, phone
+              number or email address.
+            </p>
+            <p>
+              [RETENTION PERIOD — CONFIRM]. The data controller is Infinity Space,{" "}
+              {site.address.street}, {site.address.locality}, {site.address.city}{" "}
+              {site.address.postalCode}.
+            </p>
             <p>
               To have your details removed, write to{" "}
-              <span className="font-medium">[EMAIL ADDRESS]</span>.
+              <a href={`mailto:${site.contact.email}`} className="font-medium underline">
+                {site.contact.email}
+              </a>{" "}
+              or call{" "}
+              <a href={`tel:${site.contact.phoneHref}`} className="font-medium underline">
+                {site.contact.phoneDisplay}
+              </a>
+              .
             </p>
           </div>
         </div>

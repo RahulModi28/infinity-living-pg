@@ -103,9 +103,8 @@ export default function Food() {
           <p className="mt-10 flex max-w-2xl items-start gap-2.5 text-[0.8125rem] leading-relaxed text-mute">
             <SprayCan className="mt-[0.15em] size-4 shrink-0 text-moss" aria-hidden="true" />
             <span>
-              Cooked on site in our own kitchen. Kitchen hygiene and FSSAI details:{" "}
-              <span className="whitespace-nowrap">[CONFIRM]</span>. The menu rotates through the
-              week &mdash; ask us for the current one.
+              Cooked on site in our own kitchen. The menu rotates through the week &mdash; ask us
+              for the current one.
             </span>
           </p>
         </Reveal>

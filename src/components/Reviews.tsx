@@ -46,6 +46,9 @@ function Row({ duplicate = false }: { duplicate?: boolean }) {
 }
 
 export default function Reviews() {
+  // No section at all beats an empty one, or a fabricated one.
+  if (reviews.length === 0) return null;
+
   return (
     <section id="reviews" className="scroll-mt-20 bg-ivory-2 py-14 sm:py-24 lg:py-32">
       <div className="shell">

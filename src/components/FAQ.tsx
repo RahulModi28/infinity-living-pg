@@ -17,7 +17,7 @@ export default function FAQ() {
           <SectionHead
             eyebrow="FAQ"
             title="The questions everyone asks."
-            intro="If something here still says [CONFIRM], it's because we won't publish a number we haven't verified. Ask us and you'll get the real answer the same day."
+            intro="Straight answers, including the ones other places leave vague. If something isn't here, ask us and you'll get the real answer the same day."
           />
           <Reveal delay={0.1}>
             <Button
