@@ -143,6 +143,60 @@
   .rw { display: inline-block; overflow: hidden; vertical-align: bottom; }
   .rw > span { display: inline-block; will-change: transform; }
 
+  /* ── Hero entrance ────────────────────────────────────────────────────
+     CSS, not GSAP. The hero is above the fold on every visit, so its
+     animation should not wait on a JS bundle. `both` matters: the
+     reduced-motion block below collapses the duration to 0.01ms, and the
+     fill is what leaves every element at its final state instead of its
+     starting one. Stagger comes from an inline animation-delay. */
+  .hero-rise { animation: heroRise 0.62s var(--ease-out-quint) both; }
+  .hero-img-in { animation: heroImg 0.7s var(--ease-out-quint) both; }
+
+  /* ── Hero overlays ────────────────────────────────────────────────────
+     The copy column is a fixed max-width, so the narrower the viewport the
+     larger the FRACTION of the width it covers — at 1024 it reaches 72% and
+     ran straight past the light end of the wash (paragraph measured 3.37:1).
+     So the wash is stepped: the widest screens keep the photograph bright on
+     the right, and narrower ones cover progressively more because the text
+     needs it. Measured at every step; see the audit note in Hero.tsx. */
+  .hero-wash {
+    background: linear-gradient(90deg,
+      rgba(5,10,8,0.86) 0%, rgba(5,10,8,0.76) 50%, rgba(5,10,8,0.68) 100%);
+  }
+  @media (min-width: 640px) {
+    .hero-wash {
+      background: linear-gradient(90deg,
+        rgba(5,10,8,0.88) 0%, rgba(5,10,8,0.76) 45%, rgba(5,10,8,0.60) 78%, rgba(5,10,8,0.48) 100%);
+    }
+  }
+  @media (min-width: 1024px) {
+    .hero-wash {
+      background: linear-gradient(90deg,
+        rgba(5,10,8,0.84) 0%, rgba(5,10,8,0.70) 42%, rgba(5,10,8,0.40) 74%, rgba(5,10,8,0.18) 100%);
+    }
+  }
+  @media (min-width: 1280px) {
+    .hero-wash {
+      background: linear-gradient(90deg,
+        rgba(5,10,8,0.82) 0%, rgba(5,10,8,0.60) 38%, rgba(5,10,8,0.26) 72%, rgba(5,10,8,0.10) 100%);
+    }
+  }
+
+  .hero-foot {
+    background: linear-gradient(180deg,
+      rgba(5,10,8,0) 58%, rgba(5,10,8,0.42) 84%, rgba(5,10,8,0.66) 100%);
+  }
+
+  /* Trailing fade for the hero feature bar while it scrolls on phones.
+     Cleared from `sm` up, where the row wraps and nothing is clipped. */
+  .fade-r {
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent);
+  }
+  @media (min-width: 640px) {
+    .fade-r { -webkit-mask-image: none; mask-image: none; }
+  }
+
   .link-u {
     background-image: linear-gradient(currentColor, currentColor);
     background-size: 0% 1px;
@@ -177,6 +231,16 @@
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(1.015); }
   to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes heroRise {
+  from { opacity: 0; transform: translate3d(0, 16px, 0); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes heroImg {
+  from { opacity: 0; transform: scale(1.03); }
+  to   { opacity: 1; transform: none; }
 }
 
 @keyframes marquee {
