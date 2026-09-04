@@ -129,7 +129,7 @@ export default function Hero() {
           >
             Starting from
             <span className="font-display text-[1.75rem] font-semibold tracking-[-0.03em] text-white sm:text-[2rem]">
-              &#8377;15,000
+              &#8377;16,000
             </span>
             <span>/ month</span>
           </p>
