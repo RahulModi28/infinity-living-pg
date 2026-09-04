@@ -97,7 +97,7 @@ export const rooms: Room[] = [
     id: "single",
     name: "Single Sharing",
     occupancy: "1 person",
-    price: "16,000",
+    price: "20,000",
     priceNote: "per month",
     blurb:
       "A room that's entirely yours. Good for light sleepers, late-night study sessions and anyone who needs their own space to reset.",
@@ -117,7 +117,7 @@ export const rooms: Room[] = [
     id: "double",
     name: "Double Sharing",
     occupancy: "2 people",
-    price: "15,000",
+    price: "16,000",
     priceNote: "per person / month",
     blurb:
       "The sweet spot. Enough room to spread out, one roommate to split the day with, and a lower monthly outgo than a single.",
@@ -285,7 +285,7 @@ export const faqs = [
   },
   {
     q: "What is the monthly rent?",
-    a: "₹16,000 a month for single sharing, and ₹15,000 per person a month for double sharing. Electricity and meals are included — the rent is the rent.",
+    a: "₹20,000 a month for single sharing, and ₹16,000 per person a month for double sharing. Electricity and meals are included — the rent is the rent.",
   },
   {
     q: "What is included in the rent?",
@@ -305,7 +305,7 @@ export const faqs = [
   },
   {
     q: "Is there a security deposit?",
-    a: "Yes — two months' rent, paid on move-in: ₹32,000 for single sharing, ₹30,000 for double. It isn't money you lose. It's adjusted against your rent for April and May, so you pay no rent in those two months.",
+    a: "Yes — two months' rent, paid on move-in: ₹40,000 for single sharing, ₹32,000 for double. It isn't money you lose. It's adjusted against your rent for April and May, so you pay no rent in those two months.",
   },
   {
     q: "What is the minimum stay?",

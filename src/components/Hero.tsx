@@ -209,7 +209,7 @@ export default function Hero() {
         <p data-h="sub" className="t-sub mt-7 max-w-[46ch] text-white/90">
           A <strong className="font-medium text-white">10 minute walk</strong> from campus.
           Furnished rooms, meals cooked on site, a gym and a rooftop dining hall &mdash; from{" "}
-          <strong className="font-medium text-white">&#8377;15,000 a month</strong>.
+          <strong className="font-medium text-white">&#8377;16,000 a month</strong>.
         </p>
 
         <div className="mt-9 flex flex-wrap items-center gap-3">
