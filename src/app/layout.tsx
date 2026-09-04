@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { site, baseUrl } from "@/lib/site";
 import { localBusinessJsonLd, faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
@@ -95,6 +96,14 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-IN" className={`${inter.variable} ${jakarta.variable}`}>
+      {/* beforeInteractive is the only next/script strategy Next.js injects
+          into <head>, which is where AdSense requires this script. */}
+      <Script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1363796922613344"
+        crossOrigin="anonymous"
+        strategy="beforeInteractive"
+      />
       <body>
         {/*
           Runs before first paint, so a returning visitor never sees a frame
