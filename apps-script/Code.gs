@@ -38,7 +38,7 @@ const CFG = {
   city: 'Bengaluru',
   postalCode: '560073',
 
-  priceSingle: '20,000',
+  priceSingle: '16,000',
   priceDouble: '15,000',
 
   cloudinary: 'https://res.cloudinary.com/ny4waxgb/image/upload',

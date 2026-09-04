@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     template: "%s | Infinity Space",
   },
   description:
-    "Gents PG a 10 minute walk from Christ University Yeshwanthpur Campus, Bengaluru. Single ₹20,000, double ₹15,000 — electricity, meals and Wi-Fi included.",
+    "Gents PG a 10 minute walk from Christ University Yeshwanthpur Campus, Bengaluru. Single ₹16,000, double ₹15,000 — electricity, meals and Wi-Fi included.",
   keywords: [
     "pg near christ university yeshwanthpur",
     "pg near christ university yeshwanthpur campus",

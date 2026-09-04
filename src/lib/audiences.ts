@@ -69,7 +69,7 @@ export const audiences: Record<"gents", Audience> = {
     faqs: [
       {
         q: "What is the rent for a gents PG in Yeshwanthpur?",
-        a: "₹20,000 a month for single sharing, ₹15,000 per person for double sharing. Electricity and meals are included in that.",
+        a: "₹16,000 a month for single sharing, ₹15,000 per person for double sharing. Electricity and meals are included in that.",
       },
       {
         q: "Is food included for the gents PG?",
