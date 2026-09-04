@@ -36,7 +36,11 @@ export default function Navbar() {
           "fixed inset-x-0 top-0 z-50 transition-[background-color,backdrop-filter,box-shadow,border-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
           solid
             ? "border-b border-ink/10 bg-ivory/82 backdrop-blur-xl shadow-[0_1px_24px_-12px_rgba(18,17,16,0.4)]"
-            : "border-b border-transparent bg-transparent",
+            : // Not fully transparent at the top any more. A whisper of tint
+              // and blur separates the nav from the photograph without
+              // reading as a bar — over bright frames the links were sitting
+              // directly on the windows.
+              "border-b border-white/10 bg-[rgba(5,10,8,0.10)] backdrop-blur-[6px]",
         ].join(" ")}
       >
         <nav
@@ -60,8 +64,8 @@ export default function Navbar() {
               <li key={l.href}>
                 <a
                   href={l.href}
-                  className={`link-u rounded-full px-3.5 py-2 text-[0.9375rem] transition-colors duration-300 ${
-                    solid ? "text-ink-2 hover:text-ink" : "text-white/85 hover:text-white"
+                  className={`link-u rounded-full px-3.5 py-2 text-[0.9375rem] tracking-[-0.005em] transition-colors duration-300 ${
+                    solid ? "text-ink-2 hover:text-ink" : "text-white/80 hover:text-white"
                   }`}
                 >
                   {l.label}
@@ -75,10 +79,15 @@ export default function Navbar() {
                 class already sets inline-flex, and two display utilities on
                 one element resolve by stylesheet order, not by intent. */}
             <span className="hidden sm:block">
+              {/* Solid in both states. As a glass pill at the top it read as
+                  the same weight as the nav links; the whole point of this
+                  element is that it should not. */}
               <Button
                 href="#enquire"
-                variant={solid ? "primary" : "light"}
-                className="!px-5 !py-2.5 !text-[0.875rem]"
+                variant="primary"
+                className={`!px-5 !py-2.5 !text-[0.875rem] ${
+                  solid ? "" : "!bg-ivory !text-ink hover:!bg-white"
+                }`}
                 arrow
               >
                 Book a Room
@@ -91,7 +100,7 @@ export default function Navbar() {
               className={`grid size-11 place-items-center rounded-full border transition-colors duration-300 lg:hidden ${
                 solid
                   ? "border-ink/15 text-ink hover:bg-ink/5"
-                  : "border-white/25 text-white hover:bg-white/10"
+                  : "border-white/25 bg-white/5 text-white backdrop-blur-md hover:bg-white/15"
               }`}
             >
               <Menu className="size-5" aria-hidden="true" />

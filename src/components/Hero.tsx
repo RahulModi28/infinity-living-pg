@@ -1,250 +1,200 @@
-"use client";
-
 import Image from "next/image";
-import { useRef } from "react";
-import { MapPin, Wifi, ShieldCheck, Sofa, UtensilsCrossed, Dumbbell, Play } from "lucide-react";
-import { useIsoLayoutEffect } from "@/lib/useIsoLayoutEffect";
-import { gsap, initGsap, prefersReducedMotion } from "@/lib/motion";
+import {
+  MapPin,
+  Wifi,
+  ShieldCheck,
+  Sofa,
+  UtensilsCrossed,
+  Dumbbell,
+  Play,
+  Check,
+} from "lucide-react";
 import Button from "./ui/Button";
-import Magnetic from "./ui/Magnetic";
 
+/*
+  The feature bar. "10 min from Christ" leads and is the only item given full
+  white and a clay icon — everything after it is deliberately quieter so the
+  row reads as one strong claim plus supporting detail, not six equal chips.
+*/
 const SIGNALS = [
-  { icon: MapPin, label: "Near Christ University" },
-  { icon: Sofa, label: "Fully Furnished" },
-  { icon: Wifi, label: "High-Speed Wi-Fi" },
-  { icon: ShieldCheck, label: "24/7 Security" },
-  { icon: UtensilsCrossed, label: "Four Meals a Day" },
-  { icon: Dumbbell, label: "Gym, Pool & Table Tennis" },
+  { icon: MapPin, label: "10 min from Christ", lead: true },
+  { icon: Sofa, label: "Fully furnished" },
+  { icon: UtensilsCrossed, label: "4 meals daily" },
+  { icon: ShieldCheck, label: "24/7 security" },
+  { icon: Wifi, label: "High-speed Wi-Fi" },
+  { icon: Dumbbell, label: "Gym + Pool" },
 ];
 
-function SignalList({
-  wrap = false,
-  duplicate = false,
-}: {
-  wrap?: boolean;
-  duplicate?: boolean;
-}) {
-  return (
-    <ul
-      aria-hidden={duplicate || undefined}
-      className={
-        wrap
-          ? "flex flex-wrap gap-x-6 gap-y-3"
-          : `flex shrink-0 items-center gap-x-6 pr-6 ${duplicate ? "marquee__dupe" : ""}`
-      }
-    >
-      {SIGNALS.map(({ icon: Icon, label }) => (
-        <li
-          key={label}
-          className="flex shrink-0 items-center gap-2 text-[0.8125rem] sm:text-sm"
-        >
-          <Icon className="size-4 text-clay" aria-hidden="true" />
-          {label}
-        </li>
-      ))}
-    </ul>
-  );
-}
+const TRUST = ["Fully furnished", "4 meals daily", "24/7 security"];
 
 export default function Hero() {
-  const root = useRef<HTMLElement>(null);
-
-  useIsoLayoutEffect(() => {
-    const el = root.current;
-    if (!el) return;
-    initGsap();
-
-    const q = gsap.utils.selector(el);
-    const reduced = prefersReducedMotion();
-
-    const ctx = gsap.context(() => {
-      if (reduced) {
-        gsap.set(q("[data-h]"), { opacity: 1, y: 0, scale: 1 });
-        return;
-      }
-
-      // ~1.3s total. Nothing blocks interaction — the page is scrollable
-      // and every CTA is clickable from frame one.
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-      tl.fromTo(
-        q("[data-h='img']"),
-        { scale: 1.06, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 1.5, ease: "power2.out" }
-      )
-        .fromTo(q("[data-h='veil']"), { opacity: 0 }, { opacity: 1, duration: 0.9 }, 0.15)
-        .fromTo(
-          q("[data-h='badge']"),
-          { opacity: 0, x: -18 },
-          { opacity: 1, x: 0, duration: 0.7 },
-          0.35
-        )
-        .fromTo(
-          q("[data-h='word'] > span"),
-          { yPercent: 110 },
-          { yPercent: 0, duration: 0.95, ease: "power4.out", stagger: 0.075 },
-          0.4
-        )
-        .fromTo(
-          q("[data-h='sub']"),
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.8 },
-          0.85
-        )
-        .fromTo(
-          q("[data-h='cta']"),
-          { opacity: 0, y: 18 },
-          { opacity: 1, y: 0, duration: 0.7, stagger: 0.08 },
-          0.98
-        )
-        .fromTo(
-          q("[data-h='strip']"),
-          { opacity: 0, y: 16 },
-          { opacity: 1, y: 0, duration: 0.7 },
-          1.1
-        );
-
-      // Slow drift on the backdrop as you leave the hero.
-      gsap.to(q("[data-h='img']"), {
-        yPercent: 12,
-        ease: "none",
-        scrollTrigger: { trigger: el, start: "top top", end: "bottom top", scrub: true },
-      });
-    }, el);
-
-    return () => ctx.revert();
-  }, []);
-
-  const headline = ["Your", "next", "chapter", "starts", "here."];
-
   return (
     <section
-      ref={root}
       id="top"
-      className="grain relative isolate flex min-h-[100svh] flex-col justify-end overflow-hidden bg-moss-2 pb-8 pt-28 sm:pb-12"
+      className="grain relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-moss-2"
     >
-      <div data-h="img" className="absolute inset-0 -z-20 will-change-transform">
+      {/*
+        No parallax and no GSAP timeline here any more — the backdrop gets a
+        single slow fade-in and then holds still. That drops the hero's client
+        JS to zero and keeps the photograph, rather than the motion, as the
+        thing you notice.
+      */}
+      <div className="hero-img-in absolute inset-0 -z-20">
         <Image
-          src="/images/hero.jpg"
-          alt="The common area at Infinity Space PG near Christ University Yeshwanthpur Campus, Bengaluru — lounge seating, snooker table and gym"
+          src="/images/hero-lounge.jpg"
+          alt="The lounge at Infinity Space PG near Christ University Yeshwanthpur Campus, Bengaluru — a curved sofa and armchairs on turf flooring under a coffered ceiling"
           fill
           priority
-          // Full-bleed background: one source at every width, so let the
-          // browser pick from the generated set rather than guessing.
+          fetchPriority="high"
           sizes="100vw"
-          quality={80}
-          // 4:3 source in a full-height hero crops hard at the sides on
-          // desktop; anchoring the focal point slightly above centre keeps
-          // the seating and snooker table in frame instead of the ceiling.
-          className="scale-110 object-cover object-[50%_45%]"
+          quality={82}
+          /*
+            Landscape 4:3 source. On desktop the viewport is wider than the
+            photo, so `cover` scales by width and only the vertical anchor
+            does anything: 62% keeps the sofa and turf in frame instead of
+            filling the crop with the coffered ceiling.
+
+            On phones the viewport is portrait, so the crop flips to
+            horizontal and the X anchor takes over. 62% there walks the frame
+            right, onto the sofa and windows, rather than slicing the
+            armchairs down the middle.
+          */
+          className="scale-[1.06] object-cover object-[62%_58%] sm:object-[50%_62%]"
         />
       </div>
+
       {/*
-        Two scrims, not one. The old single vertical veil was tuned for a dark
-        placeholder; over the real photo the headline measured 2.05:1 and the
-        subheading 2.82:1 against white — both below WCAG AA.
-
-        Stacking a vertical veil with a left-side scrim fixes that without
-        flattening the picture: the copy is left-aligned and capped at 46ch,
-        so darkening only that side buys contrast while the right half of the
-        room stays bright. Measured after the change: headline 4.2:1,
-        subheading 5.5:1, buttons 8.5:1.
-        Inline styles rather than Tailwind arbitrary values — multi-stop
-        gradients with commas do not survive the class parser cleanly.
+        Overlay, part one: a horizontal wash (`.hero-wash` in globals.css,
+        stepped per breakpoint). The copy is left-aligned, so the left edge
+        carries the weight and — on wide screens — the right stays close to
+        the real photograph: sofa, windows and warm ceiling lighting all still
+        legible, which the previous near-uniform veil had flattened.
       */}
-      <div
-        data-h="veil"
-        aria-hidden="true"
-        className="absolute inset-0 -z-10"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(10,20,16,0.58) 0%, rgba(10,20,16,0.46) 32%, rgba(10,20,16,0.78) 72%, rgba(10,20,16,0.92) 100%)",
-        }}
-      />
-      <div
-        data-h="veil"
-        aria-hidden="true"
-        className="absolute inset-0 -z-10"
-        style={{
-          background:
-            "linear-gradient(90deg, rgba(10,20,16,0.55) 0%, rgba(10,20,16,0.28) 45%, rgba(10,20,16,0) 70%)",
-        }}
-      />
+      <div aria-hidden="true" className="hero-wash absolute inset-0 -z-10" />
+      {/*
+        Part two: a short scrim at the foot only. The feature bar runs the full
+        width, and its right-hand end sits over bright turf where the wash has
+        faded to 0.10 — without this the last two items measure under 3:1. It
+        starts at 58% of the height, so it never reaches the headline.
+      */}
+      <div aria-hidden="true" className="hero-foot absolute inset-0 -z-10" />
 
-      <div className="shell w-full text-ivory">
-        {/*
-          The location pill is part of the h1, not a sibling of it.
+      {/* ── Content ─────────────────────────────────────────────────────── */}
+      <div /* Vertical breathing room scales with viewport HEIGHT, not width.
+             Width-stepped padding fitted 1440x900 and 1024x768 but pushed
+             the feature bar off a 1280x800 laptop; this keeps the whole
+             composition inside the fold on short screens and opens up on
+             tall ones. The 6.5rem floor is what clears the fixed navbar. */
+        className="shell flex w-full flex-1 flex-col justify-center pb-[clamp(3.5rem,8.5vh,8rem)] pt-[clamp(6.5rem,13vh,8rem)]">
+        <div className="max-w-[46rem] text-ivory">
+          {/*
+            The pill stays inside the h1. The headline itself is brand copy
+            with none of the search term in it, so this kicker is what keeps
+            "PG near Christ University · Yeshwanthpur" in the h1 as real,
+            visible text — dropping it would strip the head keyword from the
+            page's only h1.
+          */}
+          <h1 className="font-medium">
+            <span
+              className="hero-rise inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.08] px-3.5 py-2 text-[0.625rem] font-semibold uppercase leading-none tracking-[0.11em] text-white/90 backdrop-blur-md sm:px-4 sm:text-[0.75rem] sm:tracking-[0.2em]"
+              style={{ animationDelay: "40ms" }}
+            >
+              <MapPin className="size-3.5 shrink-0 text-clay" aria-hidden="true" />
+              PG near Christ University · Yeshwanthpur
+            </span>
 
-          The h1 was "Your next chapter starts here." — good brand copy with
-          none of the term anyone actually searches, so the head keyword lived
-          only in the title and the h2s. Putting it in as a kicker fixes that
-          with real, visible text: no sr-only duplicate, no hidden-text risk,
-          and the big line stays the thing you read first.
+            <span
+              className="hero-rise mt-6 block font-display sm:mt-7 text-[clamp(3rem,6.2vw,5.125rem)] font-medium leading-[0.97] tracking-[-0.04em]"
+              style={{ animationDelay: "110ms" }}
+            >
+              Live closer.
+              <br />
+              Live better.
+            </span>
+          </h1>
 
-          It also inherits the pill's translucent background, which is what
-          makes small type legible over a photograph — plain text at this size
-          measured under AA on the bright frames.
-        */}
-        <h1 className="font-medium">
-          <span
-            data-h="badge"
-            className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-[0.6875rem] font-semibold uppercase leading-none tracking-[0.09em] backdrop-blur-md sm:text-xs sm:tracking-[0.14em]"
+          <p
+            className="hero-rise mt-6 max-w-[41rem] text-[clamp(1rem,1.5vw,1.3125rem)] leading-[1.55] text-white/90 sm:mt-7"
+            style={{ animationDelay: "180ms" }}
           >
-            <MapPin className="size-3.5" aria-hidden="true" />
-            PG near Christ University · Yeshwanthpur
-          </span>{" "}
-          <span className="t-hero mt-6 block max-w-[16ch]">
-            {headline.map((w, i) => (
-              <span key={i}>
-                <span data-h="word" className="rw">
-                  <span>{w}</span>
-                </span>
-                {i < headline.length - 1 ? " " : ""}
-              </span>
+            Premium furnished student accommodation just 10 minutes from Christ
+            University, with meals, high-speed Wi-Fi, 24/7 security and everything you
+            need under one roof.
+          </p>
+
+          {/* Price on its own line so it can't get lost mid-sentence. */}
+          <p
+            className="hero-rise mt-6 flex flex-wrap items-baseline gap-x-2.5 sm:mt-7 text-[0.9375rem] text-white/90"
+            style={{ animationDelay: "230ms" }}
+          >
+            Starting from
+            <span className="font-display text-[1.75rem] font-semibold tracking-[-0.03em] text-white sm:text-[2rem]">
+              &#8377;16,000
+            </span>
+            <span>/ month</span>
+          </p>
+
+          <div
+            /* Stacked full-width on phones — two pills of different widths
+               left-aligned read as an accident, and a full-width primary is a
+               bigger tap target on the screen size that converts most. */
+            className="hero-rise mt-7 flex flex-col items-stretch gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center"
+            style={{ animationDelay: "280ms" }}
+          >
+            <Button
+              href="#rooms"
+              arrow
+              className="w-full sm:w-auto !bg-ivory !text-ink shadow-[0_10px_30px_-12px_rgba(0,0,0,0.55)] hover:!bg-white hover:shadow-[0_16px_38px_-14px_rgba(0,0,0,0.6)]"
+            >
+              View Rooms &amp; Pricing
+            </Button>
+            <Button href="#gallery" variant="light" className="w-full sm:w-auto">
+              <Play className="size-4 fill-current" aria-hidden="true" /> Take a Virtual
+              Tour
+            </Button>
+          </div>
+
+          <ul
+            className="hero-rise mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-[0.8125rem] text-white/70 sm:mt-7"
+            style={{ animationDelay: "330ms" }}
+          >
+            {TRUST.map((t) => (
+              <li key={t} className="flex items-center gap-1.5">
+                <Check className="size-3.5 shrink-0 text-white/50" aria-hidden="true" />
+                {t}
+              </li>
             ))}
-          </span>
-        </h1>
-
-        {/* The keyword now sits in the h1, so this can sell instead of repeat. */}
-        <p data-h="sub" className="t-sub mt-7 max-w-[46ch] text-white/90">
-          A <strong className="font-medium text-white">10 minute walk</strong> from campus.
-          Furnished rooms, meals cooked on site, a gym and a rooftop dining hall &mdash; from{" "}
-          <strong className="font-medium text-white">&#8377;16,000 a month</strong>.
-        </p>
-
-        <div className="mt-9 flex flex-wrap items-center gap-3">
-          <div data-h="cta">
-            <Magnetic>
-              <Button
-                href="#rooms"
-                arrow
-                className="!bg-ivory !text-ink hover:!bg-clay hover:!text-white"
-              >
-                Check Rooms
-              </Button>
-            </Magnetic>
-          </div>
-          <Button data-h="cta" href="#gallery" variant="light">
-            <Play className="size-4 fill-current" aria-hidden="true" /> Take a Virtual Tour
-          </Button>
+          </ul>
         </div>
+      </div>
 
-        <div data-h="strip" className="mt-12 border-t border-white/15 pt-6 text-white/72">
-          {/* Phones: the five signals don't fit, so they travel instead of
-              being clipped mid-word. The second copy is aria-hidden so the
-              list is announced only once. */}
-          <div className="marquee sm:hidden">
-            <div className="marquee__track">
-              <SignalList />
-              <SignalList duplicate />
-            </div>
-          </div>
-
-          {/* From `sm` up they all fit on one or two lines — no motion needed. */}
-          <div className="hidden sm:block">
-            <SignalList wrap />
-          </div>
-        </div>
+      {/* ── Feature bar ─────────────────────────────────────────────────── */}
+      <div
+        className="hero-rise shell w-full pb-6 sm:pb-9"
+        style={{ animationDelay: "380ms" }}
+      >
+        {/*
+          One row at every width. Below `sm` it scrolls horizontally inside its
+          own track — the page itself never gains a scrollbar — and the
+          trailing mask hints there is more to swipe. From `sm` up all six fit
+          and it wraps normally.
+        */}
+        <ul className="no-bar fade-r flex gap-x-7 overflow-x-auto border-t border-white/15 pt-5 sm:flex-wrap sm:gap-x-8 sm:gap-y-3 sm:overflow-x-visible">
+          {SIGNALS.map(({ icon: Icon, label, lead }) => (
+            <li
+              key={label}
+              className={`flex shrink-0 items-center gap-2 text-[0.8125rem] sm:text-sm ${
+                lead ? "font-medium text-white" : "text-white/72"
+              }`}
+            >
+              <Icon
+                className={`size-4 shrink-0 ${lead ? "text-clay" : "text-white/55"}`}
+                aria-hidden="true"
+              />
+              {label}
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
