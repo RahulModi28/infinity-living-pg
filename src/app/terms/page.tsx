@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 export default function Terms() {
   return (
     <>
-      <Navbar />
-      <main className="bg-ivory pb-24 pt-36">
+      <Navbar solid />
+      <main id="main" className="bg-ivory pb-24 pt-36">
         <div className="shell max-w-2xl">
           <h1 className="t-section">Terms</h1>
           <p className="mt-4 text-[0.8125rem] text-mute">

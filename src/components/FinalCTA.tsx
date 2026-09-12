@@ -6,7 +6,12 @@ import Button from "./ui/Button";
 import Magnetic from "./ui/Magnetic";
 import EnquiryForm from "./EnquiryForm";
 
-export default function FinalCTA() {
+/**
+ * `roomsHref` exists because this section renders on pages that have a rooms
+ * section and on /faq, which doesn't — there the button has to leave the page
+ * instead of pointing at an anchor that isn't there.
+ */
+export default function FinalCTA({ roomsHref = "#rooms" }: { roomsHref?: string }) {
   return (
     <section
       id="enquire"
@@ -45,7 +50,7 @@ export default function FinalCTA() {
                   <MessageCircle className="size-[1.05em]" aria-hidden="true" /> WhatsApp Us
                 </Button>
               </Magnetic>
-              <Button href="#rooms" variant="light">
+              <Button href={roomsHref} variant="light">
                 See room types
               </Button>
             </div>

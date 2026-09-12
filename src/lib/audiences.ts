@@ -39,7 +39,6 @@ export const audiences: Record<"gents", Audience> = {
         body: "Close enough to campus that you can go back between classes instead of killing three hours somewhere. That single fact changes how a semester actually runs.",
         points: [
           "About 850 m by road to Christ University Yeshwanthpur Campus — roughly a 10 minute walk",
-          "[SEPARATE FLOOR / BLOCK ARRANGEMENT — CONFIRM]",
           "Study desk and charging points at every bed",
           "Gym, pool table and table tennis on site",
           "Housekeeping and laundry service",
@@ -77,7 +76,7 @@ export const audiences: Record<"gents", Audience> = {
       },
       {
         q: "Do you take working professionals as well as students?",
-        a: "[CONFIRM — student-only, or students and working professionals.] The location suits both, given the metro and railway station are close by.",
+        a: "Yes — the location near Nagasandra Metro and the Tumkur Road corridor works for working professionals as well as students. Message us to check current availability.",
       },
       {
         q: "Is there a minimum stay or lock-in?",

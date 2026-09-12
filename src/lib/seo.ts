@@ -1,4 +1,4 @@
-import { site, rooms, faqs, amenityGroups, baseUrl } from "./site";
+import { site, rooms, faqs, amenityGroups, reviews, galleryShots, baseUrl } from "./site";
 import type { Audience } from "./audiences";
 
 /**
@@ -10,6 +10,32 @@ import type { Audience } from "./audiences";
  */
 
 const clean = (v: string) => (v.startsWith("[") ? undefined : v);
+
+/**
+ * Empty while `reviews` is empty (see site.ts — invented testimonials were
+ * removed on purpose). The moment real, permissioned reviews are added there,
+ * this starts emitting AggregateRating + Review schema with no other change
+ * needed — competitors in this micro-market (Stanza Living) already show a
+ * review-backed LocalBusiness in search/AI results and this closes that gap
+ * without publishing a single number that isn't real.
+ */
+function ratingFields() {
+  if (reviews.length === 0) return {};
+  const avg = reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length;
+  return {
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: Number(avg.toFixed(1)),
+      reviewCount: reviews.length,
+    },
+    review: reviews.map((r) => ({
+      "@type": "Review",
+      author: { "@type": "Person", name: r.name },
+      reviewRating: { "@type": "Rating", ratingValue: r.rating, bestRating: 5 },
+      reviewBody: r.text,
+    })),
+  };
+}
 
 export function localBusinessJsonLd() {
   return {
@@ -42,6 +68,7 @@ export function localBusinessJsonLd() {
     image: `${baseUrl()}/images/og.png`,
     sameAs: [site.social.instagram],
     priceRange: "₹₹",
+    ...ratingFields(),
     areaServed: [
       { "@type": "Place", name: "Yeshwanthpur, Bengaluru" },
       { "@type": "Place", name: "Nagasandra, Bengaluru" },
@@ -108,6 +135,57 @@ export function breadcrumbJsonLd() {
       },
     ],
   };
+}
+
+/** Breadcrumb + FAQ schema for the dedicated /faq page. */
+export function faqPageJsonLd() {
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: baseUrl() },
+        { "@type": "ListItem", position: 2, name: "FAQ", item: `${baseUrl()}/faq` },
+      ],
+    },
+    faqJsonLd(),
+  ];
+}
+
+/**
+ * Breadcrumb + ImageGallery schema for the dedicated /gallery page.
+ *
+ * Every image carries its own caption rather than a bare URL list: the alt
+ * text already names the property and the campus, which is what makes these
+ * usable in image search and quotable when an AI answer describes the place.
+ */
+export function galleryPageJsonLd() {
+  const base = baseUrl();
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: base },
+        { "@type": "ListItem", position: 2, name: "Gallery", item: `${base}/gallery` },
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ImageGallery",
+      "@id": `${base}/gallery#gallery`,
+      name: `Photographs of ${site.name}, ${site.address.locality}, ${site.address.city}`,
+      description:
+        "Real photographs of the rooms, rooftop dining hall, gym and common spaces at Infinity Space, a gents PG near Christ University Yeshwanthpur Campus, Bengaluru.",
+      url: `${base}/gallery`,
+      about: { "@id": `${base}/#business` },
+      image: galleryShots.map((s) => ({
+        "@type": "ImageObject",
+        contentUrl: `${base}${s.src}`,
+        caption: s.alt,
+      })),
+    },
+  ];
 }
 
 /** Breadcrumb + FAQ schema for a dedicated audience landing page. */

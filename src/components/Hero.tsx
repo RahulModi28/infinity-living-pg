@@ -1,31 +1,6 @@
 import Image from "next/image";
-import {
-  MapPin,
-  Wifi,
-  ShieldCheck,
-  Sofa,
-  UtensilsCrossed,
-  Dumbbell,
-  Play,
-  Check,
-} from "lucide-react";
+import { MapPin, Play } from "lucide-react";
 import Button from "./ui/Button";
-
-/*
-  The feature bar. "10 min from Christ" leads and is the only item given full
-  white and a clay icon — everything after it is deliberately quieter so the
-  row reads as one strong claim plus supporting detail, not six equal chips.
-*/
-const SIGNALS = [
-  { icon: MapPin, label: "10 min from Christ", lead: true },
-  { icon: Sofa, label: "Fully furnished" },
-  { icon: UtensilsCrossed, label: "4 meals daily" },
-  { icon: ShieldCheck, label: "24/7 security" },
-  { icon: Wifi, label: "High-speed Wi-Fi" },
-  { icon: Dumbbell, label: "Gym + Pool" },
-];
-
-const TRUST = ["Fully furnished", "4 meals daily", "24/7 security"];
 
 export default function Hero() {
   return (
@@ -72,10 +47,10 @@ export default function Hero() {
       */}
       <div aria-hidden="true" className="hero-wash absolute inset-0 -z-10" />
       {/*
-        Part two: a short scrim at the foot only. The feature bar runs the full
-        width, and its right-hand end sits over bright turf where the wash has
-        faded to 0.10 — without this the last two items measure under 3:1. It
-        starts at 58% of the height, so it never reaches the headline.
+        Part two: a short scrim at the foot only, carrying the price and the
+        CTAs where they cross bright turf and the horizontal wash has already
+        faded out. It starts at 58% of the height, so it never reaches the
+        headline.
       */}
       <div aria-hidden="true" className="hero-foot absolute inset-0 -z-10" />
 
@@ -148,54 +123,14 @@ export default function Hero() {
             >
               View Rooms &amp; Pricing
             </Button>
-            <Button href="#gallery" variant="light" className="w-full sm:w-auto">
+            <Button href="/gallery" variant="light" className="w-full sm:w-auto">
               <Play className="size-4 fill-current" aria-hidden="true" /> Take a Virtual
               Tour
             </Button>
           </div>
-
-          <ul
-            className="hero-rise mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-[0.8125rem] text-white/70 sm:mt-7"
-            style={{ animationDelay: "330ms" }}
-          >
-            {TRUST.map((t) => (
-              <li key={t} className="flex items-center gap-1.5">
-                <Check className="size-3.5 shrink-0 text-white/50" aria-hidden="true" />
-                {t}
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
 
-      {/* ── Feature bar ─────────────────────────────────────────────────── */}
-      <div
-        className="hero-rise shell w-full pb-6 sm:pb-9"
-        style={{ animationDelay: "380ms" }}
-      >
-        {/*
-          One row at every width. Below `sm` it scrolls horizontally inside its
-          own track — the page itself never gains a scrollbar — and the
-          trailing mask hints there is more to swipe. From `sm` up all six fit
-          and it wraps normally.
-        */}
-        <ul className="no-bar fade-r flex gap-x-7 overflow-x-auto border-t border-white/15 pt-5 sm:flex-wrap sm:gap-x-8 sm:gap-y-3 sm:overflow-x-visible">
-          {SIGNALS.map(({ icon: Icon, label, lead }) => (
-            <li
-              key={label}
-              className={`flex shrink-0 items-center gap-2 text-[0.8125rem] sm:text-sm ${
-                lead ? "font-medium text-white" : "text-white/72"
-              }`}
-            >
-              <Icon
-                className={`size-4 shrink-0 ${lead ? "text-clay" : "text-white/55"}`}
-                aria-hidden="true"
-              />
-              {label}
-            </li>
-          ))}
-        </ul>
-      </div>
     </section>
   );
 }

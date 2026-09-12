@@ -16,11 +16,9 @@ export const site = {
   name: "Infinity Space",
   tagline: "Premium student living near Christ University, Yeshwanthpur Campus",
   /**
-   * Canonical host. Note that at time of writing the bare
-   * infinityspace4u.com still serves the old GoDaddy placeholder and does
-   * NOT redirect here — both return 200 with different content. That needs
-   * a redirect at the DNS/host level, or Google will index them as two
-   * separate sites and split the ranking signals between them.
+   * Canonical host. The bare infinityspace4u.com now 308-redirects here
+   * (verified via Vercel), so there's a single canonical origin for search
+   * engines and AI crawlers to consolidate signals on.
    */
   url: "https://www.infinityspace4u.com",
 
@@ -29,7 +27,7 @@ export const site = {
     whatsappNumber: "919959560047",
     phoneDisplay: "+91 99595 60047",
     phoneHref: "+919959560047",
-    email: "contact@infinityspace4u.com",
+    email: "hello@brennlo.com",
     /** Second line, from the existing site: M Venkata Reddy. */
     phoneAlt: "+91 99000 05497",
     phoneAltHref: "+919900005497",
@@ -191,6 +189,30 @@ export const amenityGroups = [
   },
 ] as const;
 
+/* ─────────────────────────── Gallery ───────────────────────────
+   Real photographs taken at the property, not stock. The alt text is
+   written to be read aloud and to stand on its own in image search, so
+   each one names the place and the campus rather than "room 1".
+
+   Lives here rather than in the component because the /gallery page's
+   ImageGallery schema is generated from the same list — two copies would
+   drift the moment a photo is added.
+   ─────────────────────────────────────────────────────────────── */
+
+export const galleryShots = [
+  { src: "/images/hero-lounge.jpg", alt: "The lounge at Infinity Space PG, Yeshwanthpur — curved sofa and armchairs on turf flooring under a coffered ceiling" },
+  { src: "/images/room-single.jpg", alt: "Single sharing room with bed, study desk and chair at Infinity Space PG, Yeshwanthpur" },
+  { src: "/images/room-double.jpg", alt: "Double sharing room with two beds, study table and storage at Infinity Space PG, Yeshwanthpur" },
+  { src: "/images/dining-hall.jpg", alt: "Rooftop dining hall at Infinity Space PG near Christ University Yeshwanthpur Campus" },
+  { src: "/images/entrance.jpg", alt: "The entrance at Infinity Space PG near Christ University Yeshwanthpur Campus, Bengaluru" },
+  { src: "/images/living-room.jpg", alt: "Shared living room with sofa seating at Infinity Space PG, Yeshwanthpur, Bengaluru" },
+  { src: "/images/gym.jpg", alt: "Gym at Infinity Space PG — treadmills, cross trainer, bench and weights" },
+  { src: "/images/rooftop-view.jpg", alt: "View across Bengaluru from the rooftop at Infinity Space PG, Yeshwanthpur" },
+  { src: "/images/bathroom.jpg", alt: "Attached bathroom at Infinity Space PG, Yeshwanthpur, Bengaluru" },
+  { src: "/images/hero.jpg", alt: "Common area with snooker table and lounge seating at Infinity Space PG, Yeshwanthpur" },
+  { src: "/images/entry-biometric.jpg", alt: "Biometric secure entry at Infinity Space PG, Yeshwanthpur" },
+] as const;
+
 /* ─────────────────────────── Location ───────────────────────────
    Distances measured by road (OSRM road-network routing) from the
    property's own coordinates to real OpenStreetMap features — not
@@ -297,7 +319,7 @@ export const faqs = [
   },
   {
     q: "Is Wi-Fi available?",
-    a: "Yes. High-speed Wi-Fi is available across the property. Plan and speed: [CONFIRM].",
+    a: "Yes, high-speed Wi-Fi is available across the property. Message us if you need the exact plan and speed before you book.",
   },
   {
     q: "What room types are available?",
@@ -317,7 +339,7 @@ export const faqs = [
   },
   {
     q: "Is housekeeping available?",
-    a: "Yes. Rooms and common areas are cleaned regularly. Frequency: [CONFIRM].",
+    a: "Yes — rooms and common areas are cleaned regularly. Ask us for the current schedule if you'd like specifics.",
   },
   {
     q: "Is there a curfew?",

@@ -16,7 +16,7 @@ export default function SectionHead({
   intro?: string;
   align?: "left" | "center";
   tone?: "dark" | "light";
-  as?: "h2" | "h3";
+  as?: "h1" | "h2" | "h3";
   children?: ReactNode;
 }) {
   const muted = tone === "dark" ? "text-mute" : "text-white/60";

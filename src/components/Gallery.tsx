@@ -5,20 +5,9 @@ import { useCallback, useRef, useState } from "react";
 import { useDialog } from "@/lib/useDialog";
 import { X, ArrowLeft, ArrowRight, Expand } from "lucide-react";
 import SectionHead from "./ui/SectionHead";
+import Reveal from "./ui/Reveal";
 import Figure from "./ui/Figure";
-
-const SHOTS = [
-  { src: "/images/room-single.jpg", alt: "Single sharing room with bed, study desk and chair at Infinity Space PG, Yeshwanthpur", span: "" },
-  { src: "/images/room-double.jpg", alt: "Double sharing room with two beds, study table and storage at Infinity Space PG, Yeshwanthpur", span: "" },
-  { src: "/images/dining-hall.jpg", alt: "Rooftop dining hall at Infinity Space PG near Christ University Yeshwanthpur Campus", span: "" },
-  { src: "/images/entrance.jpg", alt: "The entrance at Infinity Space PG near Christ University Yeshwanthpur Campus, Bengaluru", span: "" },
-  { src: "/images/living-room.jpg", alt: "Shared living room with sofa seating at Infinity Space PG, Yeshwanthpur, Bengaluru", span: "" },
-  { src: "/images/gym.jpg", alt: "Gym at Infinity Space PG — treadmills, cross trainer, bench and weights", span: "" },
-  { src: "/images/rooftop-view.jpg", alt: "View across Bengaluru from the rooftop at Infinity Space PG, Yeshwanthpur", span: "" },
-  { src: "/images/bathroom.jpg", alt: "Attached bathroom at Infinity Space PG, Yeshwanthpur, Bengaluru", span: "" },
-  { src: "/images/hero.jpg", alt: "Common area with snooker table and lounge seating at Infinity Space PG, Yeshwanthpur", span: "" },
-  { src: "/images/entry-biometric.jpg", alt: "Biometric secure entry at Infinity Space PG, Yeshwanthpur", span: "" },
-];
+import { galleryShots as SHOTS } from "@/lib/site";
 
 export default function Gallery() {
   const [open, setOpen] = useState<number | null>(null);
@@ -35,13 +24,16 @@ export default function Gallery() {
     if (e.key === "ArrowLeft") step(-1);
   });
 
+  // pt-32 clears the fixed navbar: this is the first section on its own page
+  // now, not something you scroll down into.
   return (
-    <section id="gallery" className="scroll-mt-20 bg-ivory py-14 sm:py-24 lg:py-32">
+    <section id="gallery" className="scroll-mt-20 bg-ivory pb-14 pt-32 sm:pb-24 sm:pt-40 lg:pb-32">
       <div className="shell">
         <SectionHead
+          as="h1"
           eyebrow="Gallery"
           title="Look around before you visit."
-          intro="Real photographs of the rooms, rooftop dining hall, gym and common spaces — taken at the property, not stock."
+          intro="Real photographs of the rooms, rooftop dining hall, gym and common spaces at Infinity Space, the gents PG near Christ University Yeshwanthpur Campus — taken at the property, not stock."
         />
 
         <div className="mt-14 columns-2 gap-4 sm:gap-5 lg:columns-4">
@@ -70,6 +62,27 @@ export default function Gallery() {
             </button>
           ))}
         </div>
+
+        {/* Photographs are where people decide to enquire, so the page can't
+            end without a way on — and the rest of the site needs a crawlable
+            link back out of it. */}
+        <Reveal>
+          <p className="mt-10 text-[0.8125rem] leading-relaxed text-mute">
+            Photographs only go so far —{" "}
+            <a href="/#enquire" className="link-u font-medium text-ink">
+              book a visit
+            </a>{" "}
+            and see the actual room. Or check{" "}
+            <a href="/#rooms" className="link-u font-medium text-ink">
+              room types and rent
+            </a>{" "}
+            and the{" "}
+            <a href="/faq" className="link-u font-medium text-ink">
+              questions everyone asks
+            </a>
+            .
+          </p>
+        </Reveal>
       </div>
 
       {/* Lightbox */}

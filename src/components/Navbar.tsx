@@ -7,25 +7,36 @@ import Logo from "./Logo";
 import Button from "./ui/Button";
 import { site, whatsappHref } from "@/lib/site";
 
+/**
+ * Absolute, not bare `#hash`: the nav renders on every page, and a bare
+ * fragment silently does nothing anywhere the target section doesn't exist
+ * (/faq, /privacy, /terms). SmoothScroll still eases these on the homepage.
+ */
 const LINKS = [
-  { href: "#rooms", label: "Rooms" },
-  { href: "#amenities", label: "Amenities" },
-  { href: "#location", label: "Location" },
-  { href: "#gallery", label: "Gallery" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/#rooms", label: "Rooms" },
+  { href: "/#amenities", label: "Amenities" },
+  { href: "/#location", label: "Location" },
+  { href: "/gallery", label: "Gallery" },
+  { href: "/faq", label: "FAQ" },
 ];
 
-export default function Navbar() {
-  const [solid, setSolid] = useState(false);
+/**
+ * `solid` forces the opaque treatment from the first paint. The transparent
+ * state assumes a dark hero photograph behind it — on a page that opens on
+ * ivory (/faq, /privacy, /terms) white-on-cream leaves the whole nav at
+ * roughly 1.1:1 contrast until the first scroll.
+ */
+export default function Navbar({ solid: alwaysSolid = false }: { solid?: boolean }) {
+  const [solid, setSolid] = useState(alwaysSolid);
   const [open, setOpen] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setSolid(window.scrollY > 24);
+    const onScroll = () => setSolid(alwaysSolid || window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [alwaysSolid]);
 
   useDialog(open, panelRef, () => setOpen(false));
 
@@ -50,7 +61,7 @@ export default function Navbar() {
           }`}
         >
           <a
-            href="#top"
+            href="/#top"
             className={`transition-[color,transform,font-size] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
               solid ? "text-ink text-[0.95rem]" : "text-white text-[1.05rem]"
             }`}

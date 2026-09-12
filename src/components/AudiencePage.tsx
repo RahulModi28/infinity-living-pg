@@ -17,7 +17,7 @@ export default function AudiencePage({ a }: { a: Audience }) {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main">
         <section className="grain relative isolate overflow-hidden bg-moss-2 pb-14 pt-32 text-ivory sm:pb-20 sm:pt-40">
           <div
             aria-hidden="true"
@@ -128,7 +128,7 @@ export default function AudiencePage({ a }: { a: Audience }) {
             <Reveal>
               <p className="mt-8 text-[0.8125rem] leading-relaxed text-mute">
                 More questions answered on the{" "}
-                <a href="/#faq" className="link-u font-medium text-ink">
+                <a href="/faq" className="link-u font-medium text-ink">
                   main FAQ
                 </a>
                 , including deposits, notice period and what the rent covers.

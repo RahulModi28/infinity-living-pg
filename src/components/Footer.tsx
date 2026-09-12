@@ -2,12 +2,14 @@ import { Instagram, Mail, Phone, MapPin, MessageCircle } from "lucide-react";
 import { site, whatsappHref } from "@/lib/site";
 import Logo from "./Logo";
 
+// Absolute for the same reason as the Navbar's: the footer renders on every
+// page, and a bare fragment is a dead link anywhere the section isn't.
 const NAV = [
-  { href: "#rooms", label: "Rooms" },
-  { href: "#amenities", label: "Amenities" },
-  { href: "#location", label: "Location" },
-  { href: "#gallery", label: "Gallery" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/#rooms", label: "Rooms" },
+  { href: "/#amenities", label: "Amenities" },
+  { href: "/#location", label: "Location" },
+  { href: "/gallery", label: "Gallery" },
+  { href: "/faq", label: "FAQ" },
 ];
 
 const SOCIAL = [{ href: site.social.instagram, label: "Instagram", icon: Instagram }];

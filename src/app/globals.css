@@ -187,16 +187,6 @@
       rgba(5,10,8,0) 58%, rgba(5,10,8,0.42) 84%, rgba(5,10,8,0.66) 100%);
   }
 
-  /* Trailing fade for the hero feature bar while it scrolls on phones.
-     Cleared from `sm` up, where the row wraps and nothing is clipped. */
-  .fade-r {
-    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent);
-    mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent);
-  }
-  @media (min-width: 640px) {
-    .fade-r { -webkit-mask-image: none; mask-image: none; }
-  }
-
   .link-u {
     background-image: linear-gradient(currentColor, currentColor);
     background-size: 0% 1px;

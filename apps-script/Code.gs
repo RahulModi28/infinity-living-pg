@@ -27,7 +27,7 @@ const CFG = {
   whatsappNumber: '919959560047',
 
   // Where the "new lead" alert goes. Change to whichever inbox is actually watched.
-  notify: 'contact@infinityspace4u.com',
+  notify: 'hello@brennlo.com',
 
   // Shown as the sender name. The address itself is the Google account that
   // owns this script and cannot be set here — see README.

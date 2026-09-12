@@ -34,12 +34,19 @@ export default function SmoothScroll() {
     gsap.ticker.lagSmoothing(0);
 
     // In-page anchors route through Lenis so they ease instead of jumping.
+    // `/#rooms` is included because the nav and footer render site-wide and
+    // have to work as real navigation from /faq and the other sub-pages — on
+    // the homepage itself it is still the same document, so it eases here and
+    // only falls through to a page load when we are somewhere else.
     const onClick = (e: MouseEvent) => {
-      const a = (e.target as HTMLElement)?.closest?.('a[href^="#"]') as HTMLAnchorElement | null;
+      const a = (e.target as HTMLElement)?.closest?.(
+        'a[href^="#"], a[href^="/#"]'
+      ) as HTMLAnchorElement | null;
       if (!a) return;
-      const id = a.getAttribute("href");
-      if (!id || id === "#") return;
-      const el = document.querySelector(id);
+      const href = a.getAttribute("href");
+      if (!href || href === "#") return;
+      if (href.startsWith("/#") && window.location.pathname !== "/") return;
+      const el = document.querySelector(href.startsWith("/#") ? href.slice(1) : href);
       if (!el) return;
       e.preventDefault();
       lenis.scrollTo(el as HTMLElement, { offset: -72 });

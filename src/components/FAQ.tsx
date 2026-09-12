@@ -11,13 +11,18 @@ export default function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="scroll-mt-20 bg-ivory py-14 sm:py-24 lg:py-32">
+    <section id="faq" className="scroll-mt-20 bg-ivory pb-14 pt-32 sm:pb-24 sm:pt-40 lg:pb-32">
       <div className="shell grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
         <div className="lg:sticky lg:top-28 lg:self-start">
+          {/* This is the page's only h1 and it used to name nothing — the
+              whole reason the page ranks is PG questions. The campus stays in
+              the intro rather than the headline: spelled out in full it ran to
+              five lines of display type, which this layout doesn't carry. */}
           <SectionHead
+            as="h1"
             eyebrow="FAQ"
-            title="The questions everyone asks."
-            intro="Straight answers, including the ones other places leave vague. If something isn't here, ask us and you'll get the real answer the same day."
+            title="The questions everyone asks about our PG."
+            intro="Straight answers about Infinity Space, the gents PG near Christ University Yeshwanthpur Campus — including the ones other places leave vague. If something isn't here, ask us and you'll get the real answer the same day."
           />
           <Reveal delay={0.1}>
             <Button
@@ -33,12 +38,16 @@ export default function FAQ() {
           </Reveal>
         </div>
 
-        <Reveal stagger className="divide-y divide-ink/12 border-t border-ink/12">
+        <div>
+          <Reveal stagger className="divide-y divide-ink/12 border-t border-ink/12">
           {faqs.map((f, i) => {
             const isOpen = open === i;
             return (
               <div key={f.q}>
-                <h3>
+                {/* h2, not h3: the section head above is the page h1, and
+                    h1 → h3 skips a level for screen readers and for the
+                    heading outline AI crawlers parse. */}
+                <h2>
                   <button
                     onClick={() => setOpen(isOpen ? null : i)}
                     aria-expanded={isOpen}
@@ -58,7 +67,7 @@ export default function FAQ() {
                       <Plus className="size-4" />
                     </span>
                   </button>
-                </h3>
+                </h2>
                 <div
                   id={`faq-panel-${i}`}
                   role="region"
@@ -80,7 +89,25 @@ export default function FAQ() {
               </div>
             );
           })}
-        </Reveal>
+          </Reveal>
+
+          {/* The only way off this page was WhatsApp. Search traffic lands
+              here directly, so it needs somewhere to go next — and the gents
+              page already links in, which left the link one-directional. */}
+          <Reveal>
+            <p className="mt-8 text-[0.8125rem] leading-relaxed text-mute">
+              Still deciding? See{" "}
+              <a href="/#rooms" className="link-u font-medium text-ink">
+                room types and rent
+              </a>
+              , or the detail on a{" "}
+              <a href="/gents-pg-yeshwanthpur" className="link-u font-medium text-ink">
+                gents PG in Yeshwanthpur
+              </a>
+              .
+            </p>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

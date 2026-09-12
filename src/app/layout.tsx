@@ -3,7 +3,7 @@ import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { site, baseUrl } from "@/lib/site";
-import { localBusinessJsonLd, faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import { localBusinessJsonLd } from "@/lib/seo";
 import SmoothScroll from "@/components/SmoothScroll";
 import Analytics from "@/components/Analytics";
 import OverflowGuard from "@/components/OverflowGuard";
@@ -96,15 +96,18 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-IN" className={`${inter.variable} ${jakarta.variable}`}>
-      {/* beforeInteractive is the only next/script strategy Next.js injects
-          into <head>, which is where AdSense requires this script. */}
-      <Script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1363796922613344"
-        crossOrigin="anonymous"
-        strategy="beforeInteractive"
-      />
       <body>
+        {/* Inside <body>, not between <html> and <body>: a <script> is not a
+            permitted child of <html>, and React reported it as a hydration
+            error on every page. beforeInteractive still hoists it into
+            <head>, which is where AdSense wants it — the strategy does the
+            placing, so it does not have to be written there. */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1363796922613344"
+          crossOrigin="anonymous"
+          strategy="beforeInteractive"
+        />
         {/*
           Runs before first paint, so a returning visitor never sees a frame
           of the preloader. It appends its own style element rather than
@@ -122,28 +125,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <style>{`.preloader{display:none!important}`}</style>
         </noscript>
         <Preloader />
+        {/* #main, not #rooms: every page renders this, and only the homepage
+            has a rooms section — everywhere else the skip link went nowhere. */}
         <a
-          href="#rooms"
+          href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-ivory"
         >
-          Skip to rooms
+          Skip to content
         </a>
         <SmoothScroll />
         <Analytics />
         <OverflowGuard />
         <WhatsAppGate />
         {children}
+        {/* Only the business entity is site-wide — it is the same entity on
+            every page, keyed by @id. The breadcrumb is not: /faq, /gallery and
+            the audience page each publish their own, and emitting the
+            homepage's here too put two contradictory BreadcrumbLists on those
+            pages. It now lives on the homepage. */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd()) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd()) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd()) }}
         />
       </body>
     </html>
