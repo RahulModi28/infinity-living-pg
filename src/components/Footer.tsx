@@ -10,6 +10,7 @@ const NAV = [
   { href: "/#location", label: "Location" },
   { href: "/gallery", label: "Gallery" },
   { href: "/faq", label: "FAQ" },
+  { href: "/blog", label: "Blog" },
 ];
 
 const SOCIAL = [{ href: site.social.instagram, label: "Instagram", icon: Instagram }];

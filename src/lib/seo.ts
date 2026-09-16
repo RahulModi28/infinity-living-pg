@@ -1,5 +1,6 @@
 import { site, rooms, faqs, amenityGroups, reviews, galleryShots, baseUrl } from "./site";
 import type { Audience } from "./audiences";
+import type { Post } from "./blog";
 
 /**
  * Structured data. Keyword and phrasing choices below are grounded in live
@@ -207,6 +208,74 @@ export function audienceJsonLd(a: Audience, base: string) {
         name: f.q,
         acceptedAnswer: { "@type": "Answer", text: f.a },
       })),
+    },
+  ];
+}
+
+/** Breadcrumb + Blog schema for the /blog index. */
+export function blogIndexJsonLd(posts: Post[]) {
+  const base = baseUrl();
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: base },
+        { "@type": "ListItem", position: 2, name: "Blog", item: `${base}/blog` },
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "@id": `${base}/blog#blog`,
+      name: `${site.name} Blog`,
+      url: `${base}/blog`,
+      publisher: { "@id": `${base}/#business` },
+      blogPost: posts.map((p) => ({
+        "@type": "BlogPosting",
+        headline: p.title,
+        url: `${base}/blog/${p.slug}`,
+        datePublished: p.date,
+      })),
+    },
+  ];
+}
+
+/**
+ * Breadcrumb + BlogPosting for a single post. The publisher points at the
+ * site-wide business entity by @id, so every post is attributed to the same
+ * PG that the rest of the schema describes.
+ */
+export function blogPostJsonLd(p: Post) {
+  const base = baseUrl();
+  const url = `${base}/blog/${p.slug}`;
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: base },
+        { "@type": "ListItem", position: 2, name: "Blog", item: `${base}/blog` },
+        { "@type": "ListItem", position: 3, name: p.title, item: url },
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "@id": `${url}#post`,
+      headline: p.title,
+      description: p.description,
+      url,
+      mainEntityOfPage: url,
+      datePublished: p.date,
+      dateModified: p.updated ?? p.date,
+      image: `${base}${p.cover ?? "/images/og.png"}`,
+      author:
+        p.author === site.name
+          ? { "@id": `${base}/#business` }
+          : { "@type": "Person", name: p.author },
+      publisher: { "@id": `${base}/#business` },
+      isPartOf: { "@id": `${base}/blog#blog` },
     },
   ];
 }

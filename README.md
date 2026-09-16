@@ -173,6 +173,38 @@ gents-only, so ranking for it would earn enquiries it can't serve. The site
 says so plainly on the homepage and in the FAQ rather than letting someone
 find out after a visit.
 
+### The blog
+
+Posts are Markdown files in `content/blog/`. To publish one, add a file —
+the filename becomes the URL, so `content/blog/nagasandra-metro-guide.md`
+is served at `/blog/nagasandra-metro-guide` (lowercase, digits, hyphens).
+Start it with:
+
+```md
+---
+title: How to get from Nagasandra Metro to campus
+description: One or two sentences — shown in search results and link previews.
+date: 2026-09-20
+cover: /images/entrance.jpg
+coverAlt: Describe the photo for someone who can't see it
+---
+
+Normal Markdown from here: ## headings, **bold**, [links](/faq), lists.
+```
+
+`cover`/`coverAlt` are optional (the image goes in `public/images/`), as are
+`updated: YYYY-MM-DD` and `author:` (defaults to Infinity Space). Add
+`draft: true` to keep a post off the site entirely while it's being written.
+
+A new post is picked up by `/blog`, the sitemap and the post's own
+BlogPosting schema on the next deploy — nothing else to edit. A malformed
+file (missing title, bad date) fails the build with the filename in the
+error rather than publishing half a post. After deploying, run
+`npm run indexnow` so Bing (and so ChatGPT/Copilot) see it quickly.
+
+Same rule as the rest of the site: only publish facts that are true. Prices,
+distances and policies in a post should match `src/lib/site.ts`.
+
 ### The motion system
 
 Motion is deliberately centralised so it reads as one hand:
