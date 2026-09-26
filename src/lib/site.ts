@@ -331,7 +331,7 @@ export const faqs = [
   },
   {
     q: "What is the minimum stay?",
-    a: "12 months. That lines up with the deposit, which is adjusted against your April and May rent at the end of the term — so a full year is the arrangement the pricing is built around.",
+    a: "12 months, with 2 months' notice before you move out. That lines up with the deposit, which is adjusted against your April and May rent at the end of the term — so a full year is the arrangement the pricing is built around. Leaving before 12 months forfeits the deposit.",
   },
   {
     q: "Are visitors and parents allowed?",
