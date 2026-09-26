@@ -31,15 +31,19 @@ export type Audience = {
 export const audiences: Record<"gents", Audience> = {
   gents: {
     slug: "gents-pg-yeshwanthpur",
-    title: "Gents PG in Yeshwanthpur near Christ University",
+    // Led by "pg in yeshwanthpur" (720/mo) and "pg near yeshwanthpur for
+    // male" (140/mo), from the Semrush keyword gap against Stanza Living and
+    // EaseMyLiving — both sit on page 2+ for these, at KD 9–15. The slug is
+    // unchanged so the URL Google already knows keeps its signals.
+    title: "PG in Yeshwanthpur for Male Students & Professionals",
     description:
-      "A gents PG in Yeshwanthpur for students and working professionals — 10 minutes' walk to Christ University, close to Nagasandra Metro. Single & double rooms.",
-    h1: "Gents PG in Yeshwanthpur, near Christ University",
+      "PG in Yeshwanthpur for men — a 10 minute walk to Christ University, near Nagasandra Metro. Single ₹20,000, double ₹16,000, meals and Wi-Fi included.",
+    h1: "PG in Yeshwanthpur for men, near Christ University",
     eyebrow: "For men students & working professionals",
     intro:
       "Furnished rooms, four meals a day, Wi-Fi that survives submission week, and a location that works whether you're walking to campus or catching the metro to an office.",
     answer:
-      "Infinity Space is a gents PG in HMT Layout, Yeshwanthpur, about 850 m — a 10 minute walk — from Christ University Yeshwanthpur Campus and 2.1 km from Nagasandra Metro. Single sharing is ₹20,000 a month and double sharing ₹16,000 per person, including four meals a day (Mon–Fri), electricity, Wi-Fi and housekeeping.",
+      "Infinity Space is a PG in Yeshwanthpur for men, in HMT Layout, about 850 m — a 10 minute walk — from Christ University Yeshwanthpur Campus and 2.1 km from Nagasandra Metro. Single sharing is ₹20,000 a month and double sharing ₹16,000 per person, including four meals a day (Mon–Fri), electricity, Wi-Fi and housekeeping.",
     sections: [
       {
         h2: "Boys PG near Christ University Yeshwanthpur Campus",
@@ -52,8 +56,8 @@ export const audiences: Record<"gents", Audience> = {
         ],
       },
       {
-        h2: "Mens PG near Nagasandra Metro",
-        body: "Not everyone here is a student. Nagasandra and Dasarahalli on the Green Line put the Tumkur Road industrial belt and the rest of the city within a straightforward commute, which suits working professionals sharing the building.",
+        h2: "PG near Yeshwanthpur for male professionals",
+        body: "Not everyone here is a student. Nagasandra Metro and Dasarahalli on the Green Line put the Tumkur Road industrial belt and the rest of the city within a straightforward commute, which suits working professionals sharing the building.",
         points: [
           "Nagasandra Metro (Green Line) — 2.1 km walk",
           "Dasarahalli Metro (Green Line) — 2.5 km walk",
@@ -74,7 +78,7 @@ export const audiences: Record<"gents", Audience> = {
     ],
     faqs: [
       {
-        q: "What is the rent for a gents PG in Yeshwanthpur?",
+        q: "What is the rent for a PG in Yeshwanthpur?",
         a: "₹20,000 a month for single sharing, ₹16,000 per person for double sharing. Electricity and meals are included in that.",
       },
       {
@@ -82,7 +86,11 @@ export const audiences: Record<"gents", Audience> = {
         a: "At Infinity Space a single sharing room is ₹20,000 a month, with meals, electricity, Wi-Fi, housekeeping and laundry included. The deposit is two months' rent (₹40,000), adjusted against your April and May rent.",
       },
       {
-        q: "Is food included for the gents PG?",
+        q: "Is this PG near Yeshwanthpur for male residents only?",
+        a: "Yes. Infinity Space is a gents-only PG for male students and working professionals, and visitors are male only too. We don't have accommodation for women.",
+      },
+      {
+        q: "Is food included in the rent?",
         a: "Yes, and included in the rent rather than charged on top — four meals a day Monday to Friday, cooked on site. Saturday is breakfast and lunch only.",
       },
       {

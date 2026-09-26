@@ -155,7 +155,7 @@ export default function BlogPage() {
                 <ul className="mt-6 space-y-2.5 text-[0.9375rem]">
                   <li>
                     <a href="/gents-pg-yeshwanthpur" className="link-u font-medium text-ink">
-                      Gents PG in Yeshwanthpur near Christ University
+                      PG in Yeshwanthpur for men, near Christ University
                     </a>
                   </li>
                   <li>
