@@ -26,8 +26,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.8,
     })),
-    // /privacy and /terms are intentionally omitted: both are noindexed and
-    // disallowed in robots.ts while their legal text is still draft, and a
-    // sitemap should only list pages you want crawled and indexed.
+    // Fixed dates rather than `now`: these change rarely, and a lastModified
+    // that moves on every deploy teaches crawlers to ignore it. Keep in step
+    // with UPDATED in each page.
+    { url: `${base}/privacy`, lastModified: new Date("2026-09-26"), changeFrequency: "yearly" as const, priority: 0.2 },
+    { url: `${base}/terms`, lastModified: new Date("2026-09-26"), changeFrequency: "yearly" as const, priority: 0.2 },
   ];
 }

@@ -8,10 +8,10 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        // /privacy and /terms are still draft text (bracketed placeholders) —
-        // kept out of every crawler, not just noindexed for Google, so no AI
-        // answer engine ingests or cites unfinished legal copy either.
-        disallow: ["/api/", "/privacy", "/terms"],
+        // /privacy and /terms were blocked while they were draft text; they
+        // are complete now, and a readable privacy policy is a trust signal
+        // (and an AdSense requirement), so only the API stays out.
+        disallow: ["/api/"],
       },
     ],
     sitemap: `${base}/sitemap.xml`,
