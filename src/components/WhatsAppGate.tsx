@@ -15,7 +15,7 @@ import Button from "./ui/Button";
  *
  * Implemented as a document-level click interceptor rather than by changing
  * ten components, for two reasons: any WhatsApp link added later is covered
- * automatically, and the links stay real `href="https://wa.me/…"` anchors —
+ * automatically, and the links stay real WhatsApp anchors (see whatsappHref) —
  * so with JavaScript disabled or broken they still work, just ungated.
  *
  * The per-link message is preserved: the room modal and the audience pages
@@ -67,7 +67,7 @@ export default function WhatsAppGate() {
     const target = a.getAttribute("href") || "";
     // Only gate real WhatsApp hand-offs. While the number was a placeholder
     // these pointed at #enquire, and modified clicks should behave normally.
-    if (!target.includes("wa.me")) return;
+    if (!/wa\.me|api\.whatsapp\.com/.test(target)) return;
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
 
     // Already given their details once — don't ask twice.

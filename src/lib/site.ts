@@ -430,7 +430,12 @@ export function whatsappHref(message: string = site.contact.whatsappMessage) {
   const num = site.contact.whatsappNumber.replace(/[^\d]/g, "");
   // While the number is still a placeholder, keep the link inert but visible.
   if (!num) return "#enquire";
-  return `https://wa.me/${num}?text=${encodeURIComponent(message)}`;
+  // api.whatsapp.com/send, not wa.me: wa.me only redirects here, and
+  // Semrush reported every wa.me link as a broken external link (13 of them,
+  // one per page) because its crawler doesn't get a 200 back through the
+  // redirect. Same destination for people — the app on a phone, WhatsApp
+  // Web on a desktop — without the hop.
+  return `https://api.whatsapp.com/send?phone=${num}&text=${encodeURIComponent(message)}`;
 }
 
 export const isPlaceholder = (v: string) => /^\[.*\]$/.test(v.trim());

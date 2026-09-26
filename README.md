@@ -130,7 +130,7 @@ and many open the app and never do.
 
 It is a document-level click interceptor (`WhatsAppGate.tsx`) rather than a
 change to the ten components that link to WhatsApp. Any link added later is
-covered automatically, and the anchors stay real `wa.me` hrefs, so with
+covered automatically, and the anchors stay real WhatsApp hrefs, so with
 JavaScript broken they still work, just ungated.
 
 Someone who has filled it once is remembered in `localStorage` and not asked
