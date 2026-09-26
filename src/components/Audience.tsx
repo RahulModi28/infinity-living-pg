@@ -66,7 +66,7 @@ export default function Audience() {
               className="mt-7 !px-5 !py-3 !text-[0.875rem]"
               arrow
             >
-              See gents PG details
+              PG in Yeshwanthpur for men
             </Button>
           </div>
         </Reveal>

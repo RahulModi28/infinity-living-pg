@@ -109,9 +109,9 @@ export default function FAQ() {
               <a href="/#rooms" className="link-u font-medium text-ink">
                 room types and rent
               </a>
-              , or the detail on a{" "}
+              , or the detail on our{" "}
               <a href="/gents-pg-yeshwanthpur" className="link-u font-medium text-ink">
-                gents PG in Yeshwanthpur
+                PG in Yeshwanthpur for men
               </a>
               .
             </p>
