@@ -40,6 +40,10 @@ export default function QuickAnswers() {
               <a href="/blog/pg-near-christ-university-yeshwanthpur-checklist" className="link-u font-medium text-ink">
                 What to check before you pay for a PG
               </a>
+              , or{" "}
+              <a href="/blog/single-sharing-pg-near-christ-university" className="link-u font-medium text-ink">
+                single vs double sharing, compared
+              </a>
               .
             </p>
           </Reveal>

@@ -52,6 +52,12 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 export default async function PostPage({ params }: Params) {
   const p = getPost((await params).slug);
   if (!p) notFound();
+  // Every other post, newest first. Without this a post's only incoming
+  // link was the /blog index, which Semrush flags and which leaves crawlers
+  // one route in. Capped so it stays a short list as the blog grows.
+  const more = getPosts()
+    .filter((x) => x.slug !== p.slug)
+    .slice(0, 3);
 
   return (
     <>
@@ -100,6 +106,29 @@ export default async function PostPage({ params }: Params) {
           <div className="shell mt-10 sm:mt-14">
             <div className="prose-post mx-auto max-w-3xl" dangerouslySetInnerHTML={{ __html: p.html }} />
           </div>
+
+          {more.length > 0 && (
+            <aside aria-labelledby="more-guides" className="shell mt-16 sm:mt-20">
+              <div className="mx-auto max-w-3xl border-t border-ink/12 pt-10">
+                <h2 id="more-guides" className="t-label text-clay">
+                  More guides
+                </h2>
+                <ul className="mt-5 space-y-4">
+                  {more.map((m) => (
+                    <li key={m.slug}>
+                      <a
+                        href={`/blog/${m.slug}`}
+                        className="font-display text-[1.125rem] leading-snug tracking-[-0.02em] transition-colors duration-300 hover:text-clay"
+                      >
+                        {m.title}
+                      </a>
+                      <p className="mt-1 text-[0.875rem] leading-relaxed text-mute">{m.description}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </aside>
+          )}
         </article>
         <FinalCTA roomsHref="/#rooms" />
       </main>

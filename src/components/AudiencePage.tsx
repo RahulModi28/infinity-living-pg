@@ -144,7 +144,16 @@ export default function AudiencePage({ a }: { a: Audience }) {
                 <a href="/faq" className="link-u font-medium text-ink">
                   main FAQ
                 </a>
-                , including deposits, notice period and what the rent covers.
+                , including deposits, notice period and what the rent covers. Comparing room
+                types? Read{" "}
+                <a href="/blog/single-sharing-pg-near-christ-university" className="link-u font-medium text-ink">
+                  single vs double sharing near Christ University
+                </a>
+                . Commuting by metro? See our{" "}
+                <a href="/blog/best-pg-near-nagasandra-metro" className="link-u font-medium text-ink">
+                  guide to PGs near Nagasandra Metro
+                </a>
+                .
               </p>
             </Reveal>
           </div>
