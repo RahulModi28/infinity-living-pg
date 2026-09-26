@@ -91,7 +91,7 @@ export const audiences: Record<"gents", Audience> = {
       },
       {
         q: "Is there a minimum stay or lock-in?",
-        a: "12 months. The deposit is adjusted against your April and May rent at the end of that term. We put the notice period in writing before you pay anything.",
+        a: "12 months, with a 2-month notice period. The deposit is adjusted against your April and May rent at the end of that term; leaving before 12 months forfeits it. Everything is put in writing before you pay anything.",
       },
     ],
   },

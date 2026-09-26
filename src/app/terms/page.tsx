@@ -15,10 +15,9 @@ export const metadata: Metadata = {
  * lock-in, curfew, visitors). Rent and deposit are rendered from site.ts, so
  * this page can't quote a stale number.
  *
- * Deliberately NOT stated here, because none of it has been confirmed: a
- * notice period, a cancellation or refund policy before move-in, and damage
- * deductions. Section 3 defers all of those to the written agreement signed
- * at booking — add them here once they are decided.
+ * Notice (2 months), early exit (deposit forfeited), cancellation before
+ * move-in (full refund) and damage/dues were confirmed by the owner on
+ * 2026-09-26. If any of them change, change them here and in the FAQ.
  */
 const UPDATED = "2026-09-26";
 
@@ -98,11 +97,24 @@ export default function Terms() {
                 </li>
                 <li>The minimum stay is 12 months.</li>
                 <li>
-                  The notice period, what happens if you leave before 12 months, and any cancellation
-                  before move-in are set out in your written agreement. We give you these in writing
-                  before you pay anything.
+                  <strong>Notice period:</strong> 2 months. Tell us in writing (WhatsApp is fine) at
+                  least 2 months before the date you plan to move out.
+                </li>
+                <li>
+                  <strong>Leaving before 12 months:</strong> the security deposit is forfeited. It is
+                  not adjusted against rent or refunded.
+                </li>
+                <li>
+                  <strong>Cancelling before move-in:</strong> if you have paid anything to reserve a
+                  room and cancel before moving in, we refund it in full.
+                </li>
+                <li>
+                  <strong>Damage and dues:</strong> the cost of any damage beyond normal wear and
+                  tear, and any unpaid rent or charges, is payable by you and must be settled before
+                  you move out.
                 </li>
               </ul>
+              <p>These terms are also set out in the written agreement you sign at booking.</p>
             </>
           ),
         },
