@@ -1,4 +1,4 @@
-import { site, rooms, faqs, amenityGroups, reviews, galleryShots, baseUrl } from "./site";
+import { site, rooms, faqs, homeFaqs, amenityGroups, reviews, galleryShots, baseUrl } from "./site";
 import type { Audience } from "./audiences";
 import type { Post } from "./blog";
 
@@ -38,75 +38,124 @@ function ratingFields() {
   };
 }
 
+/**
+ * The business, the site and the offers as one @graph, emitted on every page
+ * from the layout.
+ *
+ * Semrush's audit flagged this block on every crawled page: it used
+ * `nearbyAttraction`, which is not a schema.org property, so the whole
+ * LocalBusiness item failed validation. The campus now lives where the
+ * vocabulary allows it — in `areaServed` and the description — and two
+ * other quiet errors went with it: Offer.itemOffered cannot be an
+ * Accommodation (a Place), and Accommodation.occupancy must be a
+ * QuantitativeValue, not the string "1 person".
+ */
 export function localBusinessJsonLd() {
+  const base = baseUrl();
+  const business = `${base}/#business`;
   return {
     "@context": "https://schema.org",
-    "@type": ["LodgingBusiness", "LocalBusiness"],
-    "@id": `${baseUrl()}/#business`,
-    name: site.name,
-    description:
-      "Gents PG near Christ University Yeshwanthpur Campus, Bengaluru. Furnished single and double sharing rooms with Wi-Fi, meals, gym, housekeeping and biometric entry.",
-    url: baseUrl(),
-    telephone: clean(site.contact.phoneDisplay),
-    email: clean(site.contact.email),
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: clean(site.address.street),
-      addressLocality: site.address.locality,
-      addressRegion: site.address.state,
-      postalCode: clean(site.address.postalCode),
-      addressCountry: site.address.country,
-    },
-    ...(clean(site.address.lat) && clean(site.address.lng)
-      ? {
-          geo: {
-            "@type": "GeoCoordinates",
-            latitude: site.address.lat,
-            longitude: site.address.lng,
+    "@graph": [
+      {
+        "@type": "LodgingBusiness",
+        "@id": business,
+        name: site.name,
+        description:
+          "Gents PG about 850 m (a 10 minute walk) from Christ University Yeshwanthpur Campus, Bengaluru. Furnished single (₹20,000/month) and double sharing (₹16,000/person/month) rooms with meals, electricity, Wi-Fi, housekeeping, a gym and biometric entry included.",
+        url: base,
+        telephone: clean(site.contact.phoneDisplay),
+        email: clean(site.contact.email),
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: clean(site.address.street),
+          addressLocality: site.address.locality,
+          addressRegion: site.address.state,
+          postalCode: clean(site.address.postalCode),
+          addressCountry: site.address.country,
+        },
+        ...(clean(site.address.lat) && clean(site.address.lng)
+          ? {
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: Number(site.address.lat),
+                longitude: Number(site.address.lng),
+              },
+              hasMap: `https://www.google.com/maps?q=${site.address.lat},${site.address.lng}`,
+            }
+          : {}),
+        image: [`${base}/images/og.png`, `${base}/images/entrance.jpg`, `${base}/images/room-single.jpg`],
+        logo: `${base}/icon.png`,
+        sameAs: [site.social.instagram],
+        priceRange: "₹16,000–₹20,000 per month",
+        currenciesAccepted: "INR",
+        ...ratingFields(),
+        audience: { "@type": "PeopleAudience", suggestedGender: "male" },
+        areaServed: [
+          { "@type": "CollegeOrUniversity", name: "Christ University — Yeshwanthpur Campus" },
+          { "@type": "Place", name: "Yeshwanthpur, Bengaluru" },
+          { "@type": "Place", name: "Nagasandra, Bengaluru" },
+          { "@type": "Place", name: "HMT Layout, Bengaluru" },
+        ],
+        /**
+         * Derived from amenityGroups rather than listed again here. The previous
+         * hard-coded list silently fell behind as amenities were confirmed — it
+         * was still missing the gym, the rooftop dining hall, the attached
+         * bathroom and biometric entry long after those went live on the page.
+         * Anything still bracketed is unconfirmed and stays out of the schema.
+         */
+        amenityFeature: [
+          ...amenityGroups.flatMap((g) => g.items.filter((i) => !i.includes("["))),
+          ...(site.foodAvailable ? ["Four meals a day cooked on site (Mon–Fri)"] : []),
+        ].map((n) => ({ "@type": "LocationFeatureSpecification", name: n, value: true })),
+        containsPlace: rooms.map((r) => ({
+          "@type": "Accommodation",
+          "@id": `${base}/#room-${r.id}`,
+          name: `${r.name} room`,
+          occupancy: {
+            "@type": "QuantitativeValue",
+            value: Number(r.occupancy.replace(/[^\d]/g, "")) || 1,
+            unitText: "person",
           },
-        }
-      : {}),
-    image: `${baseUrl()}/images/og.png`,
-    sameAs: [site.social.instagram],
-    priceRange: "₹₹",
-    ...ratingFields(),
-    areaServed: [
-      { "@type": "Place", name: "Yeshwanthpur, Bengaluru" },
-      { "@type": "Place", name: "Nagasandra, Bengaluru" },
-      { "@type": "Place", name: "Malleshwaram, Bengaluru" },
-    ],
-    /**
-     * Derived from amenityGroups rather than listed again here. The previous
-     * hard-coded list silently fell behind as amenities were confirmed — it
-     * was still missing the gym, the rooftop dining hall, the attached
-     * bathroom and biometric entry long after those went live on the page.
-     * Anything still bracketed is unconfirmed and stays out of the schema.
-     */
-    amenityFeature: [
-      ...amenityGroups.flatMap((g) => g.items.filter((i) => !i.includes("["))),
-      ...(site.foodAvailable ? ["Four meals a day cooked on site (Mon–Fri)"] : []),
-    ].map((n) => ({ "@type": "LocationFeatureSpecification", name: n, value: true })),
-    nearbyAttraction: {
-      "@type": "CollegeOrUniversity",
-      name: "Christ University — Yeshwanthpur Campus",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Yeshwanthpur",
-        addressRegion: "Karnataka",
-        addressCountry: "IN",
+        })),
+        makesOffer: rooms.map((r) => ({
+          "@type": "Offer",
+          name: `${r.name} room — PG near Christ University Yeshwanthpur`,
+          availability: "https://schema.org/InStock",
+          // Price is intentionally omitted while it is a placeholder: publishing a
+          // fabricated price in schema is worse than publishing none.
+          // Display string is "20,000"; schema needs a bare number.
+          ...(clean(r.price)
+            ? {
+                price: Number(r.price.replace(/[^\d.]/g, "")),
+                priceCurrency: "INR",
+                priceSpecification: {
+                  "@type": "UnitPriceSpecification",
+                  price: Number(r.price.replace(/[^\d.]/g, "")),
+                  priceCurrency: "INR",
+                  unitText: r.priceNote,
+                  referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitCode: "MON" },
+                },
+              }
+            : {}),
+          itemOffered: {
+            "@type": "Service",
+            name: `${r.name} PG room`,
+            serviceType: "Paying guest accommodation",
+            description: r.blurb,
+            areaServed: "Yeshwanthpur, Bengaluru",
+            provider: { "@id": business },
+          },
+        })),
       },
-    },
-    makesOffer: rooms.map((r) => ({
-      "@type": "Offer",
-      name: `${r.name} room — PG in Yeshwanthpur`,
-      // Price is intentionally omitted while it is a placeholder: publishing a
-      // fabricated price in schema is worse than publishing none.
-      // Display string is "20,000"; schema needs a bare number.
-      ...(clean(r.price)
-        ? { price: r.price.replace(/[^\d.]/g, ""), priceCurrency: "INR" }
-        : {}),
-      itemOffered: { "@type": "Accommodation", name: r.name, occupancy: r.occupancy },
-    })),
+      {
+        "@type": "WebSite",
+        "@id": `${base}/#website`,
+        url: base,
+        name: site.name,
+        inLanguage: "en-IN",
+        publisher: { "@id": business },
+      },
+    ],
   };
 }
 
@@ -122,19 +171,23 @@ export function faqJsonLd() {
   };
 }
 
-export function breadcrumbJsonLd() {
+/**
+ * FAQPage for the homepage's "quick answers" block. Built from the same
+ * entries the block renders, so the schema can never claim an answer the
+ * page doesn't show.
+ *
+ * Replaces the homepage BreadcrumbList, whose second item pointed at
+ * /#rooms — a fragment of the page itself, which is not a breadcrumb.
+ */
+export function homeFaqJsonLd() {
   return {
     "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: baseUrl() },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "PG near Christ University Yeshwanthpur Campus",
-        item: `${baseUrl()}/#rooms`,
-      },
-    ],
+    "@type": "FAQPage",
+    mainEntity: homeFaqs().map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
   };
 }
 

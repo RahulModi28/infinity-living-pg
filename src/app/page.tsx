@@ -17,7 +17,8 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import MobileBar from "@/components/MobileBar";
 import { site } from "@/lib/site";
-import { breadcrumbJsonLd } from "@/lib/seo";
+import QuickAnswers from "@/components/QuickAnswers";
+import { homeFaqJsonLd } from "@/lib/seo";
 
 export default function Home() {
   return (
@@ -40,6 +41,7 @@ export default function Home() {
         <ParentTrust />
         {site.foodAvailable && <Food />}
         <Reviews />
+        <QuickAnswers />
         {/* Removes the "what happens if I message them?" hesitation right
             before the final ask */}
         <BookingSteps />
@@ -51,7 +53,7 @@ export default function Home() {
       <MobileBar />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd()) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeFaqJsonLd()) }}
       />
     </>
   );

@@ -355,6 +355,39 @@ export const faqs = [
   },
 ] as const;
 
+/**
+ * The subset of `faqs` answered on the homepage itself, with FAQPage schema.
+ * The head searches ("pg near christ university", "single sharing pg
+ * bangalore") are answered by these four; the rest live on /faq. Picked by
+ * question text so an edit to an answer above flows through untouched.
+ */
+const HOME_FAQ_QUESTIONS = [
+  "How close is Infinity Space to Christ University Yeshwanthpur Campus?",
+  "What is the monthly rent?",
+  "What is included in the rent?",
+  "Is there a security deposit?",
+  "Is this a gents-only PG?",
+];
+
+export function homeFaqs() {
+  return HOME_FAQ_QUESTIONS.map((q) => {
+    const f = faqs.find((x) => x.q === q);
+    if (!f) throw new Error(`homeFaqs: no FAQ with the question "${q}" in site.ts.`);
+    return f;
+  });
+}
+
+/**
+ * A 40–60 word answer that stands on its own if quoted — what an AI Overview
+ * or a featured snippet lifts. Built from the room data rather than typed out,
+ * so a rent change can't leave a stale number in the one sentence most
+ * likely to be quoted elsewhere.
+ */
+export function answerBlock() {
+  const [single, double] = rooms;
+  return `${site.name} is a gents PG on Andrahalli Main Road, HMT Layout, about 850 m (a 10 minute walk) from Christ University Yeshwanthpur Campus in Bengaluru. Single sharing rooms are ₹${single.price} a month and double sharing ₹${double.price} per person, with four meals a day, electricity, Wi-Fi, housekeeping and laundry included in the rent.`;
+}
+
 /* ──────────────────────── Derived helpers ──────────────────────── */
 
 /** Security deposit is two months' rent, so derive it rather than restating. */

@@ -9,6 +9,7 @@ import SectionHead from "@/components/ui/SectionHead";
 import Reveal from "@/components/ui/Reveal";
 import Figure from "@/components/ui/Figure";
 import { getPosts, formatDate, type Post } from "@/lib/blog";
+import { answerBlock } from "@/lib/site";
 import { blogIndexJsonLd } from "@/lib/seo";
 
 const description =
@@ -130,6 +131,51 @@ export default function BlogPage() {
                 ))}
               </Reveal>
             )}
+            {/* The index was flagged as thin: a list of titles is not a page.
+                This says what the blog is for and hands readers on to the
+                pages that answer the questions the posts start. */}
+            <div className="mt-20 grid gap-12 border-t border-ink/12 pt-12 lg:grid-cols-2 lg:gap-16">
+              <div>
+                <h2 className="font-display text-[1.5rem] leading-snug tracking-[-0.02em]">What this blog covers</h2>
+                <p className="t-body mt-4 text-mute">
+                  Practical guides for students, parents and working professionals choosing a PG in north-west
+                  Bengaluru — around Christ University Yeshwanthpur Campus, HMT Layout, Nagasandra and the Tumkur
+                  Road corridor. Each post answers one question properly: what a PG's rent should cover, how to
+                  compare single and double sharing, what to ask about deposits and lock-ins, and how far
+                  &ldquo;near campus&rdquo; or &ldquo;near the metro&rdquo; really is on foot.
+                </p>
+                <p className="t-body mt-4 text-mute">
+                  Where a post mentions Infinity Space, it says so plainly — including where another option
+                  may suit you better.
+                </p>
+              </div>
+              <div>
+                <h2 className="font-display text-[1.5rem] leading-snug tracking-[-0.02em]">About Infinity Space</h2>
+                <p className="t-body mt-4 text-mute">{answerBlock()}</p>
+                <ul className="mt-6 space-y-2.5 text-[0.9375rem]">
+                  <li>
+                    <a href="/gents-pg-yeshwanthpur" className="link-u font-medium text-ink">
+                      Gents PG in Yeshwanthpur near Christ University
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/#rooms" className="link-u font-medium text-ink">
+                      Room types and rent
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/faq" className="link-u font-medium text-ink">
+                      FAQ — deposit, food, curfew and booking
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/gallery" className="link-u font-medium text-ink">
+                      Photographs of the rooms and common areas
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </section>
         <FinalCTA roomsHref="/#rooms" />

@@ -18,6 +18,11 @@ export type Audience = {
   h1: string;
   eyebrow: string;
   intro: string;
+  /**
+   * 40–60 words that answer the page's head query on their own, with no
+   * context needed — the paragraph a search snippet or AI answer quotes.
+   */
+  answer: string;
   /** Distinct H2s carrying the cluster's real search phrases. */
   sections: { h2: string; body: string; points: string[] }[];
   faqs: { q: string; a: string }[];
@@ -32,7 +37,9 @@ export const audiences: Record<"gents", Audience> = {
     h1: "Gents PG in Yeshwanthpur, near Christ University",
     eyebrow: "For men students & working professionals",
     intro:
-      "Furnished rooms, three meals, Wi-Fi that survives submission week, and a location that works whether you're walking to campus or catching the metro to an office.",
+      "Furnished rooms, four meals a day, Wi-Fi that survives submission week, and a location that works whether you're walking to campus or catching the metro to an office.",
+    answer:
+      "Infinity Space is a gents PG in HMT Layout, Yeshwanthpur, about 850 m — a 10 minute walk — from Christ University Yeshwanthpur Campus and 2.1 km from Nagasandra Metro. Single sharing is ₹20,000 a month and double sharing ₹16,000 per person, including four meals a day (Mon–Fri), electricity, Wi-Fi and housekeeping.",
     sections: [
       {
         h2: "Boys PG near Christ University Yeshwanthpur Campus",
@@ -48,9 +55,9 @@ export const audiences: Record<"gents", Audience> = {
         h2: "Mens PG near Nagasandra Metro",
         body: "Not everyone here is a student. Nagasandra and Dasarahalli on the Green Line put the Tumkur Road industrial belt and the rest of the city within a straightforward commute, which suits working professionals sharing the building.",
         points: [
-          "Nagasandra Metro (Green Line) — approx. 1.7 km",
-          "Dasarahalli Metro (Green Line) — approx. 1.7 km",
-          "IKEA Nagasandra — approx. 1.7 km",
+          "Nagasandra Metro (Green Line) — 2.1 km walk",
+          "Dasarahalli Metro (Green Line) — 2.5 km walk",
+          "IKEA Nagasandra — 2.6 km walk",
           "Vishal Mega Mart supermarket — 450 m, about a 6 minute walk",
           "Subway, KFC and Box8 all within a 10 minute walk",
         ],
@@ -69,6 +76,10 @@ export const audiences: Record<"gents", Audience> = {
       {
         q: "What is the rent for a gents PG in Yeshwanthpur?",
         a: "₹20,000 a month for single sharing, ₹16,000 per person for double sharing. Electricity and meals are included in that.",
+      },
+      {
+        q: "How much is a single sharing PG room near Christ University?",
+        a: "At Infinity Space a single sharing room is ₹20,000 a month, with meals, electricity, Wi-Fi, housekeeping and laundry included. The deposit is two months' rent (₹40,000), adjusted against your April and May rent.",
       },
       {
         q: "Is food included for the gents PG?",
