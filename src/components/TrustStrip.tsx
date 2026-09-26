@@ -1,5 +1,6 @@
 import { GraduationCap, BedDouble, Wifi, ShieldCheck, UtensilsCrossed, Dumbbell } from "lucide-react";
 import Reveal from "./ui/Reveal";
+import { answerBlock } from "@/lib/site";
 
 const ITEMS = [
   { icon: GraduationCap, t: "Walk to campus", s: "Christ University, Yeshwanthpur" },
@@ -12,9 +13,19 @@ const ITEMS = [
 
 export default function TrustStrip() {
   return (
-    <section aria-label="At a glance" className="border-b border-ink/8 bg-ivory-2">
+    <section aria-labelledby="at-a-glance" className="border-b border-ink/8 bg-ivory-2">
       <div className="shell py-10 sm:py-14">
-        <Reveal stagger className="grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-6">
+        {/* The whole offer in one self-contained paragraph, first thing under
+            the hero. The hero headline is brand copy; this is the sentence a
+            search snippet or an AI answer can quote without the rest of the
+            page — so it names the place, the distance and the rent outright. */}
+        <Reveal>
+          <h2 id="at-a-glance" className="t-label text-clay">
+            PG near Christ University Yeshwanthpur, at a glance
+          </h2>
+          <p className="t-body mt-4 max-w-[68ch] text-ink-2">{answerBlock()}</p>
+        </Reveal>
+        <Reveal stagger className="mt-10 grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-6">
           {ITEMS.map(({ icon: Icon, t, s }) => (
             <div key={t} className="group">
               <Icon

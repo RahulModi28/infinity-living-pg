@@ -59,6 +59,19 @@ export default function AudiencePage({ a }: { a: Audience }) {
           </div>
         </section>
 
+        {/* The quotable answer, straight under the hero: it stands on its
+            own, so a snippet or AI answer can lift it without the page. */}
+        <section aria-labelledby="audience-answer" className="border-b border-ink/8 bg-ivory-2">
+          <div className="shell py-10 sm:py-14">
+            <Reveal>
+              <h2 id="audience-answer" className="t-label text-clay">
+                {a.h1}, in brief
+              </h2>
+              <p className="t-body mt-4 max-w-[68ch] text-ink-2">{a.answer}</p>
+            </Reveal>
+          </div>
+        </section>
+
         {a.sections.map((s, i) => (
           <section
             key={s.h2}

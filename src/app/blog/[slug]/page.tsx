@@ -58,41 +58,47 @@ export default async function PostPage({ params }: Params) {
       <Navbar solid />
       <main id="main">
         <article className="bg-ivory pb-14 pt-32 sm:pb-24 sm:pt-40">
-          <header className="shell max-w-3xl">
-            <a
-              href="/blog"
-              className="link-u inline-flex items-center gap-2 text-[0.875rem] text-mute hover:text-ink"
-            >
-              <ArrowLeft className="size-4" aria-hidden="true" /> All posts
-            </a>
-            <p className="t-label mt-8 text-clay">
-              <time dateTime={p.date}>{formatDate(p.date)}</time>
-              <span aria-hidden="true"> · </span>
-              {p.readingMinutes} min read
-            </p>
-            <h1 className="mt-4 text-[clamp(2rem,4.6vw,3.25rem)] leading-[1.05]">{p.title}</h1>
-            <p className="t-body mt-5 text-mute">{p.description}</p>
-            {p.updated && (
-              <p className="mt-4 text-[0.8125rem] text-mute">
-                Updated <time dateTime={p.updated}>{formatDate(p.updated)}</time>
+          <header className="shell">
+            <div className="mx-auto max-w-3xl">
+              <a
+                href="/blog"
+                className="link-u inline-flex items-center gap-2 text-[0.875rem] text-mute hover:text-ink"
+              >
+                <ArrowLeft className="size-4" aria-hidden="true" /> All posts
+              </a>
+              <p className="t-label mt-8 text-clay">
+                <time dateTime={p.date}>{formatDate(p.date)}</time>
+                <span aria-hidden="true"> · </span>
+                {p.readingMinutes} min read
               </p>
-            )}
+              <h1 className="mt-4 text-[clamp(2rem,4.6vw,3.25rem)] leading-[1.05]">{p.title}</h1>
+              <p className="t-body mt-5 text-mute">{p.description}</p>
+              {p.updated && (
+                <p className="mt-4 text-[0.8125rem] text-mute">
+                  Updated <time dateTime={p.updated}>{formatDate(p.updated)}</time>
+                </p>
+              )}
+            </div>
           </header>
 
           {p.cover && (
-            <div className="shell mt-10 max-w-5xl sm:mt-14">
-              <Figure
-                src={p.cover}
-                alt={p.coverAlt ?? ""}
-                className="aspect-[16/9] rounded-[1.5rem]"
-                sizes="(max-width: 1024px) 100vw, 64rem"
-                priority
-              />
+            <div className="shell mt-10 sm:mt-14">
+              <div className="mx-auto max-w-5xl">
+                <Figure
+                  src={p.cover}
+                  alt={p.coverAlt ?? ""}
+                  className="aspect-[16/9] rounded-[1.5rem]"
+                  sizes="(max-width: 1024px) 100vw, 64rem"
+                  priority
+                />
+              </div>
             </div>
           )}
 
-          <div className="shell mt-10 max-w-3xl sm:mt-14">
-            <div className="prose-post" dangerouslySetInnerHTML={{ __html: p.html }} />
+          {/* The width sits on an inner div: .shell carries its own max-width,
+              which overrides a max-w utility on the same element. */}
+          <div className="shell mt-10 sm:mt-14">
+            <div className="prose-post mx-auto max-w-3xl" dangerouslySetInnerHTML={{ __html: p.html }} />
           </div>
         </article>
         <FinalCTA roomsHref="/#rooms" />

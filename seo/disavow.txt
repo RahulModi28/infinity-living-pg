@@ -1,0 +1,69 @@
+# Disavow file for www.infinityspace4u.com
+# Upload at: Google Search Console → Disavow links tool
+#   https://search.google.com/search-console/disavow-links
+# Select the https://www.infinityspace4u.com property (or the Domain property
+# for infinityspace4u.com) and upload this file as-is.
+#
+# Source: Semrush Backlink Analytics, referring domains for
+# infinityspace4u.com, pulled 2026-09-26 — 43 referring domains in total.
+# 41 are disavowed below: PBN/link-farm .shop directories, fake
+# "fiverr SEO" testimonial sites, and casino/pharma/gambling spam.
+# None mention the business, its rooms or its location.
+#
+# Deliberately NOT disavowed:
+#   launchindex.net                — a genuine directory listing
+#   infinity-living-pg.vercel.app  — this site's own Vercel deployment
+#
+# When Semrush reports new spam domains, add them here as domain:<name>
+# and re-upload the whole file (an upload replaces the previous one).
+
+# PBN / link-farm directories
+domain:backlink-all-niche.shop
+domain:backlink-top.shop
+domain:dapio.shop
+domain:flenro.shop
+domain:keywordrocket.shop
+domain:luminko.shop
+domain:matrivo.shop
+domain:mervi.shop
+domain:murvix.shop
+domain:nelpa.shop
+domain:nimbra.shop
+domain:nimpa.shop
+domain:nokvio.shop
+domain:orplio.shop
+domain:plixmo.shop
+domain:rank-up.shop
+domain:seolinkagency.shop
+domain:webranky.shop
+
+# Fake "Fiverr SEO" testimonial sites
+domain:fiverr-affordable-seo-services.site
+domain:fiverr-cost-effective-seo.site
+domain:fiverr-quality-seo-at-affordable-rates.site
+domain:fiverr-seo-for-business-growth.site
+domain:fiverr-seo-for-small-businesses.site
+
+# Casino / gambling spam
+domain:agentbetting.online
+domain:bestonlinecasinogamescanada.online
+domain:canlisohbethatlari.online
+domain:casinopopular.online
+domain:onlinegamblingbonus.online
+domain:realwinningonlinecasino.online
+domain:sidarma88gacor.shop
+domain:sisusan88ax.shop
+domain:top5casino.online
+
+# Pharma spam
+domain:doxycycline100mg.store
+domain:erythromycinonline.site
+
+# Unrelated spam / counterfeit and link networks
+domain:8coint.com
+domain:ecopepelu.com
+domain:hockeyjerseyscheap.us
+domain:kaila.biz
+domain:pandorajewelry-officialsites.us
+domain:pmt-ae.com
+domain:toplikevideo.com

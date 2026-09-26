@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Plus } from "lucide-react";
-import { faqs, whatsappHref } from "@/lib/site";
+import { faqs, whatsappHref, answerBlock } from "@/lib/site";
 import SectionHead from "./ui/SectionHead";
 import Reveal from "./ui/Reveal";
 import Button from "./ui/Button";
@@ -23,7 +23,16 @@ export default function FAQ() {
             eyebrow="FAQ"
             title="The questions everyone asks about our PG."
             intro="Straight answers about Infinity Space, the gents PG near Christ University Yeshwanthpur Campus — including the ones other places leave vague. If something isn't here, ask us and you'll get the real answer the same day."
-          />
+          >
+            {/* The short version, open on the page: the answers below sit in
+                an accordion, so this is the one paragraph that is always
+                visible and quotable on its own. */}
+            <Reveal delay={0.15}>
+              <p className="mt-6 max-w-2xl border-l-2 border-clay/60 pl-4 text-[0.9375rem] leading-relaxed text-ink-2">
+                {answerBlock()}
+              </p>
+            </Reveal>
+          </SectionHead>
           <Reveal delay={0.1}>
             <Button
               href={whatsappHref()}
