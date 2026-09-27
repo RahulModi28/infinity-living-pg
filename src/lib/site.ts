@@ -350,6 +350,13 @@ export const faqs = [
     a: "Yes. Infinity Space is a gents PG — we don't currently have accommodation for women. If you're looking for a ladies PG near the campus we'd rather tell you now than after a visit.",
   },
   {
+    // Answers "pg for boys near me", "infinity hostel" and "dormitory near
+    // me" (Semrush On Page SEO Checker) honestly — including that these are
+    // rooms, not dormitory beds, so a dorm search doesn't become a wasted visit.
+    q: "Is Infinity Space a boys PG or a hostel?",
+    a: "Infinity Space PG is a boys PG — a gents-only paying-guest hostel for male students and working professionals near Christ University Yeshwanthpur Campus. You get a single or double sharing room with meals, Wi-Fi and housekeeping, not a bed in a dormitory.",
+  },
+  {
     q: "How do I book a room?",
     a: "Message us on WhatsApp or fill the enquiry form on this page. We'll confirm availability, share photos and the rate card, and schedule a visit.",
   },
@@ -366,7 +373,7 @@ const HOME_FAQ_QUESTIONS = [
   "What is the monthly rent?",
   "What is included in the rent?",
   "Is there a security deposit?",
-  "Is this a gents-only PG?",
+  "Is Infinity Space a boys PG or a hostel?",
 ];
 
 export function homeFaqs() {
@@ -385,7 +392,7 @@ export function homeFaqs() {
  */
 export function answerBlock() {
   const [single, double] = rooms;
-  return `${site.name} is a gents PG on Andrahalli Main Road, HMT Layout, about 850 m (a 10 minute walk) from Christ University Yeshwanthpur Campus in Bengaluru. Single sharing rooms are ₹${single.price} a month and double sharing ₹${double.price} per person, with four meals a day, electricity, Wi-Fi, housekeeping and laundry included in the rent.`;
+  return `${site.name} PG is a gents-only boys PG on Andrahalli Main Road, HMT Layout, about 850 m (a 10 minute walk) from Christ University Yeshwanthpur Campus in Bengaluru. Single sharing rooms are ₹${single.price} a month and double sharing ₹${double.price} per person, with four meals a day, electricity, Wi-Fi, housekeeping and laundry included in the rent.`;
 }
 
 /* ──────────────────────── Derived helpers ──────────────────────── */

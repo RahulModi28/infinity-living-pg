@@ -75,7 +75,7 @@ export default function Hero() {
               style={{ animationDelay: "40ms" }}
             >
               <MapPin className="size-3.5 shrink-0 text-clay" aria-hidden="true" />
-              PG near Christ University · Yeshwanthpur
+              Boys PG near Christ University · Yeshwanthpur
             </span>
 
             <span

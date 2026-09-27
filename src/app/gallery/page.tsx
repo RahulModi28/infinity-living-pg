@@ -45,7 +45,8 @@ const TOUR = [
 ];
 
 export const metadata: Metadata = {
-  title: "Photos — Rooms, Dining Hall & Gym",
+  // Absolute, so the template doesn't append the brand a second time.
+  title: { absolute: "Infinity Space Bengaluru — Photos of Rooms & Gym" },
   description:
     "Real photographs of Infinity Space, the gents PG near Christ University Yeshwanthpur Campus — single and double rooms, rooftop dining hall, gym, lounge and bathrooms.",
   alternates: { canonical: "/gallery" },
@@ -53,7 +54,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_IN",
     url: "/gallery",
-    title: "Photos — Rooms, Dining Hall & Gym | Infinity Space",
+    title: "Infinity Space Bengaluru — Photos of Rooms, Dining Hall & Gym",
     description:
       "Real photographs of Infinity Space, the gents PG near Christ University Yeshwanthpur Campus — rooms, rooftop dining hall, gym, lounge and bathrooms.",
     images: [{ url: "/images/og.png", width: 1200, height: 630, type: "image/png", alt: "Infinity Space gallery" }],

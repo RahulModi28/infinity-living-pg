@@ -32,7 +32,7 @@ export default function Gallery() {
         <SectionHead
           as="h1"
           eyebrow="Gallery"
-          title="Look around before you visit."
+          title="Inside Infinity Space, Bengaluru."
           intro="Real photographs of the rooms, rooftop dining hall, gym and common spaces at Infinity Space, the gents PG near Christ University Yeshwanthpur Campus — taken at the property, not stock."
         />
 
