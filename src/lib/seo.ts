@@ -34,6 +34,11 @@ export function localBusinessJsonLd() {
         "@type": "LodgingBusiness",
         "@id": business,
         name: site.name,
+        // The ways people actually type the brand (Semrush On Page SEO
+        // Checker: "infinity pg", "infinity spaces", "infinite spaces").
+        // alternateName is the schema.org place for name variants, so they
+        // are declared once here instead of stuffed into visible copy.
+        alternateName: ["Infinity Space PG", "Infinity PG", "Infinity Spaces", "Infinite Space PG"],
         description:
           "Gents PG about 850 m (a 10 minute walk) from Christ University Yeshwanthpur Campus, Bengaluru. Furnished single (₹20,000/month) and double sharing (₹16,000/person/month) rooms with meals, electricity, Wi-Fi, housekeeping, a gym and biometric entry included.",
         url: base,
