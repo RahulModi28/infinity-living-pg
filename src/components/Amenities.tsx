@@ -5,8 +5,7 @@ import {
   BedDouble, Wifi, Dumbbell, ShieldCheck, Check, type LucideIcon,
 } from "lucide-react";
 import { amenityGroups } from "@/lib/site";
-import { useIsoLayoutEffect } from "@/lib/useIsoLayoutEffect";
-import { gsap, initGsap, prefersReducedMotion } from "@/lib/motion";
+import { useGsap, prefersReducedMotion } from "@/lib/motion";
 import SectionHead from "./ui/SectionHead";
 
 const ICONS: Record<string, LucideIcon> = { BedDouble, Wifi, Dumbbell, ShieldCheck };
@@ -14,10 +13,9 @@ const ICONS: Record<string, LucideIcon> = { BedDouble, Wifi, Dumbbell, ShieldChe
 export default function Amenities() {
   const root = useRef<HTMLDivElement>(null);
 
-  useIsoLayoutEffect(() => {
+  useGsap(({ gsap }) => {
     const el = root.current;
     if (!el || prefersReducedMotion()) return;
-    initGsap();
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         scrollTrigger: { trigger: el, start: "top 90%", once: true },

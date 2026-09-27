@@ -1,17 +1,50 @@
 "use client";
 
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, type DependencyList } from "react";
 
-let registered = false;
+/*
+  GSAP and ScrollTrigger are loaded on demand, never imported statically.
+  Imported at module scope they sat in the first-load bundle of every page and
+  cost ~850 ms of main-thread time on Lighthouse's throttled mobile run —
+  time charged straight to Largest Contentful Paint, for animations that are
+  all below the fold or on hover. Now the chunk is fetched after hydration.
+*/
 
-/** Register plugins exactly once, client-side only. */
-export function initGsap() {
-  if (registered || typeof window === "undefined") return { gsap, ScrollTrigger };
-  gsap.registerPlugin(ScrollTrigger);
-  gsap.defaults({ ease: "power3.out", duration: 0.9 });
-  registered = true;
-  return { gsap, ScrollTrigger };
+type Gsap = typeof import("gsap").gsap;
+type ScrollTriggerT = typeof import("gsap/ScrollTrigger").ScrollTrigger;
+export type Motion = { gsap: Gsap; ScrollTrigger: ScrollTriggerT };
+
+let loading: Promise<Motion> | null = null;
+
+/** Load GSAP + ScrollTrigger once and register the plugin. Client-side only. */
+export function loadGsap(): Promise<Motion> {
+  loading ??= Promise.all([import("gsap"), import("gsap/ScrollTrigger")]).then(
+    ([{ gsap }, { ScrollTrigger }]) => {
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.defaults({ ease: "power3.out", duration: 0.9 });
+      return { gsap, ScrollTrigger };
+    }
+  );
+  return loading;
+}
+
+/**
+ * An effect that runs once GSAP has loaded. `setup` may return a cleanup;
+ * if the component unmounts before the chunk arrives, setup never runs.
+ */
+export function useGsap(setup: (m: Motion) => void | (() => void), deps: DependencyList) {
+  useEffect(() => {
+    let dead = false;
+    let cleanup: void | (() => void);
+    loadGsap().then((m) => {
+      if (!dead) cleanup = setup(m);
+    });
+    return () => {
+      dead = true;
+      cleanup?.();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps);
 }
 
 export function prefersReducedMotion() {
@@ -36,5 +69,3 @@ export const MOTION = {
   /** For grouped/staggered blocks, which need a little more runway. */
   startGroup: "top 90%",
 } as const;
-
-export { gsap, ScrollTrigger };

@@ -59,8 +59,12 @@ export default function Analytics() {
         <>
           <Script
             src={`https://www.googletagmanager.com/gtag/js?id=${GA}`}
-            strategy="afterInteractive"
+            strategy="lazyOnload"
           />
+          {/* lazyOnload, like AdSense in layout.tsx: gtag.js is 188 KB and at
+              afterInteractive it downloaded before first paint, which
+              Lighthouse's mobile simulation charged to LCP. The dataLayer
+              queue below still buffers anything sent before it arrives. */}
           <Script id="ga4" strategy="afterInteractive">
             {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
               window.gtag=gtag;gtag('js',new Date());gtag('config','${GA}');`}

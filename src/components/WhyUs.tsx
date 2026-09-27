@@ -1,8 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { useIsoLayoutEffect } from "@/lib/useIsoLayoutEffect";
-import { gsap, initGsap, prefersReducedMotion } from "@/lib/motion";
+import { useGsap, prefersReducedMotion } from "@/lib/motion";
 import SectionHead from "./ui/SectionHead";
 
 const BENEFITS = [
@@ -17,10 +16,9 @@ const BENEFITS = [
 export default function WhyUs() {
   const root = useRef<HTMLDivElement>(null);
 
-  useIsoLayoutEffect(() => {
+  useGsap(({ gsap }) => {
     const el = root.current;
     if (!el || prefersReducedMotion()) return;
-    initGsap();
     const ctx = gsap.context(() => {
       gsap.fromTo(
         el.querySelectorAll("[data-b]"),

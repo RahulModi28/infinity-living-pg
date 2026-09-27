@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import { useRef } from "react";
-import { useIsoLayoutEffect } from "@/lib/useIsoLayoutEffect";
-import { gsap, initGsap, prefersReducedMotion, ScrollTrigger } from "@/lib/motion";
+import { useGsap, prefersReducedMotion } from "@/lib/motion";
 
 /**
  * SIGNATURE INTERACTION
@@ -22,11 +21,10 @@ import { gsap, initGsap, prefersReducedMotion, ScrollTrigger } from "@/lib/motio
 export default function SignatureReveal() {
   const root = useRef<HTMLDivElement>(null);
 
-  useIsoLayoutEffect(() => {
+  useGsap(({ gsap, ScrollTrigger }) => {
     const el = root.current;
     if (!el) return;
     if (prefersReducedMotion()) return;
-    initGsap();
 
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();

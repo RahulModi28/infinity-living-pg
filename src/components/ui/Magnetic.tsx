@@ -1,8 +1,7 @@
 "use client";
 
 import { useRef, type ReactNode } from "react";
-import { gsap } from "@/lib/motion";
-import { prefersReducedMotion } from "@/lib/motion";
+import { loadGsap, prefersReducedMotion } from "@/lib/motion";
 
 /**
  * Pointer-following pull. Used sparingly — primary CTAs only — and never on
@@ -24,18 +23,18 @@ export default function Magnetic({
     if (!el || prefersReducedMotion()) return;
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     const r = el.getBoundingClientRect();
-    gsap.to(el, {
-      x: (e.clientX - (r.left + r.width / 2)) * strength,
-      y: (e.clientY - (r.top + r.height / 2)) * strength,
-      duration: 0.6,
-      ease: "power3.out",
-    });
+    const x = (e.clientX - (r.left + r.width / 2)) * strength;
+    const y = (e.clientY - (r.top + r.height / 2)) * strength;
+    // Already loaded by the time anyone hovers; resolves immediately after.
+    loadGsap().then(({ gsap }) => gsap.to(el, { x, y, duration: 0.6, ease: "power3.out" }));
   };
 
   const reset = () => {
     const el = ref.current;
     if (!el) return;
-    gsap.to(el, { x: 0, y: 0, duration: 0.8, ease: "elastic.out(1, 0.5)" });
+    loadGsap().then(({ gsap }) =>
+      gsap.to(el, { x: 0, y: 0, duration: 0.8, ease: "elastic.out(1, 0.5)" })
+    );
   };
 
   return (

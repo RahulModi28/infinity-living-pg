@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useIsoLayoutEffect } from "@/lib/useIsoLayoutEffect";
-import { gsap, initGsap, prefersReducedMotion } from "@/lib/motion";
+import { useGsap, prefersReducedMotion } from "@/lib/motion";
 import { useReveal } from "@/lib/reveal";
 
 type Props = {
@@ -44,11 +43,10 @@ export default function Figure({
   // image. GSAP is only used for parallax, which genuinely tracks scroll.
   const wrap = useReveal<HTMLDivElement>();
 
-  useIsoLayoutEffect(() => {
+  useGsap(({ gsap }) => {
     const el = wrap.current;
     const img = el?.querySelector("img");
     if (!parallax || !el || !img || prefersReducedMotion()) return;
-    initGsap();
     const ctx = gsap.context(() => {
       gsap.fromTo(
         img,

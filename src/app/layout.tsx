@@ -8,7 +8,6 @@ import SmoothScroll from "@/components/SmoothScroll";
 import Analytics from "@/components/Analytics";
 import OverflowGuard from "@/components/OverflowGuard";
 import WhatsAppGate from "@/components/WhatsAppGate";
-import Preloader from "@/components/Preloader";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -114,23 +113,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           crossOrigin="anonymous"
           strategy="lazyOnload"
         />
-        {/*
-          Runs before first paint, so a returning visitor never sees a frame
-          of the preloader. It appends its own style element rather than
-          setting an attribute on <html> or <body>: those are React-owned, and
-          changing them before hydration is a genuine mismatch that React 19
-          reports even with suppressHydrationWarning.
-        */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html:
-              "try{if(sessionStorage.getItem('is:preloaded')){var s=document.createElement('style');s.textContent='.preloader{display:none!important}';document.head.appendChild(s)}}catch(e){}",
-          }}
-        />
-        <noscript>
-          <style>{`.preloader{display:none!important}`}</style>
-        </noscript>
-        <Preloader />
         {/* #main, not #rooms: every page renders this, and only the homepage
             has a rooms section — everywhere else the skip link went nowhere. */}
         <a
