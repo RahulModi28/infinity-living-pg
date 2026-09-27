@@ -357,6 +357,24 @@ export const faqs = [
     a: "Infinity Space PG is a boys PG — a gents-only paying-guest hostel for male students and working professionals near Christ University Yeshwanthpur Campus. You get a single or double sharing room with meals, Wi-Fi and housekeeping, not a bed in a dormitory.",
   },
   {
+    // "veg hostel near me" — confirmed by the owner: vegetarian food at
+    // every meal, with a paneer or veg dish alongside chicken on the days
+    // chicken is cooked.
+    q: "Is the food veg or non-veg?",
+    a: "Both. Vegetarian food is served at every meal, so it works as a veg PG too. On the days chicken is cooked, a paneer or vegetable dish is made alongside it — vegetarians never miss a meal.",
+  },
+  {
+    // "rooms for girls near me" / "boys girls pg near me" — answered
+    // truthfully, so anyone who lands from those searches finds out at once.
+    q: "Do you have rooms for girls, or a boys and girls PG?",
+    a: "No. Infinity Space is a boys PG only, for male students and working professionals. If you're looking for rooms for girls or a co-ed PG near Christ University Yeshwanthpur Campus, we're not the right fit — we'd rather say so before you visit.",
+  },
+  {
+    // "dormitory near me" / "dormitory bed".
+    q: "Do you have dormitory beds?",
+    a: "No dormitories. The most people in a room is two: you choose a single sharing room (₹20,000 a month) or a bed in a double sharing room (₹16,000 per person), both furnished, with meals and Wi-Fi included.",
+  },
+  {
     q: "How do I book a room?",
     a: "Message us on WhatsApp or fill the enquiry form on this page. We'll confirm availability, share photos and the rate card, and schedule a visit.",
   },
@@ -374,6 +392,7 @@ const HOME_FAQ_QUESTIONS = [
   "What is included in the rent?",
   "Is there a security deposit?",
   "Is Infinity Space a boys PG or a hostel?",
+  "Is the food veg or non-veg?",
 ];
 
 export function homeFaqs() {
