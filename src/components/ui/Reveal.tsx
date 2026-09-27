@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, type ElementType, type ReactNode } from "react";
-import { useIsoLayoutEffect } from "@/lib/useIsoLayoutEffect";
-import { gsap, initGsap, prefersReducedMotion, MOTION } from "@/lib/motion";
+import type { CSSProperties, ElementType, ReactNode } from "react";
+import { useReveal } from "@/lib/reveal";
+import { MOTION } from "@/lib/motion";
 
 type Props = {
   children: ReactNode;
@@ -16,7 +16,8 @@ type Props = {
 
 /**
  * The single scroll-reveal primitive. Every section uses this so the
- * timing, distance and easing are identical site-wide.
+ * timing, distance and easing are identical site-wide. The motion lives in
+ * globals.css ("Scroll reveals"); see lib/reveal.ts for why it isn't GSAP.
  */
 export default function Reveal({
   children,
@@ -26,38 +27,15 @@ export default function Reveal({
   stagger = false,
   y = MOTION.rise,
 }: Props) {
-  const ref = useRef<HTMLElement>(null);
-
-  useIsoLayoutEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    if (prefersReducedMotion()) {
-      gsap.set(stagger ? el.children : el, { opacity: 1, y: 0 });
-      return;
-    }
-    initGsap();
-
-    const targets = stagger ? Array.from(el.children) : el;
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        targets,
-        { opacity: 0, y },
-        {
-          opacity: 1,
-          y: 0,
-          duration: MOTION.dur.base,
-          ease: MOTION.ease,
-          delay,
-          stagger: stagger ? MOTION.stagger : 0,
-          scrollTrigger: { trigger: el, start: MOTION.start, once: true },
-        }
-      );
-    }, el);
-    return () => ctx.revert();
-  }, [delay, stagger, y]);
+  const ref = useReveal<HTMLElement>();
 
   return (
-    <Tag ref={ref} className={className} data-anim="">
+    <Tag
+      ref={ref}
+      className={className}
+      data-anim={stagger ? "stagger" : ""}
+      style={{ "--d": `${delay}s`, "--rise": `${y}px` } as CSSProperties}
+    >
       {children}
     </Tag>
   );

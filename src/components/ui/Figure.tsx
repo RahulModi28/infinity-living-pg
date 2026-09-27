@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
 import { useIsoLayoutEffect } from "@/lib/useIsoLayoutEffect";
 import { gsap, initGsap, prefersReducedMotion } from "@/lib/motion";
+import { useReveal } from "@/lib/reveal";
 
 type Props = {
   src: string;
@@ -39,57 +39,32 @@ export default function Figure({
   width,
   height,
 }: Props) {
-  const wrap = useRef<HTMLDivElement>(null);
+  // The clip-path wipe and image settle are CSS ("Scroll reveals" in
+  // globals.css), started by the shared observer — no ScrollTrigger per
+  // image. GSAP is only used for parallax, which genuinely tracks scroll.
+  const wrap = useReveal<HTMLDivElement>();
 
   useIsoLayoutEffect(() => {
     const el = wrap.current;
-    if (!el) return;
-    const img = el.querySelector("img");
-    if (prefersReducedMotion()) return;
+    const img = el?.querySelector("img");
+    if (!parallax || !el || !img || prefersReducedMotion()) return;
     initGsap();
-
     const ctx = gsap.context(() => {
-      if (reveal) {
-        gsap.fromTo(
-          el,
-          { clipPath: "inset(0% 0% 100% 0%)" },
-          {
-            clipPath: "inset(0% 0% 0% 0%)",
-            duration: 1.15,
-            ease: "power4.out",
-            scrollTrigger: { trigger: el, start: "top 94%", once: true },
-          }
-        );
-        if (img) {
-          gsap.fromTo(
-            img,
-            { scale: 1.12 },
-            {
-              scale: 1,
-              duration: 1.5,
-              ease: "power3.out",
-              scrollTrigger: { trigger: el, start: "top 94%", once: true },
-            }
-          );
+      gsap.fromTo(
+        img,
+        { yPercent: -parallax },
+        {
+          yPercent: parallax,
+          ease: "none",
+          scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true },
         }
-      }
-      if (parallax && img) {
-        gsap.fromTo(
-          img,
-          { yPercent: -parallax },
-          {
-            yPercent: parallax,
-            ease: "none",
-            scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true },
-          }
-        );
-      }
+      );
     }, el);
     return () => ctx.revert();
-  }, [reveal, parallax]);
+  }, [parallax]);
 
   return (
-    <div ref={wrap} className={`relative overflow-hidden ${className}`}>
+    <div ref={wrap} className={`relative overflow-hidden ${className}`} {...(reveal ? { "data-wipe": "" } : {})}>
       <Image
         src={src}
         alt={alt}

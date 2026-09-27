@@ -19,12 +19,11 @@ export default function TrustStrip() {
             the hero. The hero headline is brand copy; this is the sentence a
             search snippet or an AI answer can quote without the rest of the
             page — so it names the place, the distance and the rent outright. */}
-        <Reveal>
-          <h2 id="at-a-glance" className="t-label text-clay">
-            PG near Christ University Yeshwanthpur, at a glance
-          </h2>
-          <p className="t-body mt-4 max-w-[68ch] text-ink-2">{answerBlock()}</p>
-        </Reveal>
+        {/* No Reveal: first thing under the hero, so it paints at once. */}
+        <h2 id="at-a-glance" className="t-label text-clay">
+          PG near Christ University Yeshwanthpur, at a glance
+        </h2>
+        <p className="t-body mt-4 max-w-[68ch] text-ink-2">{answerBlock()}</p>
         <Reveal stagger className="mt-10 grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-6">
           {ITEMS.map(({ icon: Icon, t, s }) => (
             <div key={t} className="group">

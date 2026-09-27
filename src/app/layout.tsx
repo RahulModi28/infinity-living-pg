@@ -85,6 +85,7 @@ export const metadata: Metadata = {
     ],
   },
   category: "Student accommodation",
+  other: { "google-adsense-account": "ca-pub-1363796922613344" },
 };
 
 export const viewport: Viewport = {
@@ -101,16 +102,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en-IN" className={`${inter.variable} ${jakarta.variable}`}>
       <body>
-        {/* Inside <body>, not between <html> and <body>: a <script> is not a
-            permitted child of <html>, and React reported it as a hydration
-            error on every page. beforeInteractive still hoists it into
-            <head>, which is where AdSense wants it — the strategy does the
-            placing, so it does not have to be written there. */}
+        {/* lazyOnload, not beforeInteractive: loaded before the page was
+            interactive, AdSense's script was part of the main-thread work
+            Semrush/Lighthouse counted as Total Blocking Time. Auto ads still
+            run once it loads after everything else. Site ownership is proven
+            by the google-adsense-account meta tag (see metadata.other) and
+            public/ads.txt, neither of which needs the script in <head>. */}
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1363796922613344"
           crossOrigin="anonymous"
-          strategy="beforeInteractive"
+          strategy="lazyOnload"
         />
         {/*
           Runs before first paint, so a returning visitor never sees a frame

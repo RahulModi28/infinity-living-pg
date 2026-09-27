@@ -63,12 +63,13 @@ export default function AudiencePage({ a }: { a: Audience }) {
             own, so a snippet or AI answer can lift it without the page. */}
         <section aria-labelledby="audience-answer" className="border-b border-ink/8 bg-ivory-2">
           <div className="shell py-10 sm:py-14">
-            <Reveal>
-              <h2 id="audience-answer" className="t-label text-clay">
-                {a.h1}, in brief
-              </h2>
-              <p className="t-body mt-4 max-w-[68ch] text-ink-2">{a.answer}</p>
-            </Reveal>
+            {/* Not wrapped in Reveal: it sits just under the hero, is the
+                page's Largest Contentful Paint, and is the paragraph an
+                answer engine quotes — it should be there on first paint. */}
+            <h2 id="audience-answer" className="t-label text-clay">
+              {a.h1}, in brief
+            </h2>
+            <p className="t-body mt-4 max-w-[68ch] text-ink-2">{a.answer}</p>
           </div>
         </section>
 
