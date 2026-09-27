@@ -1,4 +1,4 @@
-import { site, rooms, faqs, homeFaqs, amenityGroups, reviews, galleryShots, baseUrl } from "./site";
+import { site, rooms, faqs, homeFaqs, amenityGroups, galleryShots, baseUrl } from "./site";
 import type { Audience } from "./audiences";
 import type { Post } from "./blog";
 
@@ -11,32 +11,6 @@ import type { Post } from "./blog";
  */
 
 const clean = (v: string) => (v.startsWith("[") ? undefined : v);
-
-/**
- * Empty while `reviews` is empty (see site.ts — invented testimonials were
- * removed on purpose). The moment real, permissioned reviews are added there,
- * this starts emitting AggregateRating + Review schema with no other change
- * needed — competitors in this micro-market (Stanza Living) already show a
- * review-backed LocalBusiness in search/AI results and this closes that gap
- * without publishing a single number that isn't real.
- */
-function ratingFields() {
-  if (reviews.length === 0) return {};
-  const avg = reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length;
-  return {
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: Number(avg.toFixed(1)),
-      reviewCount: reviews.length,
-    },
-    review: reviews.map((r) => ({
-      "@type": "Review",
-      author: { "@type": "Person", name: r.name },
-      reviewRating: { "@type": "Rating", ratingValue: r.rating, bestRating: 5 },
-      reviewBody: r.text,
-    })),
-  };
-}
 
 /**
  * The business, the site and the offers as one @graph, emitted on every page
@@ -88,7 +62,6 @@ export function localBusinessJsonLd() {
         sameAs: [site.social.instagram],
         priceRange: "₹16,000–₹20,000 per month",
         currenciesAccepted: "INR",
-        ...ratingFields(),
         audience: { "@type": "PeopleAudience", suggestedGender: "male" },
         areaServed: [
           { "@type": "CollegeOrUniversity", name: "Christ University — Yeshwanthpur Campus" },
