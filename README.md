@@ -36,7 +36,7 @@ most of the site is done.
 | Rent per room type + live availability | `rooms[]` |
 | Distances / travel times | `nearby[]` — **measure on Google Maps, do not estimate** |
 | Amenities | `amenityGroups` — **delete anything not actually provided** |
-| Reviews | `reviews[]`, then set `site.reviewsAreReal = true` to hide the placeholder banner |
+| Reviews | `reviews[]` — real, permissioned residents only; the section appears automatically |
 | FAQ answers (rent, deposit, curfew, visitors, minimum stay) | `faqs[]` |
 | Social links | `site.social` |
 | Domain | `site.url` (drives canonical, sitemap, OG tags, schema) |

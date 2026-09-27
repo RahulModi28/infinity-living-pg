@@ -34,8 +34,8 @@ Use exactly the same name, address and phone (NAP) as the site and the schema:
 
 - [ ] Google Business Profile: verify it. Category "Paying guest house" or
       "Hostel", add the website, photos and rent, and ask real residents for
-      reviews. Once real reviews exist, add them to `reviews` in
-      `src/lib/site.ts` and the schema will emit AggregateRating automatically.
+      reviews. Reviews there are what give the business stars in Google
+      search and Maps.
 - [ ] Justdial listing
 - [ ] Student-housing marketplaces that already rank for "PG near Christ
       University Yeshwanthpur": myroomie.in, podhostels.in, rentorio.in,
@@ -79,8 +79,9 @@ Collect real reviews from current residents, with their permission:
       reviews" link from Google Business Profile).
 - [ ] Send the ones they're happy to have on the website, with first name,
       course or job, a 1–5 rating, and their words, to add to `reviews` in
-      `src/lib/site.ts`. The reviews section and the star-rating schema
-      (AggregateRating) switch on automatically. Never add invented reviews:
+      `src/lib/site.ts`. They appear in the homepage reviews section. They
+      are not marked up as rating schema, because Google ignores reviews a
+      business hosts about itself ("self-serving"). Never add invented reviews:
       it breaks Google's rules and consumer-protection law.
 
 ## 4. Track progress

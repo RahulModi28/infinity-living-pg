@@ -271,16 +271,18 @@ export const nearby = [
 ] as const;
 
 /* ─────────────────────────── Reviews ───────────────────────────
-   ⚠️⚠️  THESE ARE NOT REAL REVIEWS.  ⚠️⚠️
+   Real reviews from current residents, published with their permission
+   and supplied by the owner on 2026-09-27. Text is verbatim.
 
-   Illustrative copy written to design the section. Nothing on the page
-   marks them as placeholders any more, so they now read to a visitor as
-   genuine testimonials from real residents.
+   Only add reviews from people who actually live or lived here. Never the
+   owner's or staff's own, and never invented ones: an invented testimonial
+   is a consumer-protection problem, not a styling one.
 
-   Replace every one of them with real, permissioned reviews before this
-   site goes live. Publishing invented testimonials as real is a consumer
-   protection problem, not a styling one — and if AggregateRating schema is
-   ever added on top of them it also breaks Google's review policies.
+   These are shown on the page only. They are deliberately NOT marked up as
+   Review/AggregateRating schema: Google treats reviews a business hosts
+   about itself as "self-serving" and won't show stars for them. Marking
+   them up anyway goes against its structured-data policy. Stars in search
+   come from the Google Business Profile instead.
    ─────────────────────────────────────────────────────────────── */
 
 export const reviews: {
@@ -289,13 +291,24 @@ export const reviews: {
   rating: number;
   text: string;
 }[] = [
-  // Empty on purpose. The six entries that were here were written as filler
-  // and rendered to visitors as real testimonials, names and all.
-  //
-  // Add real, permissioned reviews here and the section returns on its own —
-  // Reviews.tsx renders nothing while this is empty, and the nav and footer
-  // links drop with it. Invented ones are a consumer-protection problem, not
-  // a styling one.
+  {
+    name: "Veer Khanna",
+    course: "Resident, Infinity Space",
+    rating: 5,
+    text: "Been staying here, and overall the experience has been pretty good. The location is convenient, rooms are comfortable, and the basic facilities are taken care of.",
+  },
+  {
+    name: "Darsh Shah",
+    course: "Resident, Infinity Space",
+    rating: 5,
+    text: "The food is better than what I expected from a PG. There’s enough variety, and the meals are generally decent. Having food available inside the PG is definitely convenient.",
+  },
+  {
+    name: "Devansh Bhardawaj",
+    course: "Resident, Infinity Space",
+    rating: 5,
+    text: "I’ve had a good experience with the staff so far. They’ve been helpful, especially when I needed help with a room issue.",
+  },
 ];
 
 /* ─────────────────────────────── FAQ ─────────────────────────────── */

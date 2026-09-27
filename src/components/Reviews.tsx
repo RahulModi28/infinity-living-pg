@@ -55,7 +55,7 @@ export default function Reviews() {
         <SectionHead
           eyebrow="Reviews"
           title="What people say after they move in."
-          intro="Short, honest and from the people who actually live here — students and the parents who dropped them off."
+          intro="Short, honest and from the people who actually live here, in their own words."
         />
 
       </div>
