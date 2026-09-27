@@ -139,9 +139,57 @@
   .no-bar { scrollbar-width: none; -ms-overflow-style: none; }
   .no-bar::-webkit-scrollbar { display: none; }
 
-  /* Word-reveal primitive used by SplitText + GSAP */
+  /* Word-reveal primitive used by SplitText */
   .rw { display: inline-block; overflow: hidden; vertical-align: bottom; }
-  .rw > span { display: inline-block; will-change: transform; }
+  .rw > span { display: inline-block; }
+
+  /* ── Scroll reveals ───────────────────────────────────────────────────
+     Reveal, SplitText and Figure. lib/reveal.ts sets data-pending before
+     first paint and swaps it for data-play when the element scrolls in (one
+     shared IntersectionObserver). Plain CSS transitions, so nothing runs on
+     the main thread per element; this replaced ~90 GSAP ScrollTriggers
+     whose layout reads made the homepage's Total Blocking Time "Poor".
+     Easings match the old GSAP ones: power3.out and power4.out. */
+  [data-anim=""][data-pending],
+  [data-anim="stagger"][data-pending] > * {
+    opacity: 0;
+    transform: translateY(var(--rise, 28px));
+  }
+  [data-anim=""][data-play],
+  [data-anim="stagger"][data-play] > * {
+    transition:
+      opacity 0.75s cubic-bezier(0.215, 0.61, 0.355, 1),
+      transform 0.75s cubic-bezier(0.215, 0.61, 0.355, 1);
+    transition-delay: calc(var(--d, 0s) + var(--i, 0) * 70ms);
+  }
+  [data-anim="stagger"] > :nth-child(2) { --i: 1; }
+  [data-anim="stagger"] > :nth-child(3) { --i: 2; }
+  [data-anim="stagger"] > :nth-child(4) { --i: 3; }
+  [data-anim="stagger"] > :nth-child(5) { --i: 4; }
+  [data-anim="stagger"] > :nth-child(6) { --i: 5; }
+  [data-anim="stagger"] > :nth-child(7) { --i: 6; }
+  [data-anim="stagger"] > :nth-child(8) { --i: 7; }
+  [data-anim="stagger"] > :nth-child(9) { --i: 8; }
+  [data-anim="stagger"] > :nth-child(10) { --i: 9; }
+  [data-anim="stagger"] > :nth-child(11) { --i: 10; }
+  [data-anim="stagger"] > :nth-child(12) { --i: 11; }
+
+  /* --i inherits; a plain Reveal nested in a staggered one must not pick
+     up its parent's stagger delay. */
+  [data-anim=""] { --i: 0; }
+
+  [data-split][data-pending] .rw > span { opacity: 0; transform: translateY(108%); }
+  [data-split][data-play] .rw > span {
+    transition:
+      opacity 0.85s cubic-bezier(0.165, 0.84, 0.44, 1),
+      transform 0.85s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition-delay: calc(var(--d, 0s) + var(--i, 0) * 55ms);
+  }
+
+  [data-wipe][data-pending] { clip-path: inset(0% 0% 100% 0%); }
+  [data-wipe][data-pending] img { transform: scale(1.12); }
+  [data-wipe][data-play] { transition: clip-path 1.15s cubic-bezier(0.165, 0.84, 0.44, 1); }
+  [data-wipe][data-play] img { transition: transform 1.5s cubic-bezier(0.215, 0.61, 0.355, 1); }
 
   /* ── Hero entrance ────────────────────────────────────────────────────
      CSS, not GSAP. The hero is above the fold on every visit, so its
@@ -265,9 +313,11 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  /* Anything GSAP would have animated in must still be visible. */
-  [data-anim] { opacity: 1 !important; transform: none !important; }
-  .rw > span { transform: none !important; }
+  /* Anything that would have animated in must still be visible. (JS also
+     skips data-pending under reduced motion; this is the backstop.) */
+  [data-anim], [data-anim] > * { opacity: 1 !important; transform: none !important; }
+  .rw > span { opacity: 1 !important; transform: none !important; }
+  [data-wipe] { clip-path: none !important; }
   /* The signature section renders as a static composition instead. */
   [data-sig="caption"] { opacity: 1 !important; }
   /* Marquee stops travelling and becomes a normal swipeable row. */
