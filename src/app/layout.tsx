@@ -24,19 +24,23 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 /**
- * Title (58 chars) and description (154 chars) sit inside Google's display
+ * Title (58 chars) and description (157 chars) sit inside Google's display
  * limits and lead with the exact phrase people search — verified against live
  * Autocomplete: "pg near christ university yeshwanthpur" is the head term, and
  * "yeshwanthpur" is the spelling Google normalises to (not "yeshwantpur").
+ *
+ * "Infinity Space PG" and "boys PG" come from Semrush's On Page SEO Checker:
+ * people search the brand as "infinity pg" / "infinity space pg", and "pg for
+ * boys near me" is how students phrase it — neither appeared on the page.
  */
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl()),
   title: {
-    default: "PG near Christ University Yeshwanthpur Campus | Infinity Space",
+    default: "PG near Christ University Yeshwanthpur | Infinity Space PG",
     template: "%s | Infinity Space",
   },
   description:
-    "Gents PG a 10 minute walk from Christ University Yeshwanthpur Campus, Bengaluru. Single ₹20,000, double ₹16,000 — electricity, meals and Wi-Fi included.",
+    "Infinity Space is a boys PG a 10 minute walk from Christ University Yeshwanthpur Campus, Bengaluru. Single ₹20,000, double ₹16,000, meals and Wi-Fi included.",
   keywords: [
     "pg near christ university yeshwanthpur",
     "pg near christ university yeshwanthpur campus",
@@ -54,14 +58,14 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: "/",
     siteName: site.name,
-    title: "PG near Christ University Yeshwanthpur Campus | Infinity Space",
+    title: "PG near Christ University Yeshwanthpur | Infinity Space PG",
     description:
       "A gents PG in Yeshwanthpur, Bengaluru — furnished rooms, meals, Wi-Fi, gym and a 10 minute walk to Christ University Yeshwanthpur Campus.",
     images: [{ url: "/images/og.png", width: 1200, height: 630, type: "image/png", alt: "Infinity Space — PG near Christ University Yeshwanthpur Campus" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "PG near Christ University Yeshwanthpur Campus | Infinity Space",
+    title: "PG near Christ University Yeshwanthpur | Infinity Space PG",
     description:
       "Furnished PG in Yeshwanthpur, Bengaluru — rooms, meals, Wi-Fi and 24/7 security, minutes from campus.",
     images: ["/images/og.png"],
