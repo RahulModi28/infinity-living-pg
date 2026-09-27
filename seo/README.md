@@ -46,6 +46,43 @@ Use exactly the same name, address and phone (NAP) as the site and the schema:
       YouTube already ranks for "best pg near christ university yeshwantpur".
       Link it from the gallery and add it to `sameAs` in `src/lib/seo.ts`.
 
+### From the On Page SEO Checker's backlink suggestions
+
+Semrush suggested links from domains like yahoo.com, maps.me, lnk.bio and
+rocketreach.co. Most of those sites can't be asked for a link. Below is what
+each one means for a PG, and the way to get there honestly:
+
+- [ ] **Bing Places for Business** (bingplaces.com). Yahoo search runs on
+      Bing, so this is how to show up on yahoo.com. You can import it
+      straight from your Google Business Profile. It also feeds Bing's local
+      results and ChatGPT/Copilot answers.
+- [ ] **OpenStreetMap** (openstreetmap.org). maps.me and many other map apps
+      use OSM data. Add the building as a "guest_house" or "hostel" with the
+      name, address, phone and website. It's free, and the edit shows up
+      within days.
+- [ ] **lnk.bio** (or Linktree). A free link-in-bio page for the Instagram
+      profile, linking to the website, WhatsApp and Google Maps.
+- [ ] **Apple Business Connect** (businessconnect.apple.com). Gets the PG
+      onto Apple Maps, which iPhone users open by default.
+- [ ] **Local directories:** Justdial, Sulekha, and the student-housing
+      sites listed above. addresspage.com and rocketreach.co are generic
+      business directories and are low priority.
+
+Skip anything sold as "backlinks" or "DA boost". That's how the spam links
+in `disavow.txt` got there.
+
+### Reviews
+
+Collect real reviews from current residents, with their permission:
+
+- [ ] Ask each resident to leave a Google review (share the "Ask for
+      reviews" link from Google Business Profile).
+- [ ] Send the ones they're happy to have on the website, with first name,
+      course or job, a 1–5 rating, and their words, to add to `reviews` in
+      `src/lib/site.ts`. The reviews section and the star-rating schema
+      (AggregateRating) switch on automatically. Never add invented reviews:
+      it breaks Google's rules and consumer-protection law.
+
 ## 4. Track progress
 
 Add these keywords to the Semrush Position Tracking project. It's already set
