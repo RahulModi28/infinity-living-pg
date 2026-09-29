@@ -122,6 +122,12 @@
     -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 3rem), transparent);
     mask-image: linear-gradient(to right, #000 calc(100% - 3rem), transparent);
   }
+  /* Scrolled to the end, or nothing to scroll: no hint, so the last card
+     isn't dimmed (set by EdgeFade.tsx). */
+  .edge-fade[data-end] {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
 
   /* ── Marquee ──────────────────────────────────────────────────────────
      Used where a short row of items overflows a phone but fits a desktop,

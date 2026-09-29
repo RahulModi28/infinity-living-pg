@@ -7,6 +7,7 @@ import { localBusinessJsonLd } from "@/lib/seo";
 import SmoothScroll from "@/components/SmoothScroll";
 import Analytics from "@/components/Analytics";
 import OverflowGuard from "@/components/OverflowGuard";
+import EdgeFade from "@/components/EdgeFade";
 import WhatsAppGate from "@/components/WhatsAppGate";
 import BookingDialog from "@/components/BookingDialog";
 
@@ -125,6 +126,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SmoothScroll />
         <Analytics />
         <OverflowGuard />
+        <EdgeFade />
         <WhatsAppGate />
         <BookingDialog />
         {children}
