@@ -46,7 +46,10 @@ const TOUR = [
 
 export const metadata: Metadata = {
   // Absolute, so the template doesn't append the brand a second time.
-  title: { absolute: "Infinity Space Bengaluru — Photos of Rooms & Gym" },
+  // Not "Infinity Space Bengaluru": Semrush's On Page SEO Checker found the
+  // homepage ranks higher for that phrase, so the homepage alone targets it
+  // and this page is titled for what it is — the photographs.
+  title: { absolute: "Photos of Rooms, Dining Hall & Gym | Infinity Space" },
   description:
     "Real photographs of Infinity Space, the gents PG near Christ University Yeshwanthpur Campus — single and double rooms, rooftop dining hall, gym, lounge and bathrooms.",
   alternates: { canonical: "/gallery" },
@@ -54,7 +57,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_IN",
     url: "/gallery",
-    title: "Infinity Space Bengaluru — Photos of Rooms, Dining Hall & Gym",
+    title: "Photos of Rooms, Dining Hall & Gym | Infinity Space",
     description:
       "Real photographs of Infinity Space, the gents PG near Christ University Yeshwanthpur Campus — rooms, rooftop dining hall, gym, lounge and bathrooms.",
     images: [{ url: "/images/og.png", width: 1200, height: 630, type: "image/png", alt: "Infinity Space gallery" }],
