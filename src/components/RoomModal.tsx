@@ -134,7 +134,7 @@ export default function RoomModal({
             </dl>
 
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              <Button href="#enquire" onClick={onClose} arrow className="w-full">
+              <Button href="#enquire" data-room={room.name} onClick={onClose} arrow className="w-full">
                 Enquire
               </Button>
               <Button

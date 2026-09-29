@@ -4,9 +4,13 @@ import SplitText from "./ui/SplitText";
 import Reveal from "./ui/Reveal";
 import Button from "./ui/Button";
 import Magnetic from "./ui/Magnetic";
-import EnquiryForm from "./EnquiryForm";
 
 /**
+ * The enquiry form no longer sits here: "Book a Room" opens it as a popup
+ * (BookingDialog), from this section and from every other #enquire button.
+ * The section keeps id="enquire" so those anchors still land somewhere
+ * useful if JavaScript is off.
+ *
  * `roomsHref` exists because this section renders on pages that have a rooms
  * section and on /faq, which doesn't — there the button has to leave the page
  * instead of pointing at an anchor that isn't there.
@@ -21,8 +25,11 @@ export default function FinalCTA({ roomsHref = "#rooms" }: { roomsHref?: string 
         aria-hidden="true"
         className="pointer-events-none absolute -right-40 -top-40 size-[38rem] rounded-full bg-clay/12 blur-3xl"
       />
-      <div className="shell relative grid gap-12 lg:grid-cols-[1fr_0.95fr] lg:gap-16">
-        <div className="lg:pt-4">
+      {/* Two columns on large screens: the pitch and actions on the left,
+          the four facts as a card on the right — the column the enquiry
+          form used to fill before it moved into BookingDialog. */}
+      <div className="shell relative grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+        <div>
           <Reveal>
             <p className="t-label flex items-center gap-3 text-clay">
               <span className="inline-block h-px w-8 bg-current opacity-50" aria-hidden="true" />
@@ -39,6 +46,14 @@ export default function FinalCTA({ roomsHref = "#rooms" }: { roomsHref?: string 
 
           <Reveal delay={0.15}>
             <div className="mt-9 flex flex-wrap gap-3">
+              <Button
+                href="#enquire"
+                data-cta="enquire"
+                arrow
+                className="!bg-ivory !text-ink hover:!bg-white"
+              >
+                Book a Room
+              </Button>
               <Magnetic>
                 <Button
                   href={whatsappHref()}
@@ -54,30 +69,28 @@ export default function FinalCTA({ roomsHref = "#rooms" }: { roomsHref?: string 
                 See room types
               </Button>
             </div>
-
-            <dl className="mt-12 grid max-w-md grid-cols-2 gap-y-6 border-t border-white/12 pt-8">
-              <div>
-                <dt className="t-label text-white/45">Reply time</dt>
-                <dd className="mt-1.5 font-display text-lg">Usually same day</dd>
-              </div>
-              <div>
-                <dt className="t-label text-white/45">Visits</dt>
-                <dd className="mt-1.5 font-display text-lg">Walk-ins welcome</dd>
-              </div>
-              <div>
-                <dt className="t-label text-white/45">Booking</dt>
-                <dd className="mt-1.5 font-display text-lg">No brokerage</dd>
-              </div>
-              <div>
-                <dt className="t-label text-white/45">Campus</dt>
-                <dd className="mt-1.5 font-display text-lg">Yeshwanthpur</dd>
-              </div>
-            </dl>
           </Reveal>
         </div>
 
-        <Reveal delay={0.1} className="text-ink">
-          <EnquiryForm />
+        <Reveal delay={0.2}>
+          <dl className="grid grid-cols-2 gap-x-5 gap-y-8 rounded-[1.5rem] border border-white/12 bg-white/[0.045] p-6 backdrop-blur-sm sm:p-10">
+            <div>
+              <dt className="t-label text-white/45">Reply time</dt>
+              <dd className="mt-1.5 font-display text-base sm:text-xl">Usually same day</dd>
+            </div>
+            <div>
+              <dt className="t-label text-white/45">Visits</dt>
+              <dd className="mt-1.5 font-display text-base sm:text-xl">Walk-ins welcome</dd>
+            </div>
+            <div>
+              <dt className="t-label text-white/45">Booking</dt>
+              <dd className="mt-1.5 font-display text-base sm:text-xl">No brokerage</dd>
+            </div>
+            <div>
+              <dt className="t-label text-white/45">Campus</dt>
+              <dd className="mt-1.5 font-display text-base sm:text-xl">Yeshwanthpur</dd>
+            </div>
+          </dl>
         </Reveal>
       </div>
     </section>

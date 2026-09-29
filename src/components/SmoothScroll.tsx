@@ -45,6 +45,8 @@ export default function SmoothScroll() {
         // the homepage itself it is still the same document, so it eases here and
         // only falls through to a page load when we are somewhere else.
         const onClick = (e: MouseEvent) => {
+          // BookingDialog claims #enquire clicks to open its popup.
+          if (e.defaultPrevented) return;
           const a = (e.target as HTMLElement)?.closest?.(
             'a[href^="#"], a[href^="/#"]'
           ) as HTMLAnchorElement | null;

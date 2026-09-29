@@ -13,7 +13,18 @@ const field =
   "placeholder:text-mute/60 transition-colors duration-300 hover:border-ink/30 " +
   "focus:border-clay focus:outline-none focus:ring-2 focus:ring-clay/25";
 
-export default function EnquiryForm() {
+/**
+ * `bare` drops the card chrome for use inside BookingDialog, whose panel is
+ * already the card. `defaultRoom` preselects the room when the popup was
+ * opened from a specific room's button.
+ */
+export default function EnquiryForm({
+  bare = false,
+  defaultRoom = "",
+}: {
+  bare?: boolean;
+  defaultRoom?: string;
+}) {
   const [state, setState] = useState<State>("idle");
   const [error, setError] = useState<string | null>(null);
 
@@ -47,7 +58,9 @@ export default function EnquiryForm() {
     return (
       <div
         role="status"
-        className="flex min-h-[26rem] flex-col items-center justify-center rounded-[1.5rem] border border-ink/12 bg-ivory p-10 text-center"
+        className={`flex flex-col items-center justify-center text-center ${
+          bare ? "py-6" : "min-h-[26rem] rounded-[1.5rem] border border-ink/12 bg-ivory p-10"
+        }`}
       >
         <span className="relative grid size-16 place-items-center rounded-full bg-moss text-ivory">
           <span
@@ -78,7 +91,7 @@ export default function EnquiryForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className="rounded-[1.5rem] border border-ink/12 bg-ivory p-6 sm:p-8"
+      className={bare ? "" : "rounded-[1.5rem] border border-ink/12 bg-ivory p-6 sm:p-8"}
       noValidate
     >
       <div className="grid gap-4 sm:grid-cols-2">
@@ -113,7 +126,7 @@ export default function EnquiryForm() {
 
         <label className="block">
           <span className="t-label text-mute">Room type</span>
-          <select name="roomType" defaultValue="" className={`${field} mt-2`} required>
+          <select name="roomType" defaultValue={defaultRoom} className={`${field} mt-2`} required>
             <option value="" disabled>
               Choose one
             </option>

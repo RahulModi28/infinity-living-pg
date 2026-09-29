@@ -8,6 +8,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import Analytics from "@/components/Analytics";
 import OverflowGuard from "@/components/OverflowGuard";
 import WhatsAppGate from "@/components/WhatsAppGate";
+import BookingDialog from "@/components/BookingDialog";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -125,6 +126,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Analytics />
         <OverflowGuard />
         <WhatsAppGate />
+        <BookingDialog />
         {children}
         {/* Only the business entity is site-wide — it is the same entity on
             every page, keyed by @id. The breadcrumb is not: /faq, /gallery and
