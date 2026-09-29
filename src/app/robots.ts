@@ -15,6 +15,8 @@ export default function robots(): MetadataRoute.Robots {
       },
     ],
     sitemap: `${base}/sitemap.xml`,
-    host: base,
+    // No `host`: it isn't a robots.txt directive (only Yandex ever read it,
+    // and wanted a bare hostname), and Semrush's Site Audit reported the
+    // generated `Host: https://…` line as invalid syntax.
   };
 }

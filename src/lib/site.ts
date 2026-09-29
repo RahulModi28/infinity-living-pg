@@ -278,11 +278,13 @@ export const nearby = [
    owner's or staff's own, and never invented ones: an invented testimonial
    is a consumer-protection problem, not a styling one.
 
-   These are shown on the page only. They are deliberately NOT marked up as
-   Review/AggregateRating schema: Google treats reviews a business hosts
-   about itself as "self-serving" and won't show stars for them. Marking
-   them up anyway goes against its structured-data policy. Stars in search
-   come from the Google Business Profile instead.
+   They are also marked up as Review/AggregateRating schema on the
+   LodgingBusiness (seo.ts). That was the owner's decision on 2026-09-29,
+   following Semrush's "Mark up your aggregate rating" idea, made knowing
+   that Google treats reviews a business hosts about itself as
+   "self-serving": it may not show stars for them, and the policy discourages
+   the markup. Stars in search come reliably from the Google Business
+   Profile. Keep this list honest — the rating schema is computed from it.
    ─────────────────────────────────────────────────────────────── */
 
 export const reviews: {

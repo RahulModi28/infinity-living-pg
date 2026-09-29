@@ -1,4 +1,4 @@
-import { site, rooms, faqs, homeFaqs, amenityGroups, galleryShots, baseUrl } from "./site";
+import { site, rooms, faqs, homeFaqs, amenityGroups, galleryShots, reviews, baseUrl } from "./site";
 import type { Audience } from "./audiences";
 import type { Post } from "./blog";
 
@@ -41,6 +41,24 @@ export function localBusinessJsonLd() {
         alternateName: ["Infinity Space PG", "Infinity PG", "Infinity Spaces", "Infinite Space PG"],
         description:
           "Gents PG about 850 m (a 10 minute walk) from Christ University Yeshwanthpur Campus, Bengaluru. Furnished single (₹20,000/month) and double sharing (₹16,000/person/month) rooms with meals, electricity, Wi-Fi, housekeeping, a gym and biometric entry included.",
+        // Added at the owner's request after Semrush's On Page SEO Checker
+        // suggested "Mark up your aggregate rating" (29 Sep 2026). Built from
+        // the real resident reviews in site.ts, so the numbers always match
+        // what the page shows. Note: Google's self-serving review policy
+        // means it may not show stars for reviews a business hosts itself.
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: (reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1),
+          reviewCount: reviews.length,
+          bestRating: 5,
+          worstRating: 1,
+        },
+        review: reviews.map((r) => ({
+          "@type": "Review",
+          author: { "@type": "Person", name: r.name },
+          reviewRating: { "@type": "Rating", ratingValue: r.rating, bestRating: 5, worstRating: 1 },
+          reviewBody: r.text,
+        })),
         url: base,
         telephone: clean(site.contact.phoneDisplay),
         email: clean(site.contact.email),
